@@ -19,12 +19,27 @@ const router = createRouter({
           name: "DashboardPage",
           component: () => import("../views/DashboardView.vue"),
         },
+        {
+          path: "/baohanh",
+          name: "BaoHanhPage",
+          component: () => import("../views/BaohanhView.vue"),
+        },
+        {
+          path: "/userinfo",
+          name: "UserInfo",
+          component: () => import("../views/UserInfo.vue"),
+        },
       ]
     },
     {
       path: "/login",
       name: "Login",
       component: () => import("../views/LoginView.vue"),
+    },
+    {
+      path: "/changepass",
+      name: "ChangePass",
+      component: () => import("../views/ChangePassView.vue"),
     },
   ],
 });

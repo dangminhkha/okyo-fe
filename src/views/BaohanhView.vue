@@ -1,5 +1,5 @@
 <template>
-  <div class="text">Danh sách sản phẩm</div>
+  Bảo hành
 </template>
 
 <script>

@@ -4,9 +4,7 @@
   >
     <div class="p-4 sm:p-7">
       <div class="text-center">
-        <h1 class="block text-2xl font-bold text-gray-800 my-5">
-          Đăng nhập
-        </h1>
+        <h1 class="block text-2xl font-bold text-gray-800 my-5">Đăng nhập</h1>
 
         <!-- Form -->
         <v-form
@@ -43,7 +41,7 @@
         <div class="text-center normal-case">
           <v-btn
             variant="flat"
-            color="indigo-darken-3"
+            color="blue-darken-3"
             class="mt-3"
             @click="submit"
             ><span class="text-md normal-case">Đăng nhập</span></v-btn
