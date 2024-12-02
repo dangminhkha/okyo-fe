@@ -6,11 +6,11 @@ export const useBaseStore = defineStore({
   state: () => ({
     snack: {
       status: false,
-      message: '',
+      message: 'sdd',
       color: ''
     },
     overlay: false,
-    listDepartmentData: null
+    loginData: null
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -20,11 +20,12 @@ export const useBaseStore = defineStore({
       this.snack = data
     },
     //lay danh sach cac phong ban
-    async getListDepartment(url: string) {
+    async login(url: string) {
       await baseService.fetch(API_URL + url).then((resp) => {
-        this.listDepartmentData = resp.data
+        this.loginData = 'sjdfhjsdhfjdf'
       })
-      return this.listDepartmentData
+      return this.loginData
     }
-  }
+  },
+  persist: true,
 })

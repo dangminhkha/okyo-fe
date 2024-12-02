@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'pinia';
+import { useBaseStore } from '../stores/baseStore';
 export default {
   name: "LoginPage",
   data() {
@@ -76,7 +78,11 @@ export default {
       ],
     };
   },
+  computed:{
+    ...mapState(useBaseStore, ['loginData'])
+  },
   methods: {
+    ...mapActions(useBaseStore, ["login"]),
     async submit(e) {
       let params = {
         login: this.useName,
@@ -84,10 +90,15 @@ export default {
       };
       const { valid } = await this.$refs.form.validate();
       if (valid) {
-        console.log("login");
+        this.login('/dsfh').then(resp => {
+          console.log('asdsad');
+        })
       }
     },
   },
+  created(){
+    console.log(this.loginData);
+  }
 };
 </script>
 

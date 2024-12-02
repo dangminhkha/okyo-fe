@@ -59,6 +59,9 @@
             </template>
 
             <v-list>
+              <v-list-item @click="changePass">
+                <v-list-item-title> Đổi mật khẩu</v-list-item-title>
+              </v-list-item>
               <v-list-item v-for="(item, i) in items" :key="i">
                 <v-list-item-title>
                   <router-link :to="item.path">{{
@@ -81,18 +84,108 @@
 
     <!-- End Breadcrumb -->
   </div>
+  <v-dialog v-model="dialogChane" max-width="500" persistent>
+    <div class="bg-white p-3">
+      <div class="flex justify-between my-3">
+        <div class="text-center">
+          <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">
+            Đổi mật khẩu
+          </h1>
+        </div>
+        <span class="mdi mdi-close" @click="dialogChane = false"></span>
+      </div>
+
+      <div class="mt-5">
+        <!-- Form -->
+        <v-form
+          ref="form"
+          v-model="valid"
+          class="mx-auto max-w-xl"
+          @submit.prevent="accepChange"
+        >
+          <v-row>
+            <v-col cols="12">
+              <v-text-field
+                label="Mật khẩu mới"
+                variant="outlined"
+                density="comfortable"
+                v-model="passWord"
+                :rules="rulesPassWord"
+              ></v-text-field
+            ></v-col>
+            <v-col cols="12">
+              <v-text-field
+                label="Nhập lại mật khẩu mới"
+                variant="outlined"
+                density="comfortable"
+                v-model="repassWord"
+                :rules="rulesRePassWord"
+              ></v-text-field
+            ></v-col>
+          </v-row>
+        </v-form>
+        <div class="text-center normal-case">
+          <v-btn
+            variant="flat"
+            color="blue-darken-4"
+            class="mt-3"
+            @click="accepChange"
+            ><span class="text-md normal-case">Xác nhận</span></v-btn
+          >
+        </div>
+        <!-- End Form -->
+      </div>
+    </div>
+  </v-dialog>
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { useBaseStore } from "../stores/baseStore";
 export default {
   data() {
     return {
       items: [
         { title: "Thông tin", path: "/userinfo" },
-        { title: "Đổi mật khẩu", path: "/changepass" },
         { title: "Đăng xuất", path: "/login" },
       ],
+      dialogChane: false,
+      valid: false,
+      passWord: null,
+      rulesPassWord: [
+        (value) => {
+          if (value) return true;
+          return "Vui lòng nhập mật khẩu";
+        },
+      ],
+      repassWord: null,
+      rulesRePassWord: [
+        (value) => {
+          if (value) return true;
+          return "Vui lòng nhập lại mật khẩu";
+        },
+      ],
     };
+  },
+  methods: {
+    ...mapActions(useBaseStore, ["snackChange"]),
+    changePass() {
+      this.dialogChane = true;
+    },
+    async accepChange() {
+      let params = {
+        passWord: this.passWord,
+        repassWord: this.repassWord,
+      };
+      const { valid } = await this.$refs.form.validate();
+      if (valid) {
+        this.snackChange({
+          status: true,
+          message: "Đổi mật khẩu thành công",
+          color: "blue-darken-4",
+        });
+      }
+    },
   },
 };
 </script>
