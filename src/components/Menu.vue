@@ -118,7 +118,7 @@
                 Thông tin bảo hành
               </router-link>
             </li>
-            <li>
+            <!-- <li>
               <router-link
                 :to="'/login'"
                 class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
@@ -127,7 +127,7 @@
                 <span class="mdi mdi-logout"></span>
                 Đăng xuất
               </router-link>
-            </li>
+            </li> -->
           </ul>
         </nav>
       </div>
