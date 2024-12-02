@@ -1,5 +1,5 @@
 <template>
-  <div class="text">Danh sách sản phẩm</div>
+  <div class="text">Danh sách</div>
 </template>
 
 <script>

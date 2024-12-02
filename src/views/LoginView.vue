@@ -41,7 +41,7 @@
         <div class="text-center normal-case">
           <v-btn
             variant="flat"
-            color="blue-darken-3"
+            color="blue-darken-4"
             class="mt-3"
             @click="submit"
             ><span class="text-md normal-case">Đăng nhập</span></v-btn
