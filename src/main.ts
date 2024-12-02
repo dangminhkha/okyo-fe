@@ -15,8 +15,8 @@ import * as labsComponent from "vuetify/labs/components";
 import * as directives from "vuetify/directives";
 import "@mdi/font/css/materialdesignicons.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import { fa } from "vuetify/iconsets/fa";
-import { aliases, mdi } from "vuetify/lib/iconsets/mdi";
+import { aliases, fa } from 'vuetify/iconsets/fa'
+import { mdi } from 'vuetify/iconsets/mdi'
 //in it vuetify
 const vuetify = createVuetify({
   icons: {
