@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="shadow-xl rounded-lg" >
     <v-card flat>
       <v-card-title class="d-flex align-center pe-2">
         Danh sách sản phẩm
@@ -8,7 +8,7 @@
         <v-text-field
           v-model="search"
           density="compact"
-          label="Lọc danh sách"
+          label="Tìm kiếm"
           prepend-inner-icon="mdi-magnify"
           variant="solo-filled"
           flat
@@ -23,18 +23,34 @@
         :headers="headers"
         :items="items"
         :search="search"
+        :page="page"
+        :items-per-page="itemsPerPage"
         item-value="name"
+        hide-default-footer
+        :mobile="windowReSize.x < 768"
       >
       </v-data-table>
+      <v-pagination
+        v-model="page"
+        :length="pageCount"
+        :total-visible="5"
+        prev-icon="fas fa-angle-double-left text-sm"
+        next-icon="fas fa-angle-double-right text-sm"
+      ></v-pagination>
     </v-card>
   </div>
 </template>
 
 <script>
+import { mapState } from 'pinia';
+import { useBaseStore } from '../stores/baseStore';
 export default {
   name: "DashboardPage",
   data() {
     return {
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 5,
       search: "",
       headers: [
         {
@@ -147,6 +163,20 @@ export default {
           baseClock: "3.5 GHz",
           tdp: "35W",
         },
+        {
+          name: "AMD Athlon 3000G",
+          cores: 2,
+          threads: 4,
+          baseClock: "3.5 GHz",
+          tdp: "35W",
+        },
+        {
+          name: "AMD Athlon 3000G",
+          cores: 2,
+          threads: 4,
+          baseClock: "3.5 GHz",
+          tdp: "35W",
+        },
       ],
     };
   },
@@ -159,6 +189,17 @@ export default {
         value.toString().toLocaleUpperCase().indexOf(query) !== -1
       );
     },
+  },
+  computed:{
+    ...mapState(useBaseStore, ['windowReSize'])
+  },
+  watch:{
+    windowReSize(val){
+      console.log(val);
+    }
+  },
+  created() {
+    this.pageCount = Math.ceil(this.items.length / this.itemsPerPage);
   },
 };
 </script>

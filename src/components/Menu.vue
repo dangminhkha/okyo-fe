@@ -138,7 +138,15 @@
 </template>
 
 <script>
-export default {};
+export default {
+  name:'MenuPage',
+  data(){
+    return{
+
+    }
+  },
+ 
+};
 </script>
 
 <style>

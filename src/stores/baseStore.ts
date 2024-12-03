@@ -10,7 +10,8 @@ export const useBaseStore = defineStore({
       color: ''
     },
     overlay: false,
-    loginData: null
+    loginData: null,
+    windowReSize: null
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -25,7 +26,7 @@ export const useBaseStore = defineStore({
         this.loginData = 'sjdfhjsdhfjdf'
       })
       return this.loginData
-    }
+    },
   },
   persist: true,
 })

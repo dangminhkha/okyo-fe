@@ -16,6 +16,7 @@
             aria-controls="hs-application-sidebar"
             aria-label="Toggle navigation"
             data-hs-overlay="#hs-application-sidebar"
+            ref="triggerMenu"
           >
             <span class="sr-only">Toggle Navigation</span>
             <svg
@@ -88,9 +89,7 @@
     <div class="bg-white p-3">
       <div class="flex justify-between my-3">
         <div class="text-center">
-          <h1 class="block text-2xl font-bold text-gray-800">
-            Đổi mật khẩu
-          </h1>
+          <h1 class="block text-2xl font-bold text-gray-800">Đổi mật khẩu</h1>
         </div>
         <span class="mdi mdi-close" @click="dialogChane = false"></span>
       </div>
@@ -200,6 +199,13 @@ export default {
           message: "Đổi mật khẩu thành công",
           color: "blue-darken-4",
         });
+      }
+    },
+  },
+  watch: {
+    $route(val) {
+      if (window.innerWidth < 1024) {
+        this.$refs.triggerMenu.click();
       }
     },
   },
