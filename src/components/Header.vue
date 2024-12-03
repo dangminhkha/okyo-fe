@@ -88,7 +88,7 @@
     <div class="bg-white p-3">
       <div class="flex justify-between my-3">
         <div class="text-center">
-          <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">
+          <h1 class="block text-2xl font-bold text-gray-800">
             Đổi mật khẩu
           </h1>
         </div>
@@ -104,6 +104,15 @@
           @submit.prevent="accepChange"
         >
           <v-row>
+            <v-col cols="12">
+              <v-text-field
+                label="Mật khẩu cũ"
+                variant="outlined"
+                density="comfortable"
+                v-model="oldPassWord"
+                :rules="rulesOldPassWord"
+              ></v-text-field
+            ></v-col>
             <v-col cols="12">
               <v-text-field
                 label="Mật khẩu mới"
@@ -151,6 +160,13 @@ export default {
       ],
       dialogChane: false,
       valid: false,
+      oldPassWord: null,
+      rulesOldPassWord: [
+        (value) => {
+          if (value) return true;
+          return "Vui lòng nhập mật khẩu cũ";
+        },
+      ],
       passWord: null,
       rulesPassWord: [
         (value) => {
