@@ -3,8 +3,10 @@
     class="mt-10 bg-white border border-gray-200 rounded-xl shadow-sm max-w-md m-auto"
   >
     <div class="p-4 sm:p-7">
-      <div class="text-center">
-        <h1 class="block text-2xl font-bold text-gray-800 my-5">Đăng nhập</h1>
+      <div class="">
+        <h1 class="text-center block text-2xl font-bold text-gray-800 my-5">
+          Đăng nhập
+        </h1>
 
         <!-- Form -->
         <v-form
@@ -54,8 +56,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'pinia';
-import { useBaseStore } from '../stores/baseStore';
+import { mapActions, mapState } from "pinia";
+import { useBaseStore } from "../stores/baseStore";
 export default {
   name: "LoginPage",
   data() {
@@ -78,27 +80,29 @@ export default {
       ],
     };
   },
-  computed:{
-    ...mapState(useBaseStore, ['loginData'])
+  computed: {
+    ...mapState(useBaseStore, ["loginData"]),
   },
   methods: {
     ...mapActions(useBaseStore, ["login"]),
     async submit(e) {
       let params = {
-        login: this.useName,
+        username: this.useName,
         password: this.passWord,
       };
       const { valid } = await this.$refs.form.validate();
       if (valid) {
-        this.login('/dsfh').then(resp => {
-          console.log('asdsad');
-        })
+        this.login("public/login", params).then((resp) => {
+          if (resp) {
+            localStorage.setItem("isLogined", "true");
+            this.$router.push({ path: "/product" });
+          }
+        });
       }
     },
   },
-  created(){
-    console.log(this.loginData);
-  }
+  created() {
+  },
 };
 </script>
 

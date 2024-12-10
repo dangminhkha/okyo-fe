@@ -63,9 +63,9 @@
           <ul class="flex flex-col space-y-1">
             <li>
               <router-link
-                :to="'/dashboard'"
+                :to="'/product'"
                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
-                :class="$route.fullPath === '/dashboard' ? 'bg-gray-100' : ''"
+                :class="$route.fullPath === '/product' ? 'bg-gray-100' : ''"
               >
                 <svg
                   class="shrink-0 size-4"

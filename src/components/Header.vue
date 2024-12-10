@@ -204,8 +204,10 @@ export default {
   },
   watch: {
     $route(val) {
-      if (window.innerWidth < 1024) {
-        this.$refs.triggerMenu.click();
+      if (val.fullPath === "/product" || val.fullPath === "/baohanh") {
+        if (window.innerWidth < 1024) {
+          this.$refs.triggerMenu.click();
+        }
       }
     },
   },
