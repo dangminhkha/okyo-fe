@@ -28,6 +28,12 @@
         hide-default-footer
         :mobile="windowReSize.x < 768"
       >
+        <!-- <template v-slot:item="{ item }">
+          <td>{{item.name}}</td>
+          <td>{{item.status}}</td>
+          <td>{{item.monthGuarantee}}</td>
+          <td>{{item.description}}</td>
+        </template> -->
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon
             size="small"
@@ -78,7 +84,7 @@ export default {
         },
         {
           title: "Mô tả",
-          align: "center",
+          align: "start",
           key: "description",
         },
         { title: "", key: "actions", sortable: false },
@@ -99,7 +105,7 @@ export default {
     },
     searchDara() {
       this.page = 1;
-      this.getProducts()
+      this.getProducts();
     },
     getProducts() {
       let paramsSearch = {
