@@ -28,12 +28,6 @@
         hide-default-footer
         :mobile="windowReSize.x < 768"
       >
-        <!-- <template v-slot:item="{ item }">
-          <td>{{item.name}}</td>
-          <td>{{item.status}}</td>
-          <td>{{item.monthGuarantee}}</td>
-          <td>{{item.description}}</td>
-        </template> -->
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon
             size="small"

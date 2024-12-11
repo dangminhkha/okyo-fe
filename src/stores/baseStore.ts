@@ -16,6 +16,8 @@ export const useBaseStore = defineStore({
     productDetailData: null,
     listGuaranteeData: null,
     imageData: null,
+    guaranteeListData: null,
+    guaranreeDetailData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -58,6 +60,20 @@ export const useBaseStore = defineStore({
         this.imageData = resp.data;
       });
       return this.imageData;
+    },
+    //lay danh sach bao hanh
+    async getListGuaranteeAdmin(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.listGuaranteeData = resp.data;
+      });
+      return this.listGuaranteeData;
+    },
+    //lay chi tiet hao hanh dua tren id
+    async getGuaranteeDetail(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.guaranreeDetailData = resp.data;
+      });
+      return this.guaranreeDetailData;
     },
   },
   persist: true,
