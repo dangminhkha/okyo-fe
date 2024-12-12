@@ -35,7 +35,7 @@
           /></v-carousel-item>
         </v-carousel>
       </div>
-      <div class="flex text-center justify-between px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 px-4">
         <div>{{ dataDetail.name }}</div>
         <div>Thời hạn BH {{ dataDetail.monthGuarantee }} tháng</div>
       </div>
