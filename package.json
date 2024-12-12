@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "env-cmd -f .env.dev vite",
     "build": "env-cmd -f .env.prod vite build",
+    "build:prod": "env-cmd -f .env.prod vite build",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build"
