@@ -46,7 +46,7 @@
         class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3"
       >
         <div class="flex flex-row items-center justify-end gap-1">
-          <span class="mr-2">Nguyễn Văn A</span>
+          <span class="mr-2">{{loginData?.data?.user?.name || ''}}</span>
 
           <!-- Dropdown -->
           <v-menu>
@@ -148,7 +148,7 @@
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../stores/baseStore";
 export default {
   data() {
@@ -181,6 +181,9 @@ export default {
         },
       ],
     };
+  },
+  computed:{
+    ...mapState(useBaseStore, ["loginData"])
   },
   methods: {
     ...mapActions(useBaseStore, ["snackChange"]),

@@ -18,6 +18,9 @@ export const useBaseStore = defineStore({
     imageData: null,
     guaranteeListData: null,
     guaranreeDetailData: null,
+    addProductData: null,
+    addFileData: null,
+    addGuaranteeToProductData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -60,6 +63,27 @@ export const useBaseStore = defineStore({
         this.imageData = resp.data;
       });
       return this.imageData;
+    },
+    //thêm sản phẩm
+    async addProductAction(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.addProductData = resp.data;
+      });
+      return this.addProductData;
+    },
+    //thêm file, trả về id, lấy id để tạo sản phẩm
+    async addFileAction(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.addFileData = resp.data;
+      });
+      return this.addFileData;
+    },
+    //thêm mã bao hanh cho san pham
+    async addGuaranteeToProduct(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.addGuaranteeToProductData = resp.data;
+      });
+      return this.addGuaranteeToProductData;
     },
     //lay danh sach bao hanh
     async getListGuaranteeAdmin(url: string, params: any) {

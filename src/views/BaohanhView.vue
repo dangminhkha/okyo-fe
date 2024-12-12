@@ -29,7 +29,24 @@
         :mobile="windowReSize.x < 768"
       >
         <template v-slot:[`item.status`]="{ item }">
-          {{ item.status === "EXPIRED" ? "Hết hạn BH" : "Còn BH" }}
+          <div
+            class="text-red-darken-4 font-bold"
+            v-if="item.status === 'EXPIRED'"
+          >
+            Hết hạn BH
+          </div>
+          <div
+            class="text-gray-darken-4 font-bold"
+            v-if="item.status === 'NOT_SOLD'"
+          >
+            Chưa bán
+          </div>
+          <div
+            class="text-blue-darken-4 font-bold"
+            v-if="item.status === 'SOLD'"
+          >
+            Đang bán
+          </div>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <div class="min-w-[60px]">
@@ -53,69 +70,18 @@
         v-model="page"
         :length="pageCount"
         :total-visible="5"
-        prev-icon="fas fa-angle-double-left text-sm"
-        next-icon="fas fa-angle-double-right text-sm"
+        next-icon="mdi-menu-right"
+        prev-icon="mdi-menu-left"
       >
       </v-pagination>
     </v-card>
   </div>
-  <v-dialog v-model="dialogDetail" max-width="500">
-    <div class="bg-white py-3 px-5 rounded-lg">
-      <div class="text-right" @click="dialogDetail = false">
-        <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
-      </div>
-      <div class="grid gap-3">
-        <div class="text-center text-xl font-bold">Chi tiết bảo hành</div>
-
-        <div class="">
-          <div class="flex justify-between my-1">
-            <div>Tên SP</div>
-            <div>{{ dataSelected.product.name }}</div>
-          </div>
-          <div class="flex justify-between my-1">
-            <div>Mô tả</div>
-            <div>{{ dataSelected.product.description }}</div>
-          </div>
-          <div class="flex justify-between my-1">
-            <div>Thời hạn BH</div>
-            <div>{{ dataSelected.product.monthGuarantee }} tháng</div>
-          </div>
-        </div>
-        <div class="my-1 font-bold">Cập nhật thông tin khách hàng</div>
-        <v-form
-          ref="form"
-          v-model="valid"
-          @submit.prevent="submitEdit"
-          class="grid gap-3"
-        >
-          <v-text-field
-            label="Tên khách hàng"
-            variant="outlined"
-            v-model="customerName"
-            :rules="rulesRequired"
-          >
-          </v-text-field>
-          <v-text-field
-            label="Sđt khách hàng"
-            variant="outlined"
-            v-model="customerPhone"
-            :rules="rulesRequired"
-          >
-          </v-text-field>
-          <v-text-field
-            label="Email khách hàng"
-            variant="outlined"
-            v-model="customerEmail"
-            :rules="customerEmail ? rulesEmail : []"
-          >
-          </v-text-field>
-        </v-form>
-        <v-btn variant="flat" color="blue-darken-3" @click="submitEdit">
-          Xác nhận
-        </v-btn>
-      </div>
-    </div>
-  </v-dialog>
+  <GuaranteeDetailVue
+    v-if="dialogDetail"
+    :status="dialogDetail"
+    :id="dialogDetailId"
+    @close="dialogDetail = $event"
+  />
   <v-dialog v-model="dialogRemove" max-width="500">
     <div class="bg-white py-3 px-5 rounded-lg">
       <div class="text-right" @click="dialogRemove = false">
@@ -134,8 +100,10 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../stores/baseStore";
+import GuaranteeDetailVue from "./sections/GuaranteeDetail.vue";
 export default {
   name: "BaoHanhPage",
+  components: { GuaranteeDetailVue },
   data() {
     return {
       page: 1,
@@ -144,7 +112,7 @@ export default {
       search: "",
       headers: [
         {
-          title: "Mã sản phẩm",
+          title: "Mã BH",
           align: "start",
           key: "code",
         },
@@ -178,20 +146,8 @@ export default {
       ],
       items: [],
       dialogDetail: false,
-      dataSelected: null,
+      dialogDetailId: null,
       dialogRemove: false,
-      customerName: null,
-      customerPhone: null,
-      customerEmail: null,
-      endDate: null,
-      todayDate: new Date(new Date().setDate(new Date().getDate() - 1)),
-      rulesRequired: [
-        (value) => {
-          if (value) return true;
-          return "Vui lòng nhập thông tin";
-        },
-      ],
-      valid: false,
     };
   },
   computed: {
@@ -213,11 +169,13 @@ export default {
       "getListGuaranteeAdmin",
       "getGuaranteeDetail",
     ]),
-    async submitEdit() {
-      const { valid } = await this.$refs.form.validate();
-      if (valid) {
-      }
+    formatDate(date) {
+      if (!date) return null;
+
+      const [year, month, day] = date.split("-");
+      return `${day}/${month}/${year}`;
     },
+
     searchDara() {
       this.page = 1;
       this.getData();
@@ -244,12 +202,8 @@ export default {
       );
     },
     getGuaranteeDetails(data) {
-      this.getGuaranteeDetail(`admin/guarantee/${data.id}`).then((resp) => {
-        if (resp) {
-          this.dialogDetail = true;
-          this.dataSelected = resp.data;
-        }
-      });
+      this.dialogDetail = true;
+      this.dialogDetailId = data.id;
     },
     removeGuaranteeDetails(data) {
       this.dialogRemove = true;

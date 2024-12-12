@@ -40,10 +40,8 @@
         <div>Thời hạn BH {{ dataDetail.monthGuarantee }} tháng</div>
       </div>
       <v-card flat>
-        <v-card-title class="d-flex align-center pe-2">
-          Danh sách bảo hành
-          <v-spacer></v-spacer>
-
+        <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
+          <div class="font-bold">Danh sách bảo hành</div>
           <v-text-field
             v-model="search"
             density="compact"
@@ -55,8 +53,15 @@
             single-line
             @click:prepend-inner="searchDara()"
           ></v-text-field>
-        </v-card-title>
-
+        </div>
+        <div class="p-4">
+          <div
+            class="flex justify-center items-center p-3 rounded-lg text-sm bg-blue-darken-4 h-[40px] w-[165px] cursor-pointer"
+            @click="addGuarantee()"
+          >
+            <span class="mdi mdi-plus"></span>Thêm BH
+          </div>
+        </div>
         <v-divider></v-divider>
         <v-data-table
           :headers="headers"
@@ -93,27 +98,96 @@
               Còn BH
             </v-chip>
           </template>
+          <template v-slot:[`item.actions`]="{ item }">
+            <div class="min-w-[60px]">
+              <v-icon
+                @click="getGuaranteeDetails(item)"
+                class="text-blue-darken-4"
+              >
+                mdi-eye
+              </v-icon>
+              <v-icon
+                v-if="item.status === 'NOT_SOLD'"
+                @click="removeGuaranteeDetails(item)"
+                class="text-red-darken-4 ml-3"
+              >
+                mdi-close-circle-outline
+              </v-icon>
+            </div>
+          </template>
         </v-data-table>
         <v-pagination
           v-model="page"
           :length="pageCount"
           :total-visible="5"
-          prev-icon="fas fa-angle-double-left text-sm"
-          next-icon="fas fa-angle-double-right text-sm"
+          next-icon="mdi-menu-right"
+          prev-icon="mdi-menu-left"
         ></v-pagination>
       </v-card>
     </div>
   </div>
+  <GuaranteeDetailVue
+    v-if="dialogDetail"
+    :status="dialogDetail"
+    :id="dialogDetailId"
+    @close="dialogDetail = $event"
+  />
+  <v-dialog v-model="dialogRemove" max-width="500">
+    <div class="bg-white py-3 px-5 rounded-lg">
+      <div class="text-right" @click="dialogRemove = false">
+        <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
+      </div>
+      <div class="grid gap-3">
+        <div class="text-center text-xl font-bold">Xác nhận xóa bảo hành?</div>
+        <v-btn variant="flat" color="blue-darken-4" class="w-3/5 m-auto mt-5"
+          >Xác nhận</v-btn
+        >
+      </div>
+    </div>
+  </v-dialog>
+  <v-dialog v-model="addGuaranteeDialog" max-width="500" persistent>
+    <div class="bg-white p-4 rounded-lg">
+      <div class="text-right" @click="addGuaranteeDialog = false">
+        <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
+      </div>
+
+      <div class="text-center text-xl font-bold mb-4">
+        Thêm mã bảo hành cho sản phẩm
+      </div>
+      <v-form
+        ref="form"
+        v-model="valid"
+        @submit.prevent="submitAddGuarantee"
+        class="grid gap-3"
+      >
+        <v-text-field
+          label="Mã bảo hành"
+          variant="outlined"
+          v-model="code"
+          :rules="rulesRequired"
+        >
+        </v-text-field>
+      </v-form>
+      <div class="flex justify-center my-4">
+        <v-btn variant="flat" color="blue-darken-4" @click="submitAddGuarantee">
+          Xác nhận
+        </v-btn>
+      </div>
+    </div>
+  </v-dialog>
 </template>
 
 <script>
 import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../stores/baseStore";
+import GuaranteeDetailVue from "./sections/GuaranteeDetail.vue";
 export default {
   name: "ProductDetailPage",
-  components: {},
+  components: { GuaranteeDetailVue },
   data() {
     return {
+      valid: false,
+      addGuaranteeDialog: false,
       dataDetail: null,
       guaranteeData: [],
       imageList: [],
@@ -155,6 +229,16 @@ export default {
 
         { title: "", key: "actions", align: "end", sortable: false },
       ],
+      code: null,
+      rulesRequired: [
+        (value) => {
+          if (value) return true;
+          return "Vui lòng nhập thông tin";
+        },
+      ],
+      dialogDetail: false,
+      dialogDetailId: null,
+      dialogRemove: false,
     };
   },
   computed: {
@@ -165,6 +249,7 @@ export default {
       "detailsProduct",
       "getListGuarantee",
       "getImageFromId",
+      "addGuaranteeToProduct",
     ]),
     getImageUrl(id) {
       this.getImageFromId(`public/file`, { id: id }).then((resp) => {
@@ -195,6 +280,32 @@ export default {
           this.pageCount = resp.data.totalPage;
         }
       });
+    },
+    addGuarantee() {
+      this.addGuaranteeDialog = true;
+    },
+    async submitAddGuarantee() {
+      const { valid } = await this.$refs.form.validate();
+      if (valid) {
+        let params = {
+          productId: this.dataDetail.id,
+          code: this.code,
+        };
+        this.addGuaranteeToProduct("admin/guarantee", params).then((resp) => {
+          if (resp) {
+            this.getDetails(this.dataDetail.id);
+            this.getGuarantee(this.dataDetail.id);
+            this.addGuaranteeDialog = false;
+          }
+        });
+      }
+    },
+    getGuaranteeDetails(data) {
+      this.dialogDetail = true;
+      this.dialogDetailId = data.id;
+    },
+    removeGuaranteeDetails(data) {
+      this.dialogRemove = true;
     },
   },
   created() {
