@@ -28,6 +28,30 @@
         hide-default-footer
         :mobile="windowReSize.x < 768"
       >
+        <template v-slot:[`item.product.name`]="{ item }">
+          <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
+            <v-tooltip activator="parent" location="top">{{
+              item.product.name
+            }}</v-tooltip>
+            {{ item.product.name }}
+          </div>
+        </template>
+        <template v-slot:[`item.customerName`]="{ item }">
+          <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
+            <v-tooltip activator="parent" location="top">{{
+              item.customerName
+            }}</v-tooltip>
+            {{ item.customerName }}
+          </div>
+        </template>
+        <template v-slot:[`item.customerEmail`]="{ item }">
+          <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
+            <v-tooltip activator="parent" location="top">{{
+              item.customerEmail
+            }}</v-tooltip>
+            {{ item.customerEmail }}
+          </div>
+        </template>
         <template v-slot:[`item.status`]="{ item }">
           <div
             class="text-red-darken-4 font-bold"
@@ -81,6 +105,7 @@
     :status="dialogDetail"
     :id="dialogDetailId"
     @close="dialogDetail = $event"
+    @updateDone="updateDone"
   />
   <v-dialog v-model="dialogRemove" max-width="500">
     <div class="bg-white py-3 px-5 rounded-lg">
@@ -89,7 +114,11 @@
       </div>
       <div class="grid gap-3">
         <div class="text-center text-xl font-bold">Xác nhận xóa bảo hành?</div>
-        <v-btn variant="flat" color="blue-darken-4" class="w-3/5 m-auto mt-5"
+        <v-btn
+          variant="flat"
+          color="blue-darken-4"
+          class="w-3/5 m-auto mt-5"
+          @click="removeConfirm()"
           >Xác nhận</v-btn
         >
       </div>
@@ -115,6 +144,11 @@ export default {
           title: "Mã BH",
           align: "start",
           key: "code",
+        },
+        {
+          title: "Tên SP",
+          align: "center",
+          key: "product.name",
         },
         {
           title: "Tên KH",
@@ -148,6 +182,7 @@ export default {
       dialogDetail: false,
       dialogDetailId: null,
       dialogRemove: false,
+      dataSelected: null,
     };
   },
   computed: {
@@ -168,6 +203,8 @@ export default {
     ...mapActions(useBaseStore, [
       "getListGuaranteeAdmin",
       "getGuaranteeDetail",
+      "removeGuaranteeAction",
+      "snackChange",
     ]),
     formatDate(date) {
       if (!date) return null;
@@ -207,6 +244,25 @@ export default {
     },
     removeGuaranteeDetails(data) {
       this.dialogRemove = true;
+      this.dataSelected = data;
+    },
+    removeConfirm() {
+      this.removeGuaranteeAction(
+        `admin/guarantee/${this.dataSelected.id}`
+      ).then((resp) => {
+        if (resp) {
+          this.snackChange({
+            status: true,
+            message: "Xóa bảo hành thành công",
+            color: "blue",
+          });
+          this.getData();
+        }
+      });
+    },
+    updateDone() {
+      this.dialogDetail = false;
+      this.getData();
     },
   },
   created() {

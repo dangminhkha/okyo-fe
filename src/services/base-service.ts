@@ -1,4 +1,5 @@
 import axios from "axios";
+import router from "../router";
 import { useBaseStore } from "../stores/baseStore";
 const addTokenHeader = () => {
   return {
@@ -13,7 +14,7 @@ const getHeader = () => {
     "Content-Type": "application/json",
     "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
     "Secret-Key": "okyo-secret-key",
-    "Authorization": "Bearer " + baseStore.$state.loginData.data.accessToken,
+    Authorization: "Bearer " + baseStore.$state.loginData.data.accessToken,
   };
 };
 const getHeaderFile = () => {
@@ -39,7 +40,7 @@ async function fetchParams(url: string, params: any) {
   const baseStore = useBaseStore();
   baseStore.overlayChange(true);
   try {
-    const response = await axios.get(url, { headers: header, params: params});
+    const response = await axios.get(url, { headers: header, params: params });
     return handleSuccess(response);
   } catch (error) {
     return handleError(error);
@@ -92,6 +93,19 @@ async function update(url: string, params: any) {
     return handleError(error);
   }
 }
+async function remove(url: string) {
+  const header = getHeader();
+  const baseStore = useBaseStore();
+  baseStore.overlayChange(true);
+  try {
+    const response = await axios.delete(url, {
+      headers: header,
+    });
+    return handleSuccess(response);
+  } catch (error) {
+    return handleError(error);
+  }
+}
 const handleSuccess = (data: any) => {
   const baseStore = useBaseStore();
   baseStore.overlayChange(false);
@@ -100,6 +114,9 @@ const handleSuccess = (data: any) => {
 const handleError = (data: any) => {
   const baseStore = useBaseStore();
   baseStore.overlayChange(false);
+  if (data?.status === 403) {
+    router.push({ path: "/login" });
+  }
   baseStore.snackChange({
     status: true,
     message: data.response.data.message,
@@ -114,4 +131,5 @@ export const baseService = {
   addAuthen,
   addFile,
   update,
+  remove
 };

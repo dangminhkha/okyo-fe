@@ -263,7 +263,7 @@ export default {
       });
     },
     getDetails(id) {
-      this.detailsProduct(`admin/product/${id}`).then((resp) => {
+      this.detailsProduct(`public/product/${id}`).then((resp) => {
         if (resp) {
           this.dataDetail = resp.data;
           this.imageList = [];

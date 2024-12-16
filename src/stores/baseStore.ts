@@ -21,6 +21,8 @@ export const useBaseStore = defineStore({
     addProductData: null,
     addFileData: null,
     addGuaranteeToProductData: null,
+    updateCustomerGuaranteeData: null,
+    removeGuaranteeData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -98,6 +100,20 @@ export const useBaseStore = defineStore({
         this.guaranreeDetailData = resp.data;
       });
       return this.guaranreeDetailData;
+    },
+    //cập nhật thông tin khách hàng cho BH
+    async updateGuarantee(url: string, params: any) {
+      await baseService.update(API_URL + url, params).then((resp) => {
+        this.updateCustomerGuaranteeData = resp.data;
+      });
+      return this.updateCustomerGuaranteeData;
+    },
+    //Xóa bảo hành
+    async removeGuaranteeAction(url: string) {
+      await baseService.remove(API_URL + url).then((resp) => {
+        this.removeGuaranteeData = resp.data;
+      });
+      return this.removeGuaranteeData;
     },
   },
   persist: true,

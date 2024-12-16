@@ -38,6 +38,11 @@ const router = createRouter({
       ],
     },
     {
+      path: "/customer",
+      name: "Customer",
+      component: () => import("../views/CusromerView.vue"),
+    },
+    {
       path: "/login",
       name: "Login",
       component: () => import("../views/LoginView.vue"),
@@ -52,6 +57,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const baseStore = useBaseStore();
   const loginStatus = localStorage.getItem("isLogined") || "false";
+  if (to.path === "/customer") {
+    next();
+  }
   if (to.path === "/login") {
     localStorage.setItem("isLogined", "false");
     baseStore.$state.loginData = null;

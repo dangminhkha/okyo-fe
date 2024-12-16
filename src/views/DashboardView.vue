@@ -229,7 +229,7 @@ export default {
           },
         ],
       };
-      this.getListProduct("admin/product/search", paramsSearch).then((resp) => {
+      this.getListProduct("public/product/search", paramsSearch).then((resp) => {
         if (resp) {
           this.items = resp.data.data;
           this.pageCount = resp.data.totalPage;
@@ -259,7 +259,7 @@ export default {
           status: this.status,
           files: fileList,
         };
-        this.addProductAction("admin/product", params).then((resp) => {
+        this.addProductAction("public/product", params).then((resp) => {
           if (resp) {
             this.getProducts();
             this.addProductDialog = false;
