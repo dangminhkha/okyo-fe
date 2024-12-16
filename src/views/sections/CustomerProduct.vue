@@ -18,7 +18,7 @@
       </div>
 
       <v-divider></v-divider>
-      <div class="grid grid-cols-3 md:grid-cols-4 gap-3 p-3">
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 p-3">
         <div v-for="(item, index) in items" :key="index">
           <div class="bg-white shadow-2xl rounded-lg p-3">
             <div class="grid" @click="getProductDetails(item)">
@@ -26,9 +26,16 @@
                 <img
                   :src="API_URL + item.files[0].path"
                   class="m-auto max-h-[400px] h-[100%]"
+                  v-if="item.files[0].path"
                 />
+                
               </div>
-              <div class="text-center text-sm my-2">{{item.name}}</div>
+              <img
+                  :src="imageAvatar"
+                  class="m-auto max-h-[400px] h-[100%]"
+                  v-else
+                />
+              <div class="text-center text-sm my-2  m-auto h-[48px] leading-5">{{item.name}}</div>
             </div>
           </div>
         </div>
@@ -113,11 +120,13 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../../stores/baseStore";
+import imageAvatar from "@/assets/images/productDF.jpg";
 const API_URL = import.meta.env.VITE_API_URL;
 export default {
   name: "CustomerProductPage",
   data() {
     return {
+      imageAvatar,
       API_URL,
       page: 1,
       pageCount: 0,
