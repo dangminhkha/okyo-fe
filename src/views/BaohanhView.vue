@@ -9,7 +9,7 @@
           v-model="search"
           density="compact"
           label="Tìm kiếm"
-          prepend-inner-icon="mdi-magnify"
+          prepend-inner-icon="mdi:mdi-magnify"
           variant="solo-filled"
           flat
           hide-details
@@ -78,14 +78,14 @@
               @click="getGuaranteeDetails(item)"
               class="text-blue-darken-4"
             >
-              mdi-eye
+              mdi:mdi-eye
             </v-icon>
             <v-icon
               v-if="item.status === 'NOT_SOLD'"
               @click="removeGuaranteeDetails(item)"
               class="text-red-darken-4 ml-3"
             >
-              mdi-close-circle-outline
+              mdi:mdi-close-circle-outline
             </v-icon>
           </div>
         </template>
@@ -94,8 +94,8 @@
         v-model="page"
         :length="pageCount"
         :total-visible="5"
-        next-icon="mdi-menu-right"
-        prev-icon="mdi-menu-left"
+        next-icon="mdi:mdi-menu-right"
+        prev-icon="mdi:mdi-menu-left"
       >
       </v-pagination>
     </v-card>

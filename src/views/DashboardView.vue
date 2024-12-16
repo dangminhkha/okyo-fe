@@ -8,7 +8,7 @@
           v-model="search"
           density="compact"
           label="Tìm kiếm"
-          prepend-inner-icon="mdi-magnify"
+          prepend-inner-icon="mdi:mdi-magnify"
           variant="solo-filled"
           flat
           hide-details
@@ -35,16 +35,25 @@
         :mobile="windowReSize.x < 768"
       >
         <template v-slot:[`item.status`]="{ item }">
-          <div v-if="item.status === 0 || !item.status" class="font-bold bg-gray-100 p-2 text-sm rounded-lg text-gray-darken-2">Không hoạt động</div>
-          <div v-if="item.status === 1" class="font-bold bg-blue-50 p-2 text-sm rounded-lg text-blue-darken-4">Hoạt động</div>
+          <div
+            v-if="item.status === 0 || !item.status"
+            class="font-bold bg-gray-100 p-2 text-sm rounded-lg text-gray-darken-2 text-center"
+          >
+            Không hoạt động
+          </div>
+          <div
+            v-if="item.status === 1"
+            class="font-bold bg-blue-50 p-2 text-sm rounded-lg text-blue-darken-4 text-center"
+          >
+            Hoạt động
+          </div>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
-          <v-icon
-            size="small"
-            @click="getProductDetails(item)"
-            class="text-blue-darken-4"
-          >
-            mdi-eye
+          <v-icon @click="getProductDetails(item)" class="text-blue-darken-4">
+            mdi:mdi-eye
+          </v-icon>
+          <v-icon @click="updateProduct(item)" class="text-blue-darken-4 ml-3">
+            mdi:mdi-pencil
           </v-icon>
         </template>
       </v-data-table>
@@ -52,23 +61,117 @@
         v-model="page"
         :length="pageCount"
         :total-visible="2"
-        next-icon="mdi-menu-right"
-        prev-icon="mdi-menu-left"
+        next-icon="mdi:mdi-menu-right"
+        prev-icon="mdi:mdi-menu-left"
       ></v-pagination>
     </v-card>
   </div>
-  <v-dialog v-model="addProductDialog" max-width="500" persistent>
+  <v-dialog v-model="addProductDialog" max-width="800" persistent>
+    <v-card>
+      <v-card-text class="p-0">
+        <div class="bg-white p-4 rounded-lg">
+          <div class="text-right" @click="addProductDialog = false">
+            <span
+              class="mdi mdi-close cursor-pointer font-bold text-2xl"
+            ></span>
+          </div>
+
+          <div class="text-center text-xl font-bold mb-4">Thêm sản phẩm</div>
+
+          <v-form
+            ref="form"
+            v-model="valid"
+            @submit.prevent="submitAddProduct"
+            class="grid gap-3"
+          >
+            <v-text-field
+              label="Tên sản phẩm"
+              variant="outlined"
+              v-model="name"
+              :rules="rulesRequired"
+            >
+            </v-text-field>
+
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  type="number"
+                  inputmode="numeric"
+                  label="Thời hạn BH"
+                  variant="outlined"
+                  v-model="monthGuarantee"
+                  :rules="rulesRequired"
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-checkbox v-model="status" label="Hoạt động"></v-checkbox>
+              </v-col>
+            </v-row>
+            <v-textarea
+              label="Mô tả sản phẩm"
+              variant="outlined"
+              density="comfortable"
+              v-model="description"
+              auto-grow
+            >
+            </v-textarea>
+            <div class="flex justify-between">
+              <span v-for="(item, index) in listImg" :key="index">
+                <v-badge color="gray-500">
+                  <template v-slot:badge>
+                    <span class="mdi mdi-close" @click="removeImgList(index)">
+                    </span>
+                  </template>
+                  <v-avatar rounded="lg" size="64">
+                    <img
+                      v-if="listImg[index].base64"
+                      width="50"
+                      :src="listImg[index].base64"
+                      @click="uploadFile('upload' + index)"
+                    />
+                    <img
+                      v-else
+                      width="50"
+                      :src="imageAvatar"
+                      @click="uploadFile('upload' + index)"
+                    />
+                    <input
+                      hidden
+                      type="file"
+                      accept="image/png, image/jpg, image/jpeg"
+                      :ref="'upload' + index"
+                      @change="affterRenderImg($event, index)"
+                    />
+                  </v-avatar>
+                </v-badge>
+              </span>
+            </div>
+          </v-form>
+          <div class="flex justify-center my-6">
+            <v-btn
+              variant="flat"
+              color="blue-darken-4"
+              @click="submitAddProduct"
+            >
+              Xác nhận
+            </v-btn>
+          </div>
+        </div>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
+  <v-dialog max-width="800" v-model="dialogUpdate">
     <div class="bg-white p-4 rounded-lg">
-      <div class="text-right" @click="addProductDialog = false">
+      <div class="text-right" @click="dialogUpdate = false">
         <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
       </div>
 
-      <div class="text-center text-xl font-bold mb-4">Thêm sản phẩm</div>
-
+      <div class="text-center text-xl font-bold mb-4">Cập nhật sản phẩm</div>
       <v-form
-        ref="form"
+        ref="formEdit"
         v-model="valid"
-        @submit.prevent="submitAddProduct"
+        @submit.prevent="editConfirm"
         class="grid gap-3"
       >
         <v-text-field
@@ -78,15 +181,23 @@
           :rules="rulesRequired"
         >
         </v-text-field>
-        <v-text-field
-          type="number"
-          inputmode="numeric"
-          label="Thời hạn BH"
-          variant="outlined"
-          v-model="monthGuarantee"
-          :rules="rulesRequired"
-        >
-        </v-text-field>
+        <v-row>
+          <v-col cols="6"
+            ><v-text-field
+              type="number"
+              inputmode="numeric"
+              label="Thời hạn BH"
+              variant="outlined"
+              v-model="monthGuarantee"
+              :rules="rulesRequired"
+            >
+            </v-text-field
+          ></v-col>
+          <v-col cols="6"
+            ><v-checkbox v-model="status" label="Hoạt động"></v-checkbox
+          ></v-col>
+        </v-row>
+
         <v-textarea
           label="Mô tả sản phẩm"
           variant="outlined"
@@ -95,7 +206,6 @@
           auto-grow
         >
         </v-textarea>
-        <v-checkbox v-model="status" label="Trạng thái"></v-checkbox>
         <div class="flex justify-between">
           <span v-for="(item, index) in listImg" :key="index">
             <v-badge color="gray-500">
@@ -129,7 +239,7 @@
         </div>
       </v-form>
       <div class="flex justify-center my-4">
-        <v-btn variant="flat" color="blue-darken-4" @click="submitAddProduct">
+        <v-btn variant="flat" color="blue-darken-4" @click="editConfirm">
           Xác nhận
         </v-btn>
       </div>
@@ -183,7 +293,7 @@ export default {
       name: null,
       monthGuarantee: null,
       description: null,
-      status: 0,
+      status: true,
       listImg: [
         { id: null, base64: null },
         { id: null, base64: null },
@@ -191,6 +301,8 @@ export default {
         { id: null, base64: null },
         { id: null, base64: null },
       ],
+      dialogUpdate: false,
+      productEdit: null,
     };
   },
   methods: {
@@ -198,6 +310,7 @@ export default {
       "getListProduct",
       "addProductAction",
       "addFileAction",
+      "updateProductAction",
     ]),
     filterOnlyCapsText(value, query, item) {
       return (
@@ -229,18 +342,24 @@ export default {
           },
         ],
       };
-      this.getListProduct("public/product/search", paramsSearch).then((resp) => {
-        if (resp) {
-          this.items = resp.data.data;
-          this.pageCount = resp.data.totalPage;
+      this.getListProduct("public/product/search", paramsSearch).then(
+        (resp) => {
+          if (resp) {
+            this.items = resp.data.data;
+            this.pageCount = resp.data.totalPage;
+          }
         }
-      });
+      );
     },
     getProductDetails(item) {
       this.$router.push({ path: `/sanpham/${item.id}` });
     },
     addProduct() {
       this.addProductDialog = true;
+      this.status = false;
+      this.name = null;
+      this.monthGuarantee = null;
+      this.description = null;
     },
     async submitAddProduct() {
       const { valid } = await this.$refs.form.validate();
@@ -248,7 +367,7 @@ export default {
         let fileList = [];
         this.listImg.map((item) => {
           if (item.base64) {
-            fileList.push(item.id);
+            fileList.push({ fileId: item.id });
           }
         });
 
@@ -256,11 +375,16 @@ export default {
           name: this.name,
           monthGuarantee: this.monthGuarantee,
           description: this.description,
-          status: this.status,
+          status: this.status ? 1 : 0,
           files: fileList,
         };
-        this.addProductAction("public/product", params).then((resp) => {
+        this.addProductAction("admin/product", params).then((resp) => {
           if (resp) {
+            this.snackChange({
+              status: true,
+              message: "Thêm sản phẩm thành công",
+              color: "blue",
+            });
             this.getProducts();
             this.addProductDialog = false;
           }
@@ -318,6 +442,50 @@ export default {
       img.src = base64;
 
       return deferred.promise();
+    },
+    updateProduct(data) {
+      this.dialogUpdate = true;
+      this.productEdit = data;
+      this.status = this.productEdit.status === 1 ? true : false;
+      this.name = this.productEdit.name;
+      this.monthGuarantee = this.productEdit.monthGuarantee;
+      this.description = this.productEdit.description;
+    },
+
+    async editConfirm() {
+      const { valid } = await this.$refs.formEdit.validate();
+      if (valid) {
+        let fileList = [];
+        this.listImg.map((item) => {
+          if (item.base64) {
+            fileList.push({ fileId: item.id });
+          }
+        });
+
+        let params = {
+          id: this.productEdit.id,
+          name: this.name,
+          monthGuarantee: this.monthGuarantee,
+          description: this.description,
+          status: this.status ? 1 : 0,
+          files: fileList,
+        };
+        this.updateProductAction("admin/product", params).then((resp) => {
+          if (resp) {
+            this.snackChange({
+              status: true,
+              message: "Cập nhật thông tin thành công",
+              color: "blue",
+            });
+            this.dialogUpdate = false;
+            this.getProducts();
+            this.status = false;
+            this.name = null;
+            this.monthGuarantee = null;
+            this.description = null;
+          }
+        });
+      }
     },
   },
   computed: {

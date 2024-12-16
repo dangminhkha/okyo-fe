@@ -23,6 +23,7 @@ export const useBaseStore = defineStore({
     addGuaranteeToProductData: null,
     updateCustomerGuaranteeData: null,
     removeGuaranteeData: null,
+    updateProductData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -114,6 +115,13 @@ export const useBaseStore = defineStore({
         this.removeGuaranteeData = resp.data;
       });
       return this.removeGuaranteeData;
+    },
+    //cập nhật thông tin sản phẩm
+    async updateProductAction(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.updateProductData = resp.data;
+      });
+      return this.updateProductData;
     },
   },
   persist: true,
