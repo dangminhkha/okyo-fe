@@ -72,8 +72,41 @@
                 class="mdi mdi-close cursor-pointer font-bold text-2xl"
               ></span>
             </div>
-
-            <div class="text-center text-xl font-bold mb-4">
+            <v-carousel
+              v-if="dataSelected.files.length > 0"
+              hide-delimiters
+              hide-delimiter-background
+              height="300"
+              :cycle="true"
+              :interval="6000"
+            >
+              <template v-slot:prev="{ props }">
+                <div
+                  class="w-[50px] h-[50px] bg-gray-100 flex justify-center items-center shadow-2xl rounded-full"
+                  @click="props.onClick"
+                >
+                  <span class="mdi mdi-arrow-left"></span>
+                </div>
+              </template>
+              <template v-slot:next="{ props }">
+                <div
+                  class="w-[50px] h-[50px] bg-gray-100 flex justify-center items-center shadow-2xl rounded-full"
+                  @click="props.onClick"
+                >
+                  <span class="mdi mdi-arrow-right"></span>
+                </div>
+              </template>
+              <v-carousel-item
+                cover
+                v-for="(item, index) in dataSelected.files"
+                :key="index"
+              >
+                <img
+                  :src="API_URL + item.path"
+                  class="m-auto max-h-[400px] h-[100%]"
+              /></v-carousel-item>
+            </v-carousel>
+            <div class="text-center text-xl font-bold my-4">
               Chi tiết sản phẩm
             </div>
             <v-row>
@@ -84,9 +117,7 @@
             </v-row>
             <v-row>
               <v-col cols="6"> Thời hạn bảo hành </v-col>
-              <v-col cols="6">
-                {{ dataSelected.monthGuarantee }} tháng
-              </v-col>
+              <v-col cols="6"> {{ dataSelected.monthGuarantee }} tháng </v-col>
             </v-row>
             <v-row>
               <v-col cols="6"> Mô tả chi tiết </v-col>
@@ -104,10 +135,12 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../../stores/baseStore";
+const API_URL = import.meta.env.VITE_API_URL;
 export default {
   name: "CustomerProductPage",
   data() {
     return {
+      API_URL,
       page: 1,
       pageCount: 0,
       itemsPerPage: 10,
