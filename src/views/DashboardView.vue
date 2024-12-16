@@ -34,16 +34,24 @@
         hide-default-footer
         :mobile="windowReSize.x < 768"
       >
+        <template v-slot:[`item.name`]="{ item }">
+          <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
+            <v-tooltip activator="parent" location="top">{{
+              item.name
+            }}</v-tooltip>
+            {{ item.name }}
+          </div>
+        </template>
         <template v-slot:[`item.status`]="{ item }">
           <div
             v-if="item.status === 0 || !item.status"
-            class="font-bold bg-gray-100 p-2 text-sm rounded-lg text-gray-darken-2 text-center"
+            class="font-bold bg-gray-100 p-2 text-sm rounded-lg text-gray-darken-2 text-center max-w-[150px] m-auto"
           >
             Không hoạt động
           </div>
           <div
             v-if="item.status === 1"
-            class="font-bold bg-blue-50 p-2 text-sm rounded-lg text-blue-darken-4 text-center"
+            class="font-bold bg-blue-50 p-2 text-sm rounded-lg text-blue-darken-4 text-center max-w-[150px] m-auto"
           >
             Hoạt động
           </div>
