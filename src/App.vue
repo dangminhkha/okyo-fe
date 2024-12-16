@@ -19,7 +19,7 @@
     >
     <RouterView />
   </div>
-  <FooterVue />
+  <FooterVue v-if="$route.fullPath === '/'"/>
 </template>
 <script>
 import { useBaseStore } from "@/stores/baseStore";
