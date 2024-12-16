@@ -87,7 +87,7 @@
               v-if="item.status === 'NOT_SOLD'"
               size="small"
             >
-              Chưa có BH
+              Chưa kích hoạt
             </v-chip>
             <v-chip
               color="blue-darken-4"
@@ -95,7 +95,7 @@
               v-if="item.status === 'SOLD'"
               size="small"
             >
-              Còn BH
+              Đang BH
             </v-chip>
           </template>
           <template v-slot:[`item.actions`]="{ item }">
