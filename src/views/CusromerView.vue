@@ -8,7 +8,7 @@
       <v-tabs-window-item :value="1">
         <CustomerProductVue />
       </v-tabs-window-item>
-      <v-tabs-window-item :value="1">
+      <v-tabs-window-item :value="2">
         <CustomerGuaranteeVue />
       </v-tabs-window-item>
     </v-tabs-window>

@@ -20,7 +20,7 @@
       <v-divider></v-divider>
       <div class="grid grid-cols-3 md:grid-cols-4 gap-3 p-3">
         <div v-for="(item, index) in items" :key="index">
-          <div class="bg-white shadow-2xl rounded-xl p-3">
+          <div class="bg-white shadow-2xl rounded-lg p-3">
             <div class="grid" @click="getProductDetails(item)">
               <div v-if="item.files.length > 0">
                 <img

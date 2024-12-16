@@ -25,6 +25,8 @@ export const useBaseStore = defineStore({
     removeGuaranteeData: null,
     updateProductData: null,
     customerProductData: null,
+    getDataGuaranteeCustomerData: null,
+    cusGuaranteeDetailData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -130,6 +132,20 @@ export const useBaseStore = defineStore({
         this.customerProductData = resp.data;
       });
       return this.customerProductData;
+    },
+    //lấy danh sách bảo hành cho khách hàng
+    async getListCusGuarantee(url: string, params: any) {
+      await baseService.fetchParams(API_URL + url, params).then((resp) => {
+        this.getDataGuaranteeCustomerData = resp.data;
+      });
+      return this.getDataGuaranteeCustomerData;
+    },
+    //lấy chi tiết BH của khách hàng
+    async cusDetail(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.cusGuaranteeDetailData = resp.data;
+      });
+      return this.cusGuaranteeDetailData;
     },
   },
   persist: true,
