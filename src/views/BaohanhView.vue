@@ -53,24 +53,30 @@
           </div>
         </template>
         <template v-slot:[`item.status`]="{ item }">
-          <div
-            class="text-red-darken-4 font-bold"
+          <v-chip
+            color="red-darken-4"
+            variant="flat"
             v-if="item.status === 'EXPIRED'"
+            size="small"
           >
             Hết hạn BH
-          </div>
-          <div
-            class="text-gray-darken-4 font-bold"
+          </v-chip>
+          <v-chip
+            color="green-darken-4"
+            variant="flat"
             v-if="item.status === 'NOT_SOLD'"
+            size="small"
           >
-            Chưa bán
-          </div>
-          <div
-            class="text-blue-darken-4 font-bold"
+            Chưa kích hoạt
+          </v-chip>
+          <v-chip
+            color="blue-darken-4"
+            variant="flat"
             v-if="item.status === 'SOLD'"
+            size="small"
           >
-            Đang bán
-          </div>
+            Đang BH
+          </v-chip>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <div class="min-w-[60px]">
@@ -256,6 +262,7 @@ export default {
             message: "Xóa bảo hành thành công",
             color: "blue",
           });
+          this.dialogRemove = false;
           this.getData();
         }
       });

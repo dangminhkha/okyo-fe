@@ -31,7 +31,7 @@
             v-for="(item, index) in imageList"
             :key="index"
           >
-            <img :src="item" class="m-auto max-h-[400px] h-[100%]"
+            <img :src="API_URL + item.path" class="m-auto max-h-[400px] h-[100%]"
           /></v-carousel-item>
         </v-carousel>
       </div>
@@ -181,11 +181,13 @@
 import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../stores/baseStore";
 import GuaranteeDetailVue from "./sections/GuaranteeDetail.vue";
+const API_URL = import.meta.env.VITE_API_URL;
 export default {
   name: "ProductDetailPage",
   components: { GuaranteeDetailVue },
   data() {
     return {
+      API_URL,
       valid: false,
       addGuaranteeDialog: false,
       dataDetail: null,
@@ -251,25 +253,12 @@ export default {
       "getImageFromId",
       "addGuaranteeToProduct",
     ]),
-    getImageUrl(id) {
-      this.getImageFromId(`public/file`, { id: id }).then((resp) => {
-        if (resp) {
-          // resp.data.rep
 
-          this.imageList.push(
-            "data:" + resp.data.contentType + ";base64," + resp.data.base64
-          );
-        }
-      });
-    },
     getDetails(id) {
       this.detailsProduct(`public/product/${id}`).then((resp) => {
         if (resp) {
           this.dataDetail = resp.data;
-          this.imageList = [];
-          this.dataDetail.files.map((item) => {
-            this.getImageUrl(item.fileId);
-          });
+          this.imageList = resp.data.files;
         }
       });
     },

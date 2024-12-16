@@ -229,6 +229,12 @@
                   @click="uploadFile('upload' + index)"
                 />
                 <img
+                  v-else-if="listImg[index].path"
+                  width="50"
+                  :src="listImg[index].path"
+                  @click="uploadFile('upload' + index)"
+                />
+                <img
                   v-else
                   width="50"
                   :src="imageAvatar"
@@ -260,11 +266,13 @@ import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../stores/baseStore";
 import imageAvatar from "@/assets/images/uploader.png";
 import JQuery from "jquery";
+const API_URL = import.meta.env.VITE_API_URL;
 export default {
   name: "DashboardPage",
   components: {},
   data() {
     return {
+      API_URL,
       imageAvatar,
       page: 1,
       pageCount: 0,
@@ -303,11 +311,11 @@ export default {
       description: null,
       status: true,
       listImg: [
-        { id: null, base64: null },
-        { id: null, base64: null },
-        { id: null, base64: null },
-        { id: null, base64: null },
-        { id: null, base64: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
       ],
       dialogUpdate: false,
       productEdit: null,
@@ -319,6 +327,7 @@ export default {
       "addProductAction",
       "addFileAction",
       "updateProductAction",
+      "snackChange",
     ]),
     filterOnlyCapsText(value, query, item) {
       return (
@@ -364,7 +373,7 @@ export default {
     },
     addProduct() {
       this.addProductDialog = true;
-      this.status = false;
+      this.status = true;
       this.name = null;
       this.monthGuarantee = null;
       this.description = null;
@@ -374,8 +383,8 @@ export default {
       if (valid) {
         let fileList = [];
         this.listImg.map((item) => {
-          if (item.base64) {
-            fileList.push({ fileId: item.id });
+          if (item.id) {
+            fileList.push({ id: item.id });
           }
         });
 
@@ -400,7 +409,7 @@ export default {
       }
     },
     removeImgList(index) {
-      this.listImg[index] = { id: null, base64: null };
+      this.listImg[index] = { id: null, base64: null, path: null };
     },
     uploadFile(ref) {
       this.$refs[ref][0].click();
@@ -458,6 +467,10 @@ export default {
       this.name = this.productEdit.name;
       this.monthGuarantee = this.productEdit.monthGuarantee;
       this.description = this.productEdit.description;
+      this.productEdit.files.map((item, index) => {
+        this.listImg[index].path = API_URL + item.path;
+        this.listImg[index].id = item.id;
+      });
     },
 
     async editConfirm() {
@@ -465,8 +478,8 @@ export default {
       if (valid) {
         let fileList = [];
         this.listImg.map((item) => {
-          if (item.base64) {
-            fileList.push({ fileId: item.id });
+          if (item.id) {
+            fileList.push({ id: item.id });
           }
         });
 

@@ -61,7 +61,6 @@
                 variant="outlined"
                 density="comfortable"
                 v-model="fromDate"
-                :min="todayDate"
                 class="p-date hideDate"
                 :cancel-text="'Đóng'"
                 :hide-actions="true"
@@ -69,10 +68,10 @@
                 :format="'dd/mm/yyyy'"
                 :rules="[rules.required]"
               >
-              <template v-slot:default>
-                {{dateFormated}}
-              </template>
-            </v-date-input>
+                <template v-slot:default>
+                  {{ dateFormated }}
+                </template>
+              </v-date-input>
               <v-textarea
                 label="Mô tả"
                 variant="outlined"
@@ -95,7 +94,7 @@
 <script>
 import { mapActions } from "pinia";
 import { useBaseStore } from "../../stores/baseStore";
-import moment from 'moment'
+import moment from "moment";
 export default {
   name: "GuaranteeSection",
   emits: ["close", "updateDone"],
@@ -149,6 +148,11 @@ export default {
         if (resp) {
           this.dialogDetail = true;
           this.dataSelected = resp.data;
+          this.customerName = this.dataSelected.customerName;
+          this.customerPhone = this.dataSelected.customerPhone;
+          this.customerEmail = this.dataSelected.customerEmail;
+          this.fromDate = this.dataSelected.startDate ? new Date(moment(this.dataSelected.startDate, 'DD/MM/YYYY').format()) : null;
+          this.dateFormated = this.dataSelected.startDate;
         }
       });
     },
@@ -160,7 +164,7 @@ export default {
           customerName: this.customerName,
           customerPhone: this.customerPhone,
           customerEmail: this.customerEmail,
-          startDate: moment(this.fromDate).format('DD/MM/YYYY'),
+          startDate: moment(this.fromDate).format("DD/MM/YYYY"),
           description: this.description,
         };
         this.updateGuarantee("admin/guarantee", params).then((resp) => {
@@ -183,7 +187,6 @@ export default {
     },
   },
   computed: {
-    
     rulesEmail() {
       const rules = [];
       const rule2 = (value) =>
@@ -197,8 +200,8 @@ export default {
     },
   },
   watch: {
-    fromDate(val){
-      this.dateFormated = moment(val).format('DD/MM/YYYY')
+    fromDate(val) {
+      this.dateFormated = moment(val).format("DD/MM/YYYY");
     },
     id(val) {
       this.getGuaranteeDetails(val);

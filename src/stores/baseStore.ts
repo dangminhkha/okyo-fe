@@ -24,6 +24,7 @@ export const useBaseStore = defineStore({
     updateCustomerGuaranteeData: null,
     removeGuaranteeData: null,
     updateProductData: null,
+    customerProductData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -122,6 +123,13 @@ export const useBaseStore = defineStore({
         this.updateProductData = resp.data;
       });
       return this.updateProductData;
+    },
+    //lay chi tiet san pham khách hàng
+    async getCusProductDetail(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.customerProductData = resp.data;
+      });
+      return this.customerProductData;
     },
   },
   persist: true,
