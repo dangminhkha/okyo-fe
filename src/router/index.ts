@@ -10,10 +10,10 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
+      path: "/admin",
       name: "home",
       component: () => import("../views/MasterView.vue"),
-      redirect: "/product",
+      redirect: "/login",
       children: [
         {
           path: "/product",
@@ -38,7 +38,7 @@ const router = createRouter({
       ],
     },
     {
-      path: "/customer",
+      path: "/",
       name: "Customer",
       component: () => import("../views/CusromerView.vue"),
     },
@@ -57,7 +57,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const baseStore = useBaseStore();
   const loginStatus = localStorage.getItem("isLogined") || "false";
-  if (to.path === "/customer") {
+  if (to.path === "/") {
     next();
   }
   if (to.path === "/login") {

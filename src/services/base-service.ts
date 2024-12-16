@@ -14,7 +14,7 @@ const getHeader = () => {
     "Content-Type": "application/json",
     "Access-Control-Allow-Methods": "POST,PATCH,OPTIONS",
     "Secret-Key": "okyo-secret-key",
-    Authorization: "Bearer " + baseStore.$state.loginData.data.accessToken,
+    Authorization: baseStore.$state.loginData ? "Bearer " + baseStore.$state.loginData.data.accessToken : '',
   };
 };
 const getHeaderFile = () => {

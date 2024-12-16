@@ -1,21 +1,49 @@
 <template>
   <div class="shadow-xl rounded-lg">
     <v-card flat>
-      <v-card-title class="d-flex align-center pe-2">
-        Danh sách bảo hành
-        <v-spacer></v-spacer>
+      <v-card-title>
+        <v-row>
+          <v-col cols="12" md="3">Danh sách bảo hành</v-col>
+          <v-col cols="12" md="3"
+            ><v-select
+              label="Tìm kiếm theo"
+              :items="itemsSelect"
+              v-model="itemsSelected"
+              variant="outlined"
+              density="comfortable"
+              item-title="name"
+              item-value="value"
+              return-object
+            ></v-select
+          ></v-col>
 
-        <v-text-field
-          v-model="search"
-          density="compact"
-          label="Tìm kiếm"
-          prepend-inner-icon="mdi:mdi-magnify"
-          variant="solo-filled"
-          flat
-          hide-details
-          single-line
-          @click:prepend-inner="searchDara()"
-        ></v-text-field>
+          <v-col cols="12" md="3"
+            ><v-text-field
+              v-model="search"
+              density="compact"
+              label="Tìm kiếm"
+              prepend-inner-icon="mdi:mdi-magnify"
+              variant="solo-filled"
+              flat
+              hide-details
+              single-line
+              @click:prepend-inner="searchDara()"
+              class="h-[48px]"
+            ></v-text-field
+          ></v-col>
+          <v-col cols="12" md="3"
+            ><v-select
+              label="Trạng thái"
+              :items="itemsStatus"
+              v-model="itemsStatusSelected"
+              variant="outlined"
+              density="comfortable"
+              item-title="name"
+              item-value="value"
+              return-object
+            ></v-select
+          ></v-col>
+        </v-row>
       </v-card-title>
 
       <v-divider></v-divider>
@@ -82,9 +110,17 @@
           <div class="min-w-[60px]">
             <v-icon
               @click="getGuaranteeDetails(item)"
+              v-if="item.status !== 'NOT_SOLD'"
               class="text-blue-darken-4"
             >
               mdi:mdi-eye
+            </v-icon>
+            <v-icon
+              @click="getGuaranteeDetails(item)"
+              v-else
+              class="text-blue-darken-4"
+            >
+              mdi:mdi-pencil
             </v-icon>
             <v-icon
               v-if="item.status === 'NOT_SOLD'"
@@ -141,6 +177,21 @@ export default {
   components: { GuaranteeDetailVue },
   data() {
     return {
+      itemsStatus: [
+        { name: "Tất cả", value: "ALL" },
+        { name: "Đang BH", value: "SOLD" },
+        { name: "Hết hạn BH", value: "EXPIRED" },
+        { name: "Chưa kích hoạt", value: "NOT_SOLD" },
+      ],
+      itemsStatusSelected: { name: "Tất cả", value: "ALL" },
+      itemsSelect: [
+        { name: "Mã BH", value: "GUARANTEE_CODE" },
+        { name: "Tên sản phẩm", value: "PRODUCT_NAME" },
+        { name: "Tên khách hàng", value: "CUSTOMER_NAME" },
+        { name: "Email khách hàng", value: "CUSTOMER_MAIL" },
+        { name: "SĐT khách hàng", value: "CUSTOMER_PHONE" },
+      ],
+      itemsSelected: { name: "Mã BH", value: "GUARANTEE_CODE" },
       page: 1,
       pageCount: 0,
       itemsPerPage: 10,
@@ -150,36 +201,43 @@ export default {
           title: "Mã BH",
           align: "start",
           key: "code",
+          sortable: false,
         },
         {
           title: "Tên SP",
           align: "center",
           key: "product.name",
+          sortable: false,
         },
         {
           title: "Tên KH",
           align: "center",
           key: "customerName",
+          sortable: false,
         },
         {
           title: "Sđt KH",
           align: "center",
           key: "customerPhone",
+          sortable: false,
         },
         {
           title: "Email KH",
           align: "center",
           key: "customerEmail",
+          sortable: false,
         },
         {
           title: "Ngày hết hạn BH",
           align: "center",
           key: "endDate",
+          sortable: false,
         },
         {
           title: "Trạng thái",
           align: "start",
           key: "status",
+          sortable: false,
         },
 
         { title: "", key: "actions", align: "end", sortable: false },
@@ -229,9 +287,20 @@ export default {
         size: this.itemsPerPage,
         filters: [
           {
-            fieldCode: "NAME",
+            fieldCode: this.itemsSelected.value,
             operator: "LIKE",
             value: this.search,
+          },
+          {
+            fieldCode:
+              this.itemsStatusSelected.value !== "ALL"
+                ? "GUARANTEE_STATUS"
+                : "",
+            value:
+              this.itemsStatusSelected.value !== "ALL"
+                ? this.itemsStatusSelected.value
+                : "",
+            operator: "EQUAL",
           },
         ],
       };
@@ -269,6 +338,14 @@ export default {
     },
     updateDone() {
       this.dialogDetail = false;
+      this.getData();
+    },
+  },
+  watch: {
+    page(val) {
+      this.getData();
+    },
+    itemsStatusSelected(val) {
       this.getData();
     },
   },
