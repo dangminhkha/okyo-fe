@@ -18,43 +18,21 @@
       </div>
 
       <v-divider></v-divider>
-      <v-data-table
-        :headers="headers"
-        :items="items"
-        :page="page"
-        :items-per-page="itemsPerPage"
-        item-value="name"
-        hide-default-footer
-        :mobile="windowReSize.x < 768"
-      >
-        <template v-slot:[`item.name`]="{ item }">
-          <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
-            <v-tooltip activator="parent" location="top">{{
-              item.name
-            }}</v-tooltip>
-            {{ item.name }}
+      <div class="grid grid-cols-3 md:grid-cols-4 gap-3 p-3">
+        <div v-for="(item, index) in items" :key="index">
+          <div class="bg-white shadow-2xl rounded-xl p-3">
+            <div class="grid" @click="getProductDetails(item)">
+              <div v-if="item.files.length > 0">
+                <img
+                  :src="API_URL + item.files[0].path"
+                  class="m-auto max-h-[400px] h-[100%]"
+                />
+              </div>
+              <div class="text-center text-sm my-2">{{item.name}}</div>
+            </div>
           </div>
-        </template>
-        <template v-slot:[`item.status`]="{ item }">
-          <div
-            v-if="item.status === 0 || !item.status"
-            class="font-bold bg-gray-100 p-2 text-sm rounded-lg text-gray-darken-2 text-center max-w-[150px] m-auto"
-          >
-            Không hoạt động
-          </div>
-          <div
-            v-if="item.status === 1"
-            class="font-bold bg-blue-50 p-2 text-sm rounded-lg text-blue-darken-4 text-center max-w-[150px] m-auto"
-          >
-            Hoạt động
-          </div>
-        </template>
-        <template v-slot:[`item.actions`]="{ item }">
-          <v-icon @click="getProductDetails(item)" class="text-blue-darken-4">
-            mdi:mdi-eye
-          </v-icon>
-        </template>
-      </v-data-table>
+        </div>
+      </div>
       <v-pagination
         v-model="page"
         :length="pageCount"
@@ -78,7 +56,7 @@
               hide-delimiter-background
               height="300"
               :cycle="true"
-              :interval="6000"
+              :interval="5000"
             >
               <template v-slot:prev="{ props }">
                 <div
@@ -143,7 +121,7 @@ export default {
       API_URL,
       page: 1,
       pageCount: 0,
-      itemsPerPage: 10,
+      itemsPerPage: 12,
       search: "",
       headers: [
         {
@@ -212,6 +190,11 @@ export default {
           this.dataSelected = resp.data;
         }
       });
+    },
+  },
+  watch: {
+    page(val) {
+      this.getProducts();
     },
   },
   created() {
