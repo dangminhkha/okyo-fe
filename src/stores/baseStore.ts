@@ -27,6 +27,7 @@ export const useBaseStore = defineStore({
     customerProductData: null,
     getDataGuaranteeCustomerData: null,
     cusGuaranteeDetailData: null,
+    removeProductData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -146,6 +147,13 @@ export const useBaseStore = defineStore({
         this.cusGuaranteeDetailData = resp.data;
       });
       return this.cusGuaranteeDetailData;
+    },
+    //xóa sản phẩm
+    async removeProductAction(url: string) {
+      await baseService.remove(API_URL + url).then((resp) => {
+        this.removeProductData = resp.data;
+      });
+      return this.removeProductData;
     },
   },
   persist: true,

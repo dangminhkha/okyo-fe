@@ -43,7 +43,7 @@
       <v-pagination
         v-model="page"
         :length="pageCount"
-        :total-visible="2"
+        :total-visible="5"
         next-icon="mdi:mdi-menu-right"
         prev-icon="mdi:mdi-menu-left"
       ></v-pagination>

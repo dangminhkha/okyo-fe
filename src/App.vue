@@ -19,14 +19,15 @@
     >
     <RouterView />
   </div>
+  <FooterVue />
 </template>
 <script>
 import { useBaseStore } from "@/stores/baseStore";
 import { mapState, mapWritableState } from "pinia";
-
+import FooterVue from "./components/Footer.vue";
 export default {
   name: "App",
-  components: {},
+  components: { FooterVue },
   data() {
     return {
       overlayStatus: false,
@@ -44,7 +45,7 @@ export default {
   },
   computed: {
     ...mapState(useBaseStore, ["overlay", "snack"]),
-    ...mapWritableState(useBaseStore, ['windowReSize'])
+    ...mapWritableState(useBaseStore, ["windowReSize"]),
   },
   watch: {
     snack(val) {

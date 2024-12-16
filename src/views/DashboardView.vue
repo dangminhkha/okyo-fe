@@ -63,6 +63,9 @@
           <v-icon @click="updateProduct(item)" class="text-blue-darken-4 ml-3">
             mdi:mdi-pencil
           </v-icon>
+          <v-icon @click="removeProduct(item)" class="text-red-darken-4 ml-3">
+            mdi:mdi-close-circle-outline
+          </v-icon>
         </template>
       </v-data-table>
       <v-pagination
@@ -74,6 +77,23 @@
       ></v-pagination>
     </v-card>
   </div>
+  <v-dialog v-model="dialogRemove" max-width="500">
+    <div class="bg-white py-3 px-5 rounded-lg">
+      <div class="text-right" @click="dialogRemove = false">
+        <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
+      </div>
+      <div class="grid gap-3">
+        <div class="text-center text-xl font-bold">Xác nhận xóa sản phẩm?</div>
+        <v-btn
+          variant="flat"
+          color="blue-darken-4"
+          class="w-3/5 m-auto mt-5"
+          @click="removeConfirm()"
+          >Xác nhận</v-btn
+        >
+      </div>
+    </div>
+  </v-dialog>
   <v-dialog v-model="addProductDialog" max-width="800" persistent>
     <v-card>
       <v-card-text class="p-0">
@@ -272,6 +292,8 @@ export default {
   components: {},
   data() {
     return {
+      dialogRemove: false,
+      removeData: null,
       API_URL,
       imageAvatar,
       page: 1,
@@ -283,19 +305,19 @@ export default {
           title: "Tên sản phẩm",
           align: "start",
           key: "name",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Trạng thái",
           align: "center",
           key: "status",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Thời gian BH",
           align: "center",
           key: "monthGuarantee",
-          sortable: false
+          sortable: false,
         },
         { title: "", key: "actions", sortable: false },
       ],
@@ -331,6 +353,7 @@ export default {
       "addFileAction",
       "updateProductAction",
       "snackChange",
+      "removeProductAction",
     ]),
     filterOnlyCapsText(value, query, item) {
       return (
@@ -510,6 +533,25 @@ export default {
           }
         });
       }
+    },
+    removeProduct(data) {
+      this.dialogRemove = true;
+      this.removeData = data;
+    },
+    removeConfirm() {
+      this.removeProductAction(`admin/product/${this.removeData.id}`).then(
+        (resp) => {
+          if (resp) {
+            this.snackChange({
+              status: true,
+              message: "Xóa sản phẩm thành công",
+              color: "blue",
+            });
+            this.dialogRemove = false;
+            this.getProducts();
+          }
+        }
+      );
     },
   },
   computed: {
