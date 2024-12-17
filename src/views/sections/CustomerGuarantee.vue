@@ -131,10 +131,47 @@
                   >{{ dataSelected.product.monthGuarantee }} tháng</v-col
                 >
               </v-row>
-              <!-- <v-row>
-                <v-col cols="6">Mô tả</v-col>
-                <v-col cols="6">{{ dataSelected.product.description }}</v-col>
-              </v-row> -->
+              <v-row>
+                <v-col cols="6">Trạng thái</v-col>
+                <v-col cols="6">
+                  <v-chip
+                    color="red-darken-4"
+                    variant="flat"
+                    v-if="dataSelected.status === 'EXPIRED'"
+                    size="small"
+                  >
+                    Hết hạn BH
+                  </v-chip>
+                  <v-chip
+                    color="green-darken-4"
+                    variant="flat"
+                    v-if="dataSelected.status === 'NOT_SOLD'"
+                    size="small"
+                  >
+                    Chưa kích hoạt
+                  </v-chip>
+                  <v-chip
+                    color="blue-darken-4"
+                    variant="flat"
+                    v-if="dataSelected.status === 'SOLD'"
+                    size="small"
+                  >
+                    Đang BH
+                  </v-chip></v-col
+                >
+              </v-row>
+              <v-row>
+                <v-col cols="6">Ngày bắt đầu BH</v-col>
+                <v-col cols="6"
+                  >{{ dataSelected.startDate }}</v-col
+                >
+              </v-row>
+              <v-row>
+                <v-col cols="6">Ngày kết thúc BH</v-col>
+                <v-col cols="6"
+                  >{{ dataSelected.endDate }}</v-col
+                >
+              </v-row>
             </div>
           </div>
         </v-card-text>
@@ -159,43 +196,43 @@ export default {
           title: "Mã BH",
           align: "start",
           key: "code",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Tên SP",
           align: "center",
           key: "product.name",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Tên KH",
           align: "center",
           key: "customerName",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Sđt KH",
           align: "center",
           key: "customerPhone",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Email KH",
           align: "center",
           key: "customerEmail",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Ngày hết hạn BH",
           align: "center",
           key: "endDate",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Trạng thái",
           align: "start",
           key: "status",
-          sortable: false
+          sortable: false,
         },
 
         { title: "", key: "actions", align: "end", sortable: false },
