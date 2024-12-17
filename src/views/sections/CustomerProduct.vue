@@ -97,23 +97,26 @@
                   class="m-auto max-h-[400px] h-[100%]"
               /></v-carousel-item>
             </v-carousel>
-
-            <v-row class="mt-4">
-              <v-col cols="6"> Tên sản phẩm </v-col>
-              <v-col cols="6">
-                {{ dataSelected.name }}
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="6"> Thời hạn bảo hành </v-col>
-              <v-col cols="6"> {{ dataSelected.monthGuarantee }} tháng </v-col>
-            </v-row>
-            <v-row>
-              <v-col cols="6"> Mô tả chi tiết </v-col>
-              <v-col cols="6" class="ql-editor">
-                <span v-html="dataSelected.description"></span>
-              </v-col>
-            </v-row>
+            <div class="border border-2 p-3 rounded-lg">
+              <v-row class="mt-4">
+                <v-col cols="6"> Tên sản phẩm </v-col>
+                <v-col cols="6">
+                  {{ dataSelected.name }}
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="6"> Thời hạn bảo hành </v-col>
+                <v-col cols="6">
+                  {{ dataSelected.monthGuarantee }} tháng
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="6"> Mô tả chi tiết </v-col>
+                <v-col cols="6" class="ql-editor">
+                  <span v-html="dataSelected.description"></span>
+                </v-col>
+              </v-row>
+            </div>
           </div>
         </v-card-text>
       </v-card>
