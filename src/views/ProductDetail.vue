@@ -39,14 +39,16 @@
       </div>
       <div class="p-3 border rounded-lg">
         <v-row>
-          <v-col cols="12" md="6" class="font-bold">{{
+          <v-col cols="12" md="6" class="font-bold text-xl">{{
             dataDetail.name
           }}</v-col>
-          <v-col cols="12" md="6" class="text-end"
+          <v-col cols="12" md="6" class="text-end font-bold text-xl"
             >Thời hạn BH {{ dataDetail.monthGuarantee }} tháng</v-col
           >
         </v-row>
-        <div class="text-center mt-4 mb-2">Mô tả chi tiết</div>
+        <div class="text-center mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
+          Mô tả chi tiết
+        </div>
         <div class="ql-editor" v-html="dataDetail.description"></div>
       </div>
       <v-card flat>
