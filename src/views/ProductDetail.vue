@@ -37,21 +37,17 @@
           /></v-carousel-item>
         </v-carousel>
       </div>
-      <div class="px-4">
+      <div class="p-3 border rounded-lg">
         <v-row>
-          <v-col cols="12" md="6">Tên sản phẩm</v-col>
-          <v-col cols="12" md="6">{{ dataDetail.name }}</v-col>
+          <v-col cols="12" md="6" class="font-bold">{{
+            dataDetail.name
+          }}</v-col>
+          <v-col cols="12" md="6" class="text-end"
+            >Thời hạn BH {{ dataDetail.monthGuarantee }} tháng</v-col
+          >
         </v-row>
-        <v-row>
-          <v-col cols="12" md="6">Thời gian BH</v-col>
-          <v-col cols="12" md="6">{{ dataDetail.monthGuarantee }} tháng</v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12" md="6">Mô tả</v-col>
-          <v-col cols="12" md="6" class="ql-editor"
-            ><span v-html="dataDetail.description"></span
-          ></v-col>
-        </v-row>
+        <div class="text-center mt-4 mb-2">Mô tả chi tiết</div>
+        <div class="ql-editor" v-html="dataDetail.description"></div>
       </div>
       <v-card flat>
         <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
