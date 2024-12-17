@@ -1,9 +1,11 @@
 <template>
   <div class="max-w-screen-lg m-auto bg-white rounded-lg p-4">
-    <v-tabs v-model="tab" align-tabs="end" color="blue-darken-4" class="mb-8" :mobile="true">
-      <v-tab :value="1"><span class="font-bold text-lg">Danh sách sản phẩm</span></v-tab>
-      <v-tab :value="2"><span class="font-bold text-lg">Thông tin bảo hành</span></v-tab>
-    </v-tabs>
+    <div class="flex justify-end gap-3 px-4 mb-4">
+      <span @click="tab = 1" class="font-bold cursor-pointer border border-blue p-3 rounded-lg hover:bg-gray-100" :class="tab === 1 ? 'text-blue-darken-4': ''">Danh sách sản phẩm</span>
+      <span @click="tab = 2" class="font-bold cursor-pointer border border-blue p-3 rounded-lg hover:bg-gray-100" :class="tab === 2 ? 'text-blue-darken-4': ''">Thông tin bảo hành</span>
+    </div>
+
+    
     <CustomerSliderVue />
     <v-tabs-window v-model="tab">
       <v-tabs-window-item :value="1">
@@ -17,16 +19,21 @@
 </template>
 
 <script>
-import CustomerGuaranteeVue from './sections/CustomerGuarantee.vue';
-import CustomerHeaderVue from './sections/CustomerHeader.vue';
-import CustomerProductVue from './sections/CustomerProduct.vue';
-import CustomerSliderVue from './sections/CustomerSlider.vue';
+import CustomerGuaranteeVue from "./sections/CustomerGuarantee.vue";
+import CustomerHeaderVue from "./sections/CustomerHeader.vue";
+import CustomerProductVue from "./sections/CustomerProduct.vue";
+import CustomerSliderVue from "./sections/CustomerSlider.vue";
 export default {
   name: "CustomerPage",
-  components: { CustomerProductVue ,CustomerGuaranteeVue, CustomerSliderVue, CustomerHeaderVue},
+  components: {
+    CustomerProductVue,
+    CustomerGuaranteeVue,
+    CustomerSliderVue,
+    CustomerHeaderVue,
+  },
   data() {
     return {
-      tab: null,
+      tab: 1,
     };
   },
 };

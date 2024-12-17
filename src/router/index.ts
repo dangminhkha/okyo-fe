@@ -57,14 +57,12 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const baseStore = useBaseStore();
   const loginStatus = localStorage.getItem("isLogined") || "false";
-  if (to.path === "/") {
-    next();
-  }
+  
   if (to.path === "/login") {
     localStorage.setItem("isLogined", "false");
     baseStore.$state.loginData = null;
     next();
-  } else if (loginStatus === "false") {
+  } else if (loginStatus === "false" && to.path !== "/") {
     next({ path: "/login" });
   } else next();
 });
