@@ -47,3 +47,6 @@ input[type=number] {
 .hideDate input {
   display: none !important;
 }
+.v-btn {
+  text-transform: unset !important;
+}

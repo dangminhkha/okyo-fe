@@ -159,36 +159,43 @@ export default {
           title: "Mã BH",
           align: "start",
           key: "code",
+          sortable: false
         },
         {
           title: "Tên SP",
           align: "center",
           key: "product.name",
+          sortable: false
         },
         {
           title: "Tên KH",
           align: "center",
           key: "customerName",
+          sortable: false
         },
         {
           title: "Sđt KH",
           align: "center",
           key: "customerPhone",
+          sortable: false
         },
         {
           title: "Email KH",
           align: "center",
           key: "customerEmail",
+          sortable: false
         },
         {
           title: "Ngày hết hạn BH",
           align: "center",
           key: "endDate",
+          sortable: false
         },
         {
           title: "Trạng thái",
           align: "start",
           key: "status",
+          sortable: false
         },
 
         { title: "", key: "actions", align: "end", sortable: false },

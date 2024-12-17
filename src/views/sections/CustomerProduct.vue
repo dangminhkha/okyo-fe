@@ -137,16 +137,19 @@ export default {
           title: "Tên sản phẩm",
           align: "start",
           key: "name",
+          sortable: false
         },
         {
           title: "Trạng thái",
           align: "center",
           key: "status",
+          sortable: false
         },
         {
           title: "Thời gian BH",
           align: "center",
           key: "monthGuarantee",
+          sortable: false
         },
         { title: "", key: "actions", sortable: false },
       ],
