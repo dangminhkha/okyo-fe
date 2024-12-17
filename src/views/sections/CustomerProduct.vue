@@ -28,14 +28,15 @@
                   class="m-auto max-h-[400px] h-[100%]"
                   v-if="item.files[0].path"
                 />
-                
               </div>
               <img
-                  :src="imageAvatar"
-                  class="m-auto max-h-[400px] h-[100%]"
-                  v-else
-                />
-              <div class="text-center text-sm my-2  m-auto h-[48px] leading-5">{{item.name}}</div>
+                :src="imageAvatar"
+                class="m-auto max-h-[400px] h-[100%]"
+                v-else
+              />
+              <div class="text-center text-sm my-2 m-auto h-[48px] leading-5">
+                {{ item.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -56,6 +57,9 @@
               <span
                 class="mdi mdi-close cursor-pointer font-bold text-2xl"
               ></span>
+            </div>
+            <div class="text-center text-xl font-bold mb-4">
+              Chi tiết sản phẩm
             </div>
             <v-carousel
               v-if="dataSelected.files.length > 0"
@@ -91,10 +95,8 @@
                   class="m-auto max-h-[400px] h-[100%]"
               /></v-carousel-item>
             </v-carousel>
-            <div class="text-center text-xl font-bold my-4">
-              Chi tiết sản phẩm
-            </div>
-            <v-row>
+
+            <v-row class="mt-4">
               <v-col cols="6"> Tên sản phẩm </v-col>
               <v-col cols="6">
                 {{ dataSelected.name }}
@@ -137,19 +139,19 @@ export default {
           title: "Tên sản phẩm",
           align: "start",
           key: "name",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Trạng thái",
           align: "center",
           key: "status",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Thời gian BH",
           align: "center",
           key: "monthGuarantee",
-          sortable: false
+          sortable: false,
         },
         { title: "", key: "actions", sortable: false },
       ],

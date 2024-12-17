@@ -12,7 +12,7 @@
           aria-label="Brand"
           ><img :src="imageAvatar" class="m-auto"
         /></a>
-        <p class="mt-3 text-xs sm:text-sm text-gray-600">
+        <p class="mt-3 text-xs sm:text-sm text-gray-600 text-center">
           © {{ new Date().getFullYear() }} OKYO.
         </p>
       </div>
