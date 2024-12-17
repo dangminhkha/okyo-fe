@@ -48,7 +48,7 @@
         </v-row>
         <v-row>
           <v-col cols="12" md="6">Mô tả</v-col>
-          <v-col cols="12" md="6"
+          <v-col cols="12" md="6" class="ql-editor"
             ><span v-html="dataDetail.description"></span
           ></v-col>
         </v-row>

@@ -20,12 +20,12 @@
       <v-divider></v-divider>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3 p-3">
         <div v-for="(item, index) in items" :key="index">
-          <div class="bg-white shadow-2xl rounded-lg p-3">
+          <div class="bg-white shadow-2xl rounded-lg p-3 hover:shadow-xl cursor-pointer">
             <div class="grid" @click="getProductDetails(item)">
               <div v-if="item.files.length > 0">
                 <img
                   :src="API_URL + item.files[0].path"
-                  class="m-auto max-h-[400px] h-[100%] rounded-xl"
+                  class="m-auto max-h-[400px] h-[100%] rounded-lg"
                   v-if="item.files[0].path"
                 />
               </div>
@@ -108,7 +108,7 @@
             </v-row>
             <v-row>
               <v-col cols="6"> Mô tả chi tiết </v-col>
-              <v-col cols="6">
+              <v-col cols="6" class="ql-editor">
                 <span v-html="dataSelected.description"></span>
               </v-col>
             </v-row>
