@@ -2,7 +2,7 @@
   <div class="shadow-xl rounded-lg">
     <v-card flat>
       <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
-        <div>Danh sách sản phẩm</div>
+        <div class="font-bold">Danh sách sản phẩm</div>
 
         <v-text-field
           v-model="search"
@@ -25,13 +25,13 @@
               <div v-if="item.files.length > 0">
                 <img
                   :src="API_URL + item.files[0].path"
-                  class="m-auto max-h-[400px] h-[100%]"
+                  class="m-auto max-h-[400px] h-[100%] rounded-xl"
                   v-if="item.files[0].path"
                 />
               </div>
               <img
                 :src="imageAvatar"
-                class="m-auto max-h-[400px] h-[100%]"
+                class="m-auto max-h-[400px] h-[100%] rounded-xl"
                 v-else
               />
               <div class="text-center text-sm my-2 m-auto h-[48px] leading-5">
@@ -109,7 +109,7 @@
             <v-row>
               <v-col cols="6"> Mô tả chi tiết </v-col>
               <v-col cols="6">
-                {{ dataSelected.description }}
+                <span v-html="dataSelected.description"></span>
               </v-col>
             </v-row>
           </div>

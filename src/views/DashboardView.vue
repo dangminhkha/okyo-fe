@@ -136,14 +136,8 @@
                 <v-checkbox v-model="status" label="Hoạt động"></v-checkbox>
               </v-col>
             </v-row>
-            <v-textarea
-              label="Mô tả sản phẩm"
-              variant="outlined"
-              density="comfortable"
-              v-model="description"
-              auto-grow
-            >
-            </v-textarea>
+            <Editor v-model="description" editorStyle="height: 200px"> </Editor>
+
             <div class="flex justify-between">
               <span v-for="(item, index) in listImg" :key="index">
                 <v-badge color="gray-500">
@@ -225,15 +219,8 @@
             ><v-checkbox v-model="status" label="Hoạt động"></v-checkbox
           ></v-col>
         </v-row>
+        <Editor v-model="description" editorStyle="height: 200px"> </Editor>
 
-        <v-textarea
-          label="Mô tả sản phẩm"
-          variant="outlined"
-          density="comfortable"
-          v-model="description"
-          auto-grow
-        >
-        </v-textarea>
         <div class="flex justify-between">
           <span v-for="(item, index) in listImg" :key="index">
             <v-badge color="gray-500">
@@ -287,9 +274,10 @@ import { useBaseStore } from "../stores/baseStore";
 import imageAvatar from "@/assets/images/uploader.png";
 import JQuery from "jquery";
 const API_URL = import.meta.env.VITE_API_URL;
+import Editor from "primevue/editor";
 export default {
   name: "DashboardPage",
-  components: {},
+  components: { Editor },
   data() {
     return {
       dialogRemove: false,

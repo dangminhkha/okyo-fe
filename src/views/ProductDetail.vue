@@ -31,13 +31,27 @@
             v-for="(item, index) in imageList"
             :key="index"
           >
-            <img :src="API_URL + item.path" class="m-auto max-h-[400px] h-[100%]"
+            <img
+              :src="API_URL + item.path"
+              class="m-auto max-h-[400px] h-[100%]"
           /></v-carousel-item>
         </v-carousel>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 px-4">
-        <div>{{ dataDetail.name }}</div>
-        <div>Thời hạn BH {{ dataDetail.monthGuarantee }} tháng</div>
+      <div class="px-4">
+        <v-row>
+          <v-col cols="12" md="6">Tên sản phẩm</v-col>
+          <v-col cols="12" md="6">{{ dataDetail.name }}</v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" md="6">Thời gian BH</v-col>
+          <v-col cols="12" md="6">{{ dataDetail.monthGuarantee }} tháng</v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" md="6">Mô tả</v-col>
+          <v-col cols="12" md="6"
+            ><span v-html="dataDetail.description"></span
+          ></v-col>
+        </v-row>
       </div>
       <v-card flat>
         <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
@@ -181,6 +195,7 @@
 import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../stores/baseStore";
 import GuaranteeDetailVue from "./sections/GuaranteeDetail.vue";
+
 const API_URL = import.meta.env.VITE_API_URL;
 export default {
   name: "ProductDetailPage",
@@ -202,37 +217,37 @@ export default {
           title: "Mã sản phẩm",
           align: "start",
           key: "code",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Tên KH",
           align: "center",
           key: "customerName",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Sđt KH",
           align: "center",
           key: "customerPhone",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Email KH",
           align: "center",
           key: "customerEmail",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Ngày hết hạn BH",
           align: "center",
           key: "endDate",
-          sortable: false
+          sortable: false,
         },
         {
           title: "Trạng thái",
           align: "start",
           key: "status",
-          sortable: false
+          sortable: false,
         },
 
         { title: "", key: "actions", align: "end", sortable: false },

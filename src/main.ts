@@ -6,7 +6,10 @@ import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import App from "./App.vue";
 import router from "./router";
-
+//prime
+import PrimeVue from 'primevue/config';
+import Aura from '@primevue/themes/aura';
+import "quill/dist/quill.snow.css";
 // Vuetify
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
@@ -39,5 +42,9 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 app.use(router);
-
+app.use(PrimeVue, {
+  theme: {
+      preset: Aura
+  }
+});
 app.mount("#app");
