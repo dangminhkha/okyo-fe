@@ -131,10 +131,10 @@
                   >{{ dataSelected.product.monthGuarantee }} tháng</v-col
                 >
               </v-row>
-              <v-row>
+              <!-- <v-row>
                 <v-col cols="6">Mô tả</v-col>
                 <v-col cols="6">{{ dataSelected.product.description }}</v-col>
-              </v-row>
+              </v-row> -->
             </div>
           </div>
         </v-card-text>

@@ -16,10 +16,10 @@
                 <div>Tên SP</div>
                 <div>{{ dataSelected.product.name }}</div>
               </div>
-              <div class="flex justify-between my-1">
+              <!-- <div class="flex justify-between my-1">
                 <div>Mô tả</div>
                 <div>{{ dataSelected.product.description }}</div>
-              </div>
+              </div> -->
               <div class="flex justify-between my-1">
                 <div>Thời hạn BH</div>
                 <div>{{ dataSelected.product.monthGuarantee }} tháng</div>
