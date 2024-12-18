@@ -85,8 +85,9 @@
           :mobile="windowReSize.x < 768"
         >
           <template v-slot:[`item.id`]="{ item, index }">
-            <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
-              {{ index + 1 }}
+            <div class="cursor-pointer">
+              <span class="hidden">{{ item.id }}</span
+              >{{ index + 1 }}
             </div>
           </template>
           <template v-slot:[`item.status`]="{ item }">
@@ -283,7 +284,7 @@ export default {
       dialogDetail: false,
       dialogDetailId: null,
       dialogRemove: false,
-      idRemove: null
+      idRemove: null,
     };
   },
   computed: {
