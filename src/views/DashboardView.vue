@@ -373,7 +373,7 @@ export default {
           },
         ],
       };
-      this.getListProduct("public/product/search", paramsSearch).then(
+      this.getListProduct("admin/product/search", paramsSearch).then(
         (resp) => {
           if (resp) {
             this.items = resp.data.data;

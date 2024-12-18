@@ -28,6 +28,7 @@ export const useBaseStore = defineStore({
     getDataGuaranteeCustomerData: null,
     cusGuaranteeDetailData: null,
     removeProductData: null,
+    changePassData: null,
   }),
   actions: {
     overlayChange(status: boolean) {
@@ -42,6 +43,13 @@ export const useBaseStore = defineStore({
         this.loginData = resp.data;
       });
       return this.loginData;
+    },
+    //đổi mật khẩu
+    async changePassAction(url: string, params: any) {
+      await baseService.update(API_URL + url, params).then((resp) => {
+        this.changePassData = resp.data;
+      });
+      return this.changePassData;
     },
     //lay danh sach san pham
     async getListProduct(url: string, params: any) {
