@@ -119,9 +119,17 @@
             <div class="min-w-[60px]">
               <v-icon
                 @click="getGuaranteeDetails(item)"
+                v-if="item.status !== 'NOT_SOLD'"
                 class="text-blue-darken-4"
               >
                 mdi:mdi-eye
+              </v-icon>
+              <v-icon
+                @click="getGuaranteeDetails(item)"
+                v-else
+                class="text-blue-darken-4"
+              >
+                mdi:mdi-pencil
               </v-icon>
               <v-icon
                 v-if="item.status === 'NOT_SOLD'"
@@ -275,6 +283,7 @@ export default {
       dialogDetail: false,
       dialogDetailId: null,
       dialogRemove: false,
+      idRemove: null
     };
   },
   computed: {
@@ -331,9 +340,10 @@ export default {
     },
     removeGuaranteeDetails(data) {
       this.dialogRemove = true;
+      this.idRemove = data.id;
     },
     removeConfirm() {
-      this.removeGuaranteeAction(`admin/guarantee/${this.dialogDetailId}`).then(
+      this.removeGuaranteeAction(`admin/guarantee/${this.idRemove}`).then(
         (resp) => {
           if (resp) {
             this.snackChange({
@@ -342,7 +352,7 @@ export default {
               color: "blue",
             });
             this.dialogRemove = false;
-            this.getData();
+            this.getGuarantee(this.$route.params.id);
           }
         }
       );
