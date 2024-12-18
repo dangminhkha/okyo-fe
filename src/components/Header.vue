@@ -91,7 +91,10 @@
         <div class="text-center">
           <h1 class="block text-2xl font-bold text-gray-800">Đổi mật khẩu</h1>
         </div>
-        <span class="mdi mdi-close cursor-pointer font-bold text-2xl" @click="dialogChane = false"></span>
+        <span
+          class="mdi mdi-close cursor-pointer font-bold text-2xl"
+          @click="dialogChane = false"
+        ></span>
       </div>
 
       <div class="mt-5">
@@ -110,7 +113,15 @@
                 density="comfortable"
                 v-model="oldPassWord"
                 :rules="rulesOldPassWord"
-              ></v-text-field
+                :type="visible ? 'text' : 'password'"
+                ><template v-slot:append-inner>
+                  <button type="button" @click="visible = !visible">
+                    <i v-if="visible" class="far fa-eye eyes-button-custom"></i>
+                    <i
+                      v-if="!visible"
+                      class="far fa-eye-slash eyes-button-custom"
+                    ></i>
+                  </button> </template></v-text-field
             ></v-col>
             <v-col cols="12">
               <v-text-field
@@ -119,7 +130,18 @@
                 density="comfortable"
                 v-model="passWord"
                 :rules="rulesPassWord"
-              ></v-text-field
+                :type="visible1 ? 'text' : 'password'"
+                ><template v-slot:append-inner>
+                  <button type="button" @click="visible1 = !visible1">
+                    <i
+                      v-if="visible1"
+                      class="far fa-eye eyes-button-custom"
+                    ></i>
+                    <i
+                      v-if="!visible1"
+                      class="far fa-eye-slash eyes-button-custom"
+                    ></i>
+                  </button> </template></v-text-field
             ></v-col>
             <v-col cols="12">
               <v-text-field
@@ -128,7 +150,18 @@
                 density="comfortable"
                 v-model="repassWord"
                 :rules="rulesRePassWord"
-              ></v-text-field
+                :type="visible2 ? 'text' : 'password'"
+                ><template v-slot:append-inner>
+                  <button type="button" @click="visible2 = !visible2">
+                    <i
+                      v-if="visible2"
+                      class="far fa-eye eyes-button-custom"
+                    ></i>
+                    <i
+                      v-if="!visible2"
+                      class="far fa-eye-slash eyes-button-custom"
+                    ></i>
+                  </button> </template></v-text-field
             ></v-col>
           </v-row>
         </v-form>
@@ -154,7 +187,7 @@ export default {
   data() {
     return {
       items: [
-        { title: "Thông tin", path: "/userinfo" },
+        // { title: "Thông tin", path: "/userinfo" },
         { title: "Đăng xuất", path: "/login" },
       ],
       dialogChane: false,
@@ -180,6 +213,9 @@ export default {
           return "Vui lòng nhập lại mật khẩu";
         },
       ],
+      visible1: false,
+      visible2: false,
+      visible: false,
     };
   },
   computed: {
@@ -189,12 +225,15 @@ export default {
     ...mapActions(useBaseStore, ["snackChange", "changePassAction"]),
     changePass() {
       this.dialogChane = true;
+      this.oldPassWord = null;
+      this.passWord = null;
+      this.repassWord = null;
     },
     async accepChange() {
       const { valid } = await this.$refs.form.validate();
       if (valid) {
         let params = {
-          passWord: this.oldPassWord,
+          password: this.oldPassWord,
           newPassword: this.passWord,
           confirmPassword: this.repassWord,
         };
@@ -205,6 +244,7 @@ export default {
               message: "Đổi mật khẩu thành công",
               color: "blue-darken-4",
             });
+            this.dialogChane = false;
           }
         });
       }

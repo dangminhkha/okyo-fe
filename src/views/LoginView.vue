@@ -36,7 +36,14 @@
                   :type="visible ? 'text' : 'password'"
                   ><template v-slot:append-inner>
                     <button type="button" @click="visible = !visible">
-                      <i class="far fa-eye eyes-button-custom"></i>
+                      <i
+                      v-if="visible"
+                      class="far fa-eye eyes-button-custom"
+                    ></i>
+                    <i
+                      v-if="!visible"
+                      class="far fa-eye-slash eyes-button-custom"
+                    ></i>
                     </button> </template></v-text-field
               ></v-col>
             </v-row>
