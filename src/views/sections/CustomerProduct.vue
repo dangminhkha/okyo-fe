@@ -107,7 +107,7 @@
                 >
               </v-row>
               <div
-                class="text-center mt-4 mb-2 text-blue-darken-4 text-2xl font-bold"
+                class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold"
               >
                 Mô tả chi tiết
               </div>

@@ -56,6 +56,11 @@
         hide-default-footer
         :mobile="windowReSize.x < 768"
       >
+        <template v-slot:[`item.id`]="{ item, index }">
+          <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
+            {{ index + 1 }}
+          </div>
+        </template>
         <template v-slot:[`item.product.name`]="{ item }">
           <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
             <v-tooltip activator="parent" location="top">{{
@@ -198,8 +203,14 @@ export default {
       search: "",
       headers: [
         {
-          title: "Mã BH",
+          title: "STT",
           align: "start",
+          key: "id",
+          sortable: false,
+        },
+        {
+          title: "Mã BH",
+          align: "center",
           key: "code",
           sortable: false,
         },

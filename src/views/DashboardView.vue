@@ -34,6 +34,11 @@
         hide-default-footer
         :mobile="windowReSize.x < 768"
       >
+        <template v-slot:[`item.id`]="{ item, index }">
+          <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
+            {{ index + 1 }}
+          </div>
+        </template>
         <template v-slot:[`item.name`]="{ item }">
           <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
             <v-tooltip activator="parent" location="top">{{
@@ -45,15 +50,15 @@
         <template v-slot:[`item.status`]="{ item }">
           <div
             v-if="item.status === 0 || !item.status"
-            class="font-bold p-2 text-sm rounded-lg  text-center max-w-[150px] m-auto"
+            class="font-bold p-2 text-sm rounded-lg text-center max-w-[150px] m-auto"
           >
-            <span class=" mdi mdi-circle text-2xl text-gray-500"></span>
+            <span class="mdi mdi-circle text-2xl text-gray-500"></span>
           </div>
           <div
             v-if="item.status === 1"
             class="font-bold p-2 text-sm rounded-lg text-center max-w-[150px] m-auto"
           >
-          <span class=" mdi mdi-circle text-2xl text-green-500"></span>
+            <span class="mdi mdi-circle text-2xl text-green-500"></span>
           </div>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
@@ -290,11 +295,16 @@ export default {
       search: "",
       headers: [
         {
-          title: "Tên sản phẩm",
+          title: "STT",
           align: "start",
+          key: "id",
+          sortable: false,
+        },
+        {
+          title: "Tên sản phẩm",
+          align: "center",
           key: "name",
           sortable: false,
-          class:'ss'
         },
         {
           title: "Trạng thái",
@@ -374,14 +384,12 @@ export default {
           },
         ],
       };
-      this.getListProduct("admin/product/search", paramsSearch).then(
-        (resp) => {
-          if (resp) {
-            this.items = resp.data.data;
-            this.pageCount = resp.data.totalPage;
-          }
+      this.getListProduct("admin/product/search", paramsSearch).then((resp) => {
+        if (resp) {
+          this.items = resp.data.data;
+          this.pageCount = resp.data.totalPage;
         }
-      );
+      });
     },
     getProductDetails(item) {
       this.$router.push({ path: `/sanpham/${item.id}` });

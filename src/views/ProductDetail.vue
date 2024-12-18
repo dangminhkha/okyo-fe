@@ -46,7 +46,7 @@
             >Thời hạn BH {{ dataDetail.monthGuarantee }} tháng</v-col
           >
         </v-row>
-        <div class="text-center mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
+        <div class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
           Mô tả chi tiết
         </div>
         <div class="ql-editor" v-html="dataDetail.description"></div>
@@ -84,6 +84,11 @@
           hide-default-footer
           :mobile="windowReSize.x < 768"
         >
+          <template v-slot:[`item.id`]="{ item, index }">
+            <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
+              {{ index + 1 }}
+            </div>
+          </template>
           <template v-slot:[`item.status`]="{ item }">
             <v-chip
               color="red-darken-4"
@@ -151,7 +156,11 @@
       </div>
       <div class="grid gap-3">
         <div class="text-center text-xl font-bold">Xác nhận xóa bảo hành?</div>
-        <v-btn variant="flat" color="blue-darken-4" class="w-3/5 m-auto mt-5"
+        <v-btn
+          variant="flat"
+          color="blue-darken-4"
+          class="w-3/5 m-auto mt-5"
+          @click="removeConfirm()"
           >Xác nhận</v-btn
         >
       </div>
@@ -212,8 +221,14 @@ export default {
       search: "",
       headers: [
         {
-          title: "Mã sản phẩm",
+          title: "STT",
           align: "start",
+          key: "id",
+          sortable: false,
+        },
+        {
+          title: "Mã sản phẩm",
+          align: "center",
           key: "code",
           sortable: false,
         },
@@ -271,6 +286,8 @@ export default {
       "getListGuarantee",
       "getImageFromId",
       "addGuaranteeToProduct",
+      "removeGuaranteeAction",
+      "snackChange",
     ]),
 
     getDetails(id) {
@@ -314,6 +331,21 @@ export default {
     },
     removeGuaranteeDetails(data) {
       this.dialogRemove = true;
+    },
+    removeConfirm() {
+      this.removeGuaranteeAction(`admin/guarantee/${this.dialogDetailId}`).then(
+        (resp) => {
+          if (resp) {
+            this.snackChange({
+              status: true,
+              message: "Xóa bảo hành thành công",
+              color: "blue",
+            });
+            this.dialogRemove = false;
+            this.getData();
+          }
+        }
+      );
     },
   },
   created() {
