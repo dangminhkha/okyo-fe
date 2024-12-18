@@ -2,7 +2,7 @@
   <div class="shadow-xl rounded-lg">
     <v-card flat>
       <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
-        <div>Danh sách sản phẩm</div>
+        <div class="text-blue-darken-4 font-bold">Danh sách sản phẩm</div>
 
         <v-text-field
           v-model="search"
@@ -45,15 +45,15 @@
         <template v-slot:[`item.status`]="{ item }">
           <div
             v-if="item.status === 0 || !item.status"
-            class="font-bold bg-gray-100 p-2 text-sm rounded-lg text-gray-darken-2 text-center max-w-[150px] m-auto"
+            class="font-bold p-2 text-sm rounded-lg  text-center max-w-[150px] m-auto"
           >
-            Không hoạt động
+            <span class=" mdi mdi-circle text-2xl text-gray-500"></span>
           </div>
           <div
             v-if="item.status === 1"
-            class="font-bold bg-blue-50 p-2 text-sm rounded-lg text-blue-darken-4 text-center max-w-[150px] m-auto"
+            class="font-bold p-2 text-sm rounded-lg text-center max-w-[150px] m-auto"
           >
-            Hoạt động
+          <span class=" mdi mdi-circle text-2xl text-green-500"></span>
           </div>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
@@ -294,6 +294,7 @@ export default {
           align: "start",
           key: "name",
           sortable: false,
+          class:'ss'
         },
         {
           title: "Trạng thái",
