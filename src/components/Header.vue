@@ -114,7 +114,6 @@
                 v-model="oldPassWord"
                 :rules="rulesOldPassWord"
                 :type="visible ? 'text' : 'password'"
-                autocomplete="nope"
                 ><template v-slot:append-inner>
                   <button type="button" @click="visible = !visible">
                     <i v-if="visible" class="far fa-eye eyes-button-custom"></i>
