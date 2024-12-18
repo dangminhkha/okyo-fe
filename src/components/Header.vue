@@ -46,7 +46,7 @@
         class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3"
       >
         <div class="flex flex-row items-center justify-end gap-1">
-          <span class="mr-2">{{loginData?.data?.user?.name || ''}}</span>
+          <span class="mr-2">{{ loginData?.data?.user?.name || "" }}</span>
 
           <!-- Dropdown -->
           <v-menu>
@@ -86,12 +86,12 @@
     <!-- End Breadcrumb -->
   </div>
   <v-dialog v-model="dialogChane" max-width="500" persistent>
-    <div class="bg-white p-3">
-      <div class="flex justify-between my-3">
+    <div class="bg-white p-3 rounded-lg">
+      <div class="flex justify-between my-3 mx-3">
         <div class="text-center">
           <h1 class="block text-2xl font-bold text-gray-800">Đổi mật khẩu</h1>
         </div>
-        <span class="mdi mdi-close" @click="dialogChane = false"></span>
+        <span class="mdi mdi-close cursor-pointer font-bold text-2xl" @click="dialogChane = false"></span>
       </div>
 
       <div class="mt-5">
@@ -182,25 +182,30 @@ export default {
       ],
     };
   },
-  computed:{
-    ...mapState(useBaseStore, ["loginData"])
+  computed: {
+    ...mapState(useBaseStore, ["loginData"]),
   },
   methods: {
-    ...mapActions(useBaseStore, ["snackChange"]),
+    ...mapActions(useBaseStore, ["snackChange", "changePassAction"]),
     changePass() {
       this.dialogChane = true;
     },
     async accepChange() {
-      let params = {
-        passWord: this.passWord,
-        repassWord: this.repassWord,
-      };
       const { valid } = await this.$refs.form.validate();
       if (valid) {
-        this.snackChange({
-          status: true,
-          message: "Đổi mật khẩu thành công",
-          color: "blue-darken-4",
+        let params = {
+          passWord: this.oldPassWord,
+          newPassword: this.passWord,
+          confirmPassword: this.repassWord,
+        };
+        this.changePassAction("public/change-pass", params).then((resp) => {
+          if (resp) {
+            this.snackChange({
+              status: true,
+              message: "Đổi mật khẩu thành công",
+              color: "blue-darken-4",
+            });
+          }
         });
       }
     },
