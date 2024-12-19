@@ -153,6 +153,7 @@ export default {
           this.customerEmail = this.dataSelected.customerEmail;
           this.fromDate = this.dataSelected.startDate ? new Date(moment(this.dataSelected.startDate, 'DD/MM/YYYY').format()) : null;
           this.dateFormated = this.dataSelected.startDate;
+          this.description = this.dataSelected.description;
         }
       });
     },
