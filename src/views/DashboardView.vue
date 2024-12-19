@@ -406,6 +406,13 @@ export default {
       this.name = null;
       this.monthGuarantee = null;
       this.description = null;
+      this.listImg = [
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+      ];
     },
     async submitAddProduct() {
       const { valid } = await this.$refs.form.validate();
