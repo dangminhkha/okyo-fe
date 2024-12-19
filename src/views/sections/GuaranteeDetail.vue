@@ -2,15 +2,16 @@
   <v-dialog v-model="dialogDetail" max-width="500" scrollable>
     <v-card>
       <v-card-text>
-        <div class="bg-white py-3 px-5 rounded-lg">
-          <div class="text-right" @click="dialogDetail = false">
-            <span
-              class="mdi mdi-close cursor-pointer font-bold text-2xl"
-            ></span>
+        <div class="bg-white p-4 rounded-lg">
+          <div class="flex justify-between items-center mb-4">
+            <div class="text-center text-xl font-bold text-blue-darken-4">Chi tiết bảo hành</div>
+            <div class="text-right" @click="dialogDetail = false">
+              <span
+                class="mdi mdi-close cursor-pointer font-bold text-2xl"
+              ></span>
+            </div>
           </div>
           <div class="grid gap-3">
-            <div class="text-center text-xl font-bold">Chi tiết bảo hành</div>
-
             <div class="">
               <div class="flex justify-between my-1">
                 <div>Tên SP</div>
@@ -151,7 +152,11 @@ export default {
           this.customerName = this.dataSelected.customerName;
           this.customerPhone = this.dataSelected.customerPhone;
           this.customerEmail = this.dataSelected.customerEmail;
-          this.fromDate = this.dataSelected.startDate ? new Date(moment(this.dataSelected.startDate, 'DD/MM/YYYY').format()) : null;
+          this.fromDate = this.dataSelected.startDate
+            ? new Date(
+                moment(this.dataSelected.startDate, "DD/MM/YYYY").format()
+              )
+            : null;
           this.dateFormated = this.dataSelected.startDate;
           this.description = this.dataSelected.description;
         }

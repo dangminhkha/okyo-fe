@@ -102,16 +102,18 @@
   </v-dialog>
   <v-dialog v-model="addProductDialog" max-width="800" persistent>
     <v-card>
-      <v-card-text class="p-0">
+      <v-card-text>
         <div class="bg-white p-4 rounded-lg">
-          <div class="text-right" @click="addProductDialog = false">
-            <span
-              class="mdi mdi-close cursor-pointer font-bold text-2xl"
-            ></span>
+          <div class="flex justify-between items-center mb-4">
+            <div class="text-center text-xl font-bold text-blue-darken-4">
+              Thêm sản phẩm
+            </div>
+            <div class="text-right" @click="addProductDialog = false">
+              <span
+                class="mdi mdi-close cursor-pointer font-bold text-2xl"
+              ></span>
+            </div>
           </div>
-
-          <div class="text-center text-xl font-bold mb-4">Thêm sản phẩm</div>
-
           <v-form
             ref="form"
             v-model="valid"
@@ -191,11 +193,14 @@
   </v-dialog>
   <v-dialog max-width="800" v-model="dialogUpdate">
     <div class="bg-white p-4 rounded-lg">
-      <div class="text-right" @click="dialogUpdate = false">
-        <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
+      <div class="flex justify-between items-center mb-4">
+        <div class="text-center text-xl font-bold text-blue-darken-4">
+          Cập nhật sản phẩm
+        </div>
+        <div class="text-right" @click="dialogUpdate = false">
+          <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
+        </div>
       </div>
-
-      <div class="text-center text-xl font-bold mb-4">Cập nhật sản phẩm</div>
       <v-form
         ref="formEdit"
         v-model="valid"
