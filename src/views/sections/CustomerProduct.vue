@@ -2,7 +2,9 @@
   <div class="shadow-xl rounded-lg">
     <v-card flat>
       <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
-        <div class="font-bold">Danh sách sản phẩm</div>
+        <div class="font-bold text-blue-darken-4 text-xl">
+          Danh sách sản phẩm
+        </div>
 
         <v-text-field
           v-model="search"
@@ -36,7 +38,9 @@
                 class="m-auto max-h-[300px] rounded-lg"
                 v-else
               />
-              <div class="text-center text-sm my-2 m-auto h-[48px] leading-5">
+              <div
+                class="text-center text-sm my-4 m-auto h-[48px] leading-5 text-blue-darken-4 font-bold"
+              >
                 {{ item.name }}
               </div>
             </div>
@@ -55,14 +59,17 @@
       <v-card>
         <v-card-text>
           <div class="bg-white rounded-lg">
-            <div class="text-right" @click="dialogDetail = false">
-              <span
-                class="mdi mdi-close cursor-pointer font-bold text-2xl"
-              ></span>
+            <div class="flex justify-between items-center mb-4">
+              <div class="text-center text-xl font-bold text-blue-darken-4">
+                Chi tiết sản phẩm
+              </div>
+              <div class="text-right" @click="dialogDetail = false">
+                <span
+                  class="mdi mdi-close cursor-pointer font-bold text-2xl"
+                ></span>
+              </div>
             </div>
-            <div class="text-center text-xl font-bold mb-4">
-              Chi tiết sản phẩm
-            </div>
+
             <v-carousel
               v-if="dataSelected.files.length > 0"
               hide-delimiters

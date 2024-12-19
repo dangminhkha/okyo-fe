@@ -1,9 +1,10 @@
 <template>
   <div class="shadow-xl rounded-lg">
     <v-card flat>
-      <v-card-title class="d-flex align-center pe-2">
-        Danh sách bảo hành
-        <v-spacer></v-spacer>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
+        <div class="text-xl text-blue-darken-4 font-bold">
+          Danh sách bảo hành
+        </div>
 
         <v-text-field
           v-model="search"
@@ -16,7 +17,7 @@
           single-line
           @click:prepend-inner="searchDara()"
         ></v-text-field>
-      </v-card-title>
+      </div>
 
       <v-divider></v-divider>
       <v-data-table
@@ -31,7 +32,7 @@
       >
         <template v-slot:body="{ items }">
           <div v-if="items.length > 0">
-            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 my-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-10">
               <div v-for="(item, index) in items" :key="index">
                 <div
                   class="bg-white border p-3 rounded-lg shadow-xl hover:shadow-lg cursor-pointer"
@@ -43,25 +44,28 @@
                       item.code
                     }}</span>
                   </div>
-                  <div class="text-blue-darken-4 font-bold">
-                    {{ item.product.name }}
+                  <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
+                    <v-tooltip activator="parent" location="top">{{
+                      item.product.name
+                    }}</v-tooltip>
+                    Tên SP:
+                    <span class="text-blue-darken-4 font-bold">
+                      {{ item.product.name }}</span
+                    >
                   </div>
-                  <div>
-                    Tên KH:
-                    <span class="text-blue-darken-4 font-bold">{{
+                  <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
+                    <v-tooltip activator="parent" location="top">{{
                       item.customerName
-                    }}</span>
+                    }}</v-tooltip>
+                    Tên KH:
+                    <span class="text-blue-darken-4 font-bold">
+                      {{ item.customerName }}</span
+                    >
                   </div>
-                  <div>
+                  <div class="">
                     SĐT KH:
                     <span class="text-blue-darken-4 font-bold">{{
                       item.customerPhone
-                    }}</span>
-                  </div>
-                  <div>
-                    Email KH:
-                    <span class="text-blue-darken-4 font-bold">{{
-                      item.customerEmail
                     }}</span>
                   </div>
                   <div>
@@ -116,7 +120,9 @@
         <v-card-text>
           <div class="bg-white rounded-lg">
             <div class="flex justify-between mb-4">
-              <div class="text-center text-xl font-bold text-blue-darken-4">Chi tiết bảo hành</div>
+              <div class="text-center text-xl font-bold text-blue-darken-4">
+                Chi tiết bảo hành
+              </div>
               <div class="text-right" @click="dialogDetail = false">
                 <span
                   class="mdi mdi-close cursor-pointer font-bold text-2xl"
@@ -125,19 +131,19 @@
             </div>
             <div class="grid gap-3 border p-3 rounded-lg">
               <v-row>
-                <v-col cols="6">Tên khách hàng</v-col>
+                <v-col cols="6">Tên KH</v-col>
                 <v-col cols="6">{{ dataSelected.customerName }}</v-col>
               </v-row>
               <v-row>
-                <v-col cols="6">SĐT khách hàng</v-col>
+                <v-col cols="6">SĐT KH</v-col>
                 <v-col cols="6">{{ dataSelected.customerPhone }}</v-col>
               </v-row>
               <v-row>
-                <v-col cols="6">Email khách hàng</v-col>
+                <v-col cols="6">Email KH</v-col>
                 <v-col cols="6">{{ dataSelected.customerEmail }}</v-col>
               </v-row>
               <v-row>
-                <v-col cols="6">Tên sản phẩm</v-col>
+                <v-col cols="6">Tên SP</v-col>
                 <v-col cols="6">{{ dataSelected.product.name }}</v-col>
               </v-row>
               <v-row>

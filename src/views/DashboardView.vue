@@ -302,7 +302,7 @@ export default {
         },
         {
           title: "Tên sản phẩm",
-          align: "center",
+          align: "start",
           key: "name",
           sortable: false,
         },
