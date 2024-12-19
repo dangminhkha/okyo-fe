@@ -1,10 +1,12 @@
 <template>
-  <v-dialog v-model="dialogDetail" max-width="500" scrollable>
+  <v-dialog v-model="dialogDetail" max-width="800" scrollable>
     <v-card>
       <v-card-text>
         <div class="bg-white p-4 rounded-lg">
           <div class="flex justify-between items-center mb-4">
-            <div class="text-center text-xl font-bold text-blue-darken-4">Chi tiết bảo hành</div>
+            <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
+              Chi tiết bảo hành
+            </div>
             <div class="text-right" @click="dialogDetail = false">
               <span
                 class="mdi mdi-close cursor-pointer font-bold text-2xl"
@@ -17,10 +19,7 @@
                 <div>Tên SP</div>
                 <div>{{ dataSelected.product.name }}</div>
               </div>
-              <!-- <div class="flex justify-between my-1">
-                <div>Mô tả</div>
-                <div>{{ dataSelected.product.description }}</div>
-              </div> -->
+
               <div class="flex justify-between my-1">
                 <div>Thời hạn BH</div>
                 <div>{{ dataSelected.product.monthGuarantee }} tháng</div>
@@ -33,54 +32,69 @@
               @submit.prevent="submitEdit"
               class="grid gap-3"
             >
-              <v-text-field
-                label="Tên khách hàng"
-                variant="outlined"
-                v-model="customerName"
-                :rules="[rules.required]"
-              >
-              </v-text-field>
-              <v-text-field
-                label="Sđt khách hàng"
-                variant="outlined"
-                v-model="customerPhone"
-                :rules="[rules.required, rules.rulesPhone]"
-                inputmode="numeric"
-                maxlength="10"
-              >
-              </v-text-field>
-              <v-text-field
-                label="Email khách hàng"
-                variant="outlined"
-                v-model="customerEmail"
-                :rules="customerEmail ? rulesEmail : []"
-              >
-              </v-text-field>
-              <v-date-input
-                prepend-icon=""
-                label="Ngày bắt đầu"
-                variant="outlined"
-                density="comfortable"
-                v-model="fromDate"
-                class="p-date hideDate"
-                :cancel-text="'Đóng'"
-                :hide-actions="true"
-                placeholder="dd/mm/yyyy"
-                :format="'dd/mm/yyyy'"
-                :rules="[rules.required]"
-              >
-                <template v-slot:default>
-                  {{ dateFormated }}
-                </template>
-              </v-date-input>
-              <v-textarea
-                label="Mô tả"
-                variant="outlined"
-                density="comfortable"
-                v-model="description"
-                auto-grow
-              >
-              </v-textarea>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    label="Tên khách hàng"
+                    variant="outlined"
+                    v-model="customerName"
+                    :rules="[rules.required]"
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    label="Sđt khách hàng"
+                    variant="outlined"
+                    v-model="customerPhone"
+                    :rules="[rules.required, rules.rulesPhone]"
+                    inputmode="numeric"
+                    maxlength="10"
+                  >
+                  </v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12" md="6">
+                  <v-text-field
+                    label="Email khách hàng"
+                    variant="outlined"
+                    v-model="customerEmail"
+                    :rules="customerEmail ? rulesEmail : []"
+                  >
+                  </v-text-field>
+                </v-col>
+                <v-col cols="12" md="6">
+                  <v-date-input
+                    prepend-icon=""
+                    label="Ngày bắt đầu"
+                    variant="outlined"
+                    v-model="fromDate"
+                    class="p-date hideDate"
+                    :cancel-text="'Đóng'"
+                    :hide-actions="true"
+                    placeholder="dd/mm/yyyy"
+                    :format="'dd/mm/yyyy'"
+                    :rules="[rules.required]"
+                  >
+                    <template v-slot:default>
+                      {{ dateFormated }}
+                    </template>
+                  </v-date-input>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="12">
+                  <v-textarea
+                    label="Mô tả"
+                    variant="outlined"
+                    density="comfortable"
+                    v-model="description"
+                    auto-grow
+                  >
+                  </v-textarea>
+                </v-col>
+              </v-row>
             </v-form>
             <v-btn variant="flat" color="blue-darken-4" @click="submitEdit">
               Xác nhận

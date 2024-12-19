@@ -105,7 +105,7 @@
       <v-card-text>
         <div class="bg-white p-4 rounded-lg">
           <div class="flex justify-between items-center mb-4">
-            <div class="text-center text-xl font-bold text-blue-darken-4">
+            <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
               Thêm sản phẩm
             </div>
             <div class="text-right" @click="addProductDialog = false">
@@ -194,7 +194,7 @@
   <v-dialog max-width="800" v-model="dialogUpdate">
     <div class="bg-white p-4 rounded-lg">
       <div class="flex justify-between items-center mb-4">
-        <div class="text-center text-xl font-bold text-blue-darken-4">
+        <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
           Cập nhật sản phẩm
         </div>
         <div class="text-right" @click="dialogUpdate = false">

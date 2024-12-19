@@ -120,7 +120,7 @@
         <v-card-text>
           <div class="bg-white rounded-lg">
             <div class="flex justify-between mb-4">
-              <div class="text-center text-xl font-bold text-blue-darken-4">
+              <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
                 Chi tiết bảo hành
               </div>
               <div class="text-right" @click="dialogDetail = false">
@@ -138,7 +138,7 @@
                 <v-col cols="6">SĐT KH</v-col>
                 <v-col cols="6">{{ dataSelected.customerPhone }}</v-col>
               </v-row>
-              <v-row>
+              <v-row v-if="dataSelected.customerEmail">
                 <v-col cols="6">Email KH</v-col>
                 <v-col cols="6">{{ dataSelected.customerEmail }}</v-col>
               </v-row>

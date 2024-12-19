@@ -1,7 +1,7 @@
 <template>
   <div class="bg-white p-3 rounded-lg" v-if="dataDetail">
     <div class="grid gap-4">
-      <div class="text-center">
+      <div class="p-3 border rounded-lg">
         <v-carousel
           v-if="imageList.length > 0"
           hide-delimiters
@@ -15,7 +15,7 @@
               class="w-[50px] h-[50px] bg-gray-100 flex justify-center items-center shadow-2xl rounded-full"
               @click="props.onClick"
             >
-              <span class="mdi mdi-arrow-left w-[40px]"></span>
+              <span class="mdi mdi-arrow-left"></span>
             </div>
           </template>
           <template v-slot:next="{ props }">
@@ -23,7 +23,7 @@
               class="w-[50px] h-[50px] bg-gray-100 flex justify-center items-center shadow-2xl rounded-full"
               @click="props.onClick"
             >
-              <span class="mdi mdi-arrow-right w-[40px]"></span>
+              <span class="mdi mdi-arrow-right"></span>
             </div>
           </template>
           <v-carousel-item
@@ -36,16 +36,16 @@
               class="m-auto max-h-[400px] h-[100%]"
           /></v-carousel-item>
         </v-carousel>
+        <div class="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 my-4">
+          <div class="font-bold text-xl">
+            {{ dataDetail.name }}
+          </div>
+          <div class="font-bold text-xl md:text-right">
+            Thời hạn BH {{ dataDetail.monthGuarantee }} tháng
+          </div>
+        </div>
       </div>
       <div class="p-3 border rounded-lg">
-        <v-row>
-          <v-col cols="12" md="6" class="font-bold text-xl">{{
-            dataDetail.name
-          }}</v-col>
-          <v-col cols="12" md="6" class="text-end font-bold text-xl"
-            >Thời hạn BH {{ dataDetail.monthGuarantee }} tháng</v-col
-          >
-        </v-row>
         <div class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
           Mô tả chi tiết
         </div>

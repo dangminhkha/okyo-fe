@@ -60,7 +60,9 @@
         <v-card-text>
           <div class="bg-white rounded-lg">
             <div class="flex justify-between items-center mb-4">
-              <div class="text-center text-xl font-bold text-blue-darken-4">
+              <div
+                class="text-center text-xl font-bold text-blue-darken-4 uppercase"
+              >
                 Chi tiết sản phẩm
               </div>
               <div class="text-right" @click="dialogDetail = false">
@@ -69,50 +71,53 @@
                 ></span>
               </div>
             </div>
-
-            <v-carousel
-              v-if="dataSelected.files.length > 0"
-              hide-delimiters
-              hide-delimiter-background
-              height="300"
-              :cycle="true"
-              :interval="5000"
-            >
-              <template v-slot:prev="{ props }">
-                <div
-                  class="w-[50px] h-[50px] bg-gray-100 flex justify-center items-center shadow-2xl rounded-full"
-                  @click="props.onClick"
-                >
-                  <span class="mdi mdi-arrow-left"></span>
-                </div>
-              </template>
-              <template v-slot:next="{ props }">
-                <div
-                  class="w-[50px] h-[50px] bg-gray-100 flex justify-center items-center shadow-2xl rounded-full"
-                  @click="props.onClick"
-                >
-                  <span class="mdi mdi-arrow-right"></span>
-                </div>
-              </template>
-              <v-carousel-item
-                cover
-                v-for="(item, index) in dataSelected.files"
-                :key="index"
-              >
-                <img
-                  :src="API_URL + item.path"
-                  class="m-auto max-h-[400px] h-[100%]"
-              /></v-carousel-item>
-            </v-carousel>
             <div class="border p-3 rounded-lg mt-4">
-              <v-row>
-                <v-col cols="12" md="6" class="font-bold text-xl">{{
-                  dataSelected.name
-                }}</v-col>
-                <v-col cols="12" md="6" class="text-end font-bold text-xl"
-                  >Thời hạn BH {{ dataSelected.monthGuarantee }} tháng</v-col
+              <v-carousel
+                v-if="dataSelected.files.length > 0"
+                hide-delimiters
+                hide-delimiter-background
+                height="300"
+                :cycle="true"
+                :interval="5000"
+              >
+                <template v-slot:prev="{ props }">
+                  <div
+                    class="w-[50px] h-[50px] bg-gray-100 flex justify-center items-center shadow-2xl rounded-full"
+                    @click="props.onClick"
+                  >
+                    <span class="mdi mdi-arrow-left"></span>
+                  </div>
+                </template>
+                <template v-slot:next="{ props }">
+                  <div
+                    class="w-[50px] h-[50px] bg-gray-100 flex justify-center items-center shadow-2xl rounded-full"
+                    @click="props.onClick"
+                  >
+                    <span class="mdi mdi-arrow-right"></span>
+                  </div>
+                </template>
+                <v-carousel-item
+                  cover
+                  v-for="(item, index) in dataSelected.files"
+                  :key="index"
                 >
-              </v-row>
+                  <img
+                    :src="API_URL + item.path"
+                    class="m-auto max-h-[400px] h-[100%]"
+                /></v-carousel-item>
+              </v-carousel>
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 my-4"
+              >
+                <div class="font-bold text-xl">
+                  {{ dataSelected.name }}
+                </div>
+                <div class="font-bold text-xl md:text-right">
+                  Thời hạn BH {{ dataSelected.monthGuarantee }} tháng
+                </div>
+              </div>
+            </div>
+            <div class="border p-3 rounded-lg mt-4">
               <div
                 class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold"
               >
