@@ -30,7 +30,7 @@
               ref="form"
               v-model="valid"
               @submit.prevent="submitEdit"
-              class="grid gap-3"
+              class="grid"
             >
               <v-row>
                 <v-col cols="12" md="6">

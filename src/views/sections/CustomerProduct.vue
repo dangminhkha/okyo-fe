@@ -20,7 +20,7 @@
       </div>
 
       <v-divider></v-divider>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
         <div v-for="(item, index) in items" :key="index">
           <div
             class="bg-white shadow-2xl rounded-lg p-3 hover:shadow-xl cursor-pointer"
@@ -29,13 +29,13 @@
               <div v-if="item.files.length > 0">
                 <img
                   :src="API_URL + item.files[0].path"
-                  class="m-auto max-h-[300px] rounded-lg"
+                  class="m-auto max-h-[150px] rounded-lg"
                   v-if="item.files[0].path"
                 />
               </div>
               <img
                 :src="imageAvatar"
-                class="m-auto max-h-[300px] rounded-lg"
+                class="m-auto max-h-[150px] rounded-lg"
                 v-else
               />
               <div
@@ -48,6 +48,7 @@
         </div>
       </div>
       <v-pagination
+        class="mt-4"
         v-model="page"
         :length="pageCount"
         :total-visible="5"

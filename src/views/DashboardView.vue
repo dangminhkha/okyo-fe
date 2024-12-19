@@ -146,7 +146,7 @@
             </v-row>
             <Editor v-model="description" editorStyle="height: 200px"> </Editor>
 
-            <div class="flex justify-between">
+            <div class="flex justify-between border p-3 rounded-lg">
               <span v-for="(item, index) in listImg" :key="index">
                 <v-badge color="gray-500">
                   <template v-slot:badge>
@@ -232,7 +232,7 @@
         </v-row>
         <Editor v-model="description" editorStyle="height: 200px"> </Editor>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between border p-3 rounded-lg">
           <span v-for="(item, index) in listImg" :key="index">
             <v-badge color="gray-500">
               <template v-slot:badge>
