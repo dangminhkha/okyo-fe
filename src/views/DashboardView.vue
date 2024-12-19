@@ -36,7 +36,8 @@
       >
         <template v-slot:[`item.id`]="{ item, index }">
           <div class="cursor-pointer">
-            <span class="hidden">{{item.id}}</span>{{ index + 1 }}
+            <span class="hidden">{{ item.id }}</span
+            >{{ index + 1 }}
           </div>
         </template>
         <template v-slot:[`item.name`]="{ item }">
@@ -484,6 +485,13 @@ export default {
       return deferred.promise();
     },
     updateProduct(data) {
+      this.listImg = [
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+        { id: null, base64: null, path: null },
+      ];
       this.dialogUpdate = true;
       this.productEdit = data;
       this.status = this.productEdit.status === 1 ? true : false;
