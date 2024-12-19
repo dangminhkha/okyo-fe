@@ -58,7 +58,8 @@
       >
         <template v-slot:[`item.id`]="{ item, index }">
           <div class="cursor-pointer">
-            <span class="hidden">{{item.id}}</span>{{ index + 1 }}
+            <span class="hidden">{{ item.id }}</span
+            >{{ index + 1 }}
           </div>
         </template>
         <template v-slot:[`item.product.name`]="{ item }">
@@ -312,6 +313,12 @@ export default {
                 ? this.itemsStatusSelected.value
                 : "",
             operator: "EQUAL",
+          },
+        ],
+        sorts: [
+          {
+            fieldCode: "ID",
+            typeSort: "DESC",
           },
         ],
       };
