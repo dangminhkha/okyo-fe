@@ -82,3 +82,6 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield !important;
 }
+.row-right{
+  color: #0D47A1;
+}

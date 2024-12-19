@@ -157,6 +157,7 @@
     :status="dialogDetail"
     :id="dialogDetailId"
     @close="dialogDetail = $event"
+    @updateDone="updateDone"
   />
   <v-dialog v-model="dialogRemove" max-width="500">
     <div class="bg-white py-3 px-5 rounded-lg">
@@ -318,6 +319,7 @@ export default {
     },
     addGuarantee() {
       this.addGuaranteeDialog = true;
+      this.code = null;
     },
     async submitAddGuarantee() {
       const { valid } = await this.$refs.form.validate();
@@ -338,6 +340,10 @@ export default {
     getGuaranteeDetails(data) {
       this.dialogDetail = true;
       this.dialogDetailId = data.id;
+    },
+    updateDone() {
+      this.dialogDetail = false;
+      this.getGuarantee(this.$route.params.id);
     },
     removeGuaranteeDetails(data) {
       this.dialogRemove = true;

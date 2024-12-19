@@ -26,72 +26,79 @@
         :items-per-page="itemsPerPage"
         item-value="name"
         hide-default-footer
+        hide-default-header
         :mobile="windowReSize.x < 768"
       >
-        <template v-slot:[`item.id`]="{ item, index }">
-          <div class="cursor-pointer">
-            <span class="hidden">{{ item.id }}</span
-            >{{ index + 1 }}
-          </div>
-        </template>
-        <template v-slot:[`item.product.name`]="{ item }">
-          <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
-            <v-tooltip activator="parent" location="top">{{
-              item.product.name
-            }}</v-tooltip>
-            {{ item.product.name }}
-          </div>
-        </template>
-        <template v-slot:[`item.customerName`]="{ item }">
-          <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
-            <v-tooltip activator="parent" location="top">{{
-              item.customerName
-            }}</v-tooltip>
-            {{ item.customerName }}
-          </div>
-        </template>
-        <template v-slot:[`item.customerEmail`]="{ item }">
-          <div class="md:max-w-[100px] md:truncate md:cursor-pointer">
-            <v-tooltip activator="parent" location="top">{{
-              item.customerEmail
-            }}</v-tooltip>
-            {{ item.customerEmail }}
-          </div>
-        </template>
-        <template v-slot:[`item.status`]="{ item }">
-          <v-chip
-            color="red-darken-4"
-            variant="flat"
-            v-if="item.status === 'EXPIRED'"
-            size="small"
-          >
-            Hết hạn BH
-          </v-chip>
-          <v-chip
-            color="green-darken-4"
-            variant="flat"
-            v-if="item.status === 'NOT_SOLD'"
-            size="small"
-          >
-            Chưa kích hoạt
-          </v-chip>
-          <v-chip
-            color="blue-darken-4"
-            variant="flat"
-            v-if="item.status === 'SOLD'"
-            size="small"
-          >
-            Đang BH
-          </v-chip>
-        </template>
-        <template v-slot:[`item.actions`]="{ item }">
-          <div class="min-w-[60px]">
-            <v-icon
-              @click="getGuaranteeDetails(item)"
-              class="text-blue-darken-4"
-            >
-              mdi:mdi-eye
-            </v-icon>
+        <template v-slot:body="{ items }">
+          <div v-if="items.length > 0">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 my-10">
+              <div v-for="(item, index) in items" :key="index">
+                <div
+                  class="bg-white border p-3 rounded-lg shadow-xl hover:shadow-lg cursor-pointer"
+                  @click="getGuaranteeDetails(item)"
+                >
+                  <div>
+                    Mã BH:
+                    <span class="text-blue-darken-4 font-bold">{{
+                      item.code
+                    }}</span>
+                  </div>
+                  <div class="text-blue-darken-4 font-bold">
+                    {{ item.product.name }}
+                  </div>
+                  <div>
+                    Tên KH:
+                    <span class="text-blue-darken-4 font-bold">{{
+                      item.customerName
+                    }}</span>
+                  </div>
+                  <div>
+                    SĐT KH:
+                    <span class="text-blue-darken-4 font-bold">{{
+                      item.customerPhone
+                    }}</span>
+                  </div>
+                  <div>
+                    Email KH:
+                    <span class="text-blue-darken-4 font-bold">{{
+                      item.customerEmail
+                    }}</span>
+                  </div>
+                  <div>
+                    Ngày hết hạn BH:
+                    <span class="text-blue-darken-4 font-bold">{{
+                      item.endDate
+                    }}</span>
+                  </div>
+                  <div class="my-2">
+                    <v-chip
+                      color="red-darken-4"
+                      variant="flat"
+                      v-if="item.status === 'EXPIRED'"
+                      size="small"
+                    >
+                      Hết hạn BH
+                    </v-chip>
+                    <v-chip
+                      color="green-darken-4"
+                      variant="flat"
+                      v-if="item.status === 'NOT_SOLD'"
+                      size="small"
+                    >
+                      Chưa kích hoạt
+                    </v-chip>
+                    <v-chip
+                      color="blue-darken-4"
+                      variant="flat"
+                      v-if="item.status === 'SOLD'"
+                      size="small"
+                    >
+                      Đang BH
+                    </v-chip>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </template>
       </v-data-table>
@@ -107,14 +114,16 @@
     <v-dialog v-model="dialogDetail" max-width="800" scrollable>
       <v-card>
         <v-card-text>
-          <div class="bg-white py-3 px-5 rounded-lg">
-            <div class="text-right" @click="dialogDetail = false">
-              <span
-                class="mdi mdi-close cursor-pointer font-bold text-2xl"
-              ></span>
+          <div class="bg-white rounded-lg">
+            <div class="flex justify-between mb-4">
+              <div class="text-center text-xl font-bold text-blue-darken-4">Chi tiết bảo hành</div>
+              <div class="text-right" @click="dialogDetail = false">
+                <span
+                  class="mdi mdi-close cursor-pointer font-bold text-2xl"
+                ></span>
+              </div>
             </div>
-            <div class="grid gap-3">
-              <div class="text-center text-xl font-bold">Chi tiết bảo hành</div>
+            <div class="grid gap-3 border p-3 rounded-lg">
               <v-row>
                 <v-col cols="6">Tên khách hàng</v-col>
                 <v-col cols="6">{{ dataSelected.customerName }}</v-col>
@@ -174,6 +183,10 @@
                 <v-col cols="6">Ngày kết thúc BH</v-col>
                 <v-col cols="6">{{ dataSelected.endDate }}</v-col>
               </v-row>
+              <v-row v-if="dataSelected.description">
+                <v-col cols="6">Mô tả</v-col>
+                <v-col cols="6">{{ dataSelected.description }}</v-col>
+              </v-row>
             </div>
           </div>
         </v-card-text>
@@ -191,7 +204,7 @@ export default {
     return {
       page: 1,
       pageCount: 0,
-      itemsPerPage: 10,
+      itemsPerPage: 9,
       search: "",
       headers: [
         {
@@ -281,6 +294,11 @@ export default {
           this.dataSelected = resp.data;
         }
       });
+    },
+  },
+  watch: {
+    page(val) {
+      this.getData();
     },
   },
   created() {},

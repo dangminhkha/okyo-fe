@@ -1,11 +1,6 @@
 <template>
   <div class="bg-gray-100 rounded-2xl mx-4">
-    <v-carousel
-      height="auto"
-      :show-arrows="false"
-      cycle
-      hide-delimiter-background
-    >
+    <v-carousel height="auto" :show-arrows="false" hide-delimiter-background>
       <v-carousel-item v-for="(slide, i) in sliders" :key="i">
         <!-- Item -->
         <img :src="slide" class="m-auto rounded-2xl" />
