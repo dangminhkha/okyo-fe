@@ -3,63 +3,26 @@
     <v-card flat>
       <v-card-title>
         <v-row>
-          <v-col cols="12" md="3">Danh sách bảo hành</v-col>
-          <v-col cols="12" md="3"
-            ><v-select
-              label="Tìm kiếm theo"
-              :items="itemsSelect"
-              v-model="itemsSelected"
-              variant="outlined"
-              density="comfortable"
-              item-title="name"
-              item-value="value"
-              return-object
-            ></v-select
-          ></v-col>
+          <v-col cols="12" md="3" class="text-blue-darken-4 font-bold uppercase">Danh sách bảo hành</v-col>
+          <v-col cols="12" md="3"><v-select label="Tìm kiếm theo" :items="itemsSelect" v-model="itemsSelected"
+              variant="outlined" density="comfortable" item-title="name" item-value="value"
+              return-object></v-select></v-col>
 
-          <v-col cols="12" md="3"
-            ><v-text-field
-              v-model="search"
-              density="compact"
-              label="Tìm kiếm"
-              prepend-inner-icon="mdi:mdi-magnify"
-              variant="solo-filled"
-              flat
-              hide-details
-              single-line
-              @click:prepend-inner="searchDara()"
-              class="h-[48px]"
-            ></v-text-field
-          ></v-col>
-          <v-col cols="12" md="3"
-            ><v-select
-              label="Trạng thái"
-              :items="itemsStatus"
-              v-model="itemsStatusSelected"
-              variant="outlined"
-              density="comfortable"
-              item-title="name"
-              item-value="value"
-              return-object
-            ></v-select
-          ></v-col>
+          <v-col cols="12" md="3"><v-text-field v-model="search" density="compact" label="Tìm kiếm"
+              prepend-inner-icon="mdi:mdi-magnify" variant="solo-filled" flat hide-details single-line
+              @click:prepend-inner="searchDara()" class="h-[48px]"></v-text-field></v-col>
+          <v-col cols="12" md="3"><v-select label="Trạng thái" :items="itemsStatus" v-model="itemsStatusSelected"
+              variant="outlined" density="comfortable" item-title="name" item-value="value"
+              return-object></v-select></v-col>
         </v-row>
       </v-card-title>
 
       <v-divider></v-divider>
-      <v-data-table
-        :headers="headers"
-        :items="items"
-        :page="page"
-        :items-per-page="itemsPerPage"
-        item-value="name"
-        hide-default-footer
-        :mobile="windowReSize.x < 768"
-      >
+      <v-data-table :headers="headers" :items="items" :page="page" :items-per-page="itemsPerPage" item-value="name"
+        hide-default-footer :mobile="windowReSize.x < 768">
         <template v-slot:[`item.id`]="{ item, index }">
           <div class="cursor-pointer">
-            <span class="hidden">{{ item.id }}</span
-            >{{ index + 1 }}
+            <span class="hidden">{{ item.id }}</span>{{ index + 1 }}
           </div>
         </template>
         <template v-slot:[`item.product.name`]="{ item }">
@@ -87,74 +50,38 @@
           </div>
         </template>
         <template v-slot:[`item.status`]="{ item }">
-          <v-chip
-            color="red-darken-4"
-            variant="flat"
-            v-if="item.status === 'EXPIRED'"
-            size="small"
-          >
+          <v-chip color="red-darken-4" variant="flat" v-if="item.status === 'EXPIRED'" size="small">
             Hết hạn BH
           </v-chip>
-          <v-chip
-            color="green-darken-4"
-            variant="flat"
-            v-if="item.status === 'NOT_SOLD'"
-            size="small"
-          >
+          <v-chip color="green-darken-4" variant="flat" v-if="item.status === 'NOT_SOLD'" size="small">
             Chưa kích hoạt
           </v-chip>
-          <v-chip
-            color="blue-darken-4"
-            variant="flat"
-            v-if="item.status === 'SOLD'"
-            size="small"
-          >
+          <v-chip color="blue-darken-4" variant="flat" v-if="item.status === 'SOLD'" size="small">
             Đang BH
           </v-chip>
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <div class="min-w-[60px]">
-            <v-icon
-              @click="getGuaranteeDetails(item)"
-              v-if="item.status !== 'NOT_SOLD'"
-              class="text-blue-darken-4"
-            >
+            <v-icon @click="getGuaranteeDetails(item)" v-if="item.status !== 'NOT_SOLD'" class="text-blue-darken-4">
               mdi:mdi-eye
             </v-icon>
-            <v-icon
-              @click="getGuaranteeDetails(item)"
-              v-else
-              class="text-blue-darken-4"
-            >
+            <v-icon @click="getGuaranteeDetails(item)" v-else class="text-blue-darken-4">
               mdi:mdi-pencil
             </v-icon>
-            <v-icon
-              v-if="item.status === 'NOT_SOLD'"
-              @click="removeGuaranteeDetails(item)"
-              class="text-red-darken-4 ml-3"
-            >
+            <v-icon v-if="item.status === 'NOT_SOLD'" @click="removeGuaranteeDetails(item)"
+              class="text-red-darken-4 ml-3">
               mdi:mdi-close-circle-outline
             </v-icon>
           </div>
         </template>
       </v-data-table>
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-        :total-visible="5"
-        next-icon="mdi:mdi-menu-right"
-        prev-icon="mdi:mdi-menu-left"
-      >
+      <v-pagination v-model="page" :length="pageCount" :total-visible="5" next-icon="mdi:mdi-menu-right"
+        prev-icon="mdi:mdi-menu-left">
       </v-pagination>
     </v-card>
   </div>
-  <GuaranteeDetailVue
-    v-if="dialogDetail"
-    :status="dialogDetail"
-    :id="dialogDetailId"
-    @close="dialogDetail = $event"
-    @updateDone="updateDone"
-  />
+  <GuaranteeDetailVue v-if="dialogDetail" :status="dialogDetail" :id="dialogDetailId" @close="dialogDetail = $event"
+    @updateDone="updateDone" />
   <v-dialog v-model="dialogRemove" max-width="500">
     <div class="bg-white py-3 px-5 rounded-lg">
       <div class="text-right" @click="dialogRemove = false">
@@ -162,13 +89,7 @@
       </div>
       <div class="grid gap-3">
         <div class="text-center text-xl font-bold">Xác nhận xóa bảo hành?</div>
-        <v-btn
-          variant="flat"
-          color="blue-darken-4"
-          class="w-3/5 m-auto mt-5"
-          @click="removeConfirm()"
-          >Xác nhận</v-btn
-        >
+        <v-btn variant="flat" color="blue-darken-4" class="w-3/5 m-auto mt-5" @click="removeConfirm()">Xác nhận</v-btn>
       </div>
     </div>
   </v-dialog>
@@ -373,5 +294,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

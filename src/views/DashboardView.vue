@@ -1,43 +1,32 @@
 <template>
   <div class="shadow-xl rounded-lg">
     <v-card flat>
-      <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
-        <div class="text-blue-darken-4 font-bold">Danh sách sản phẩm</div>
+      <v-card-title>
+        <v-row>
+          <v-col cols="12" md="6" class="text-blue-darken-4 font-bold uppercase">Danh sách sản phẩm</v-col>
+          <v-col cols="12" md="6"><v-text-field v-model="search" density="compact" label="Tìm kiếm" class="h-[48px]"
+              prepend-inner-icon="mdi:mdi-magnify" variant="solo-filled" flat hide-details single-line
+              @click:prepend-inner="searchDara()"></v-text-field></v-col>
 
-        <v-text-field
-          v-model="search"
-          density="compact"
-          label="Tìm kiếm"
-          prepend-inner-icon="mdi:mdi-magnify"
-          variant="solo-filled"
-          flat
-          hide-details
-          single-line
-          @click:prepend-inner="searchDara()"
-        ></v-text-field>
+        </v-row>
+      </v-card-title>
+      <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
+
+
       </div>
       <div class="p-4">
         <div
           class="flex justify-center items-center p-3 rounded-lg text-sm bg-blue-darken-4 h-[40px] w-[165px] cursor-pointer"
-          @click="addProduct()"
-        >
+          @click="addProduct()">
           <span class="mdi mdi-plus"></span>Thêm sản phẩm
         </div>
       </div>
       <v-divider></v-divider>
-      <v-data-table
-        :headers="headers"
-        :items="items"
-        :page="page"
-        :items-per-page="itemsPerPage"
-        item-value="name"
-        hide-default-footer
-        :mobile="windowReSize.x < 768"
-      >
+      <v-data-table :headers="headers" :items="items" :page="page" :items-per-page="itemsPerPage" item-value="name"
+        hide-default-footer :mobile="windowReSize.x < 768">
         <template v-slot:[`item.id`]="{ item, index }">
           <div class="cursor-pointer">
-            <span class="hidden">{{ item.id }}</span
-            >{{ index + 1 }}
+            <span class="hidden">{{ item.id }}</span>{{ index + 1 }}
           </div>
         </template>
         <template v-slot:[`item.name`]="{ item }">
@@ -49,16 +38,11 @@
           </div>
         </template>
         <template v-slot:[`item.status`]="{ item }">
-          <div
-            v-if="item.status === 0 || !item.status"
-            class="font-bold p-2 text-sm rounded-lg text-center max-w-[150px] m-auto"
-          >
+          <div v-if="item.status === 0 || !item.status"
+            class="font-bold p-2 text-sm rounded-lg text-center max-w-[150px] m-auto">
             <span class="mdi mdi-circle text-2xl text-gray-500"></span>
           </div>
-          <div
-            v-if="item.status === 1"
-            class="font-bold p-2 text-sm rounded-lg text-center max-w-[150px] m-auto"
-          >
+          <div v-if="item.status === 1" class="font-bold p-2 text-sm rounded-lg text-center max-w-[150px] m-auto">
             <span class="mdi mdi-circle text-2xl text-green-500"></span>
           </div>
         </template>
@@ -74,13 +58,8 @@
           </v-icon>
         </template>
       </v-data-table>
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-        :total-visible="5"
-        next-icon="mdi:mdi-menu-right"
-        prev-icon="mdi:mdi-menu-left"
-      ></v-pagination>
+      <v-pagination v-model="page" :length="pageCount" :total-visible="5" next-icon="mdi:mdi-menu-right"
+        prev-icon="mdi:mdi-menu-left"></v-pagination>
     </v-card>
   </div>
   <v-dialog v-model="dialogRemove" max-width="500">
@@ -90,13 +69,7 @@
       </div>
       <div class="grid gap-3">
         <div class="text-center text-xl font-bold">Xác nhận xóa sản phẩm?</div>
-        <v-btn
-          variant="flat"
-          color="blue-darken-4"
-          class="w-3/5 m-auto mt-5"
-          @click="removeConfirm()"
-          >Xác nhận</v-btn
-        >
+        <v-btn variant="flat" color="blue-darken-4" class="w-3/5 m-auto mt-5" @click="removeConfirm()">Xác nhận</v-btn>
       </div>
     </div>
   </v-dialog>
@@ -109,35 +82,17 @@
               Thêm sản phẩm
             </div>
             <div class="text-right" @click="addProductDialog = false">
-              <span
-                class="mdi mdi-close cursor-pointer font-bold text-2xl"
-              ></span>
+              <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
             </div>
           </div>
-          <v-form
-            ref="form"
-            v-model="valid"
-            @submit.prevent="submitAddProduct"
-            class="grid gap-3"
-          >
-            <v-text-field
-              label="Tên sản phẩm"
-              variant="outlined"
-              v-model="name"
-              :rules="rulesRequired"
-            >
+          <v-form ref="form" v-model="valid" @submit.prevent="submitAddProduct" class="grid gap-3">
+            <v-text-field label="Tên sản phẩm" variant="outlined" v-model="name" :rules="rulesRequired">
             </v-text-field>
 
             <v-row>
               <v-col cols="6">
-                <v-text-field
-                  type="number"
-                  inputmode="numeric"
-                  label="Thời hạn BH"
-                  variant="outlined"
-                  v-model="monthGuarantee"
-                  :rules="rulesRequired"
-                >
+                <v-text-field type="number" inputmode="numeric" label="Thời hạn BH" variant="outlined"
+                  v-model="monthGuarantee" :rules="rulesRequired">
                 </v-text-field>
               </v-col>
               <v-col cols="6">
@@ -154,36 +109,18 @@
                     </span>
                   </template>
                   <v-avatar rounded="lg" size="64">
-                    <img
-                      v-if="listImg[index].base64"
-                      width="50"
-                      :src="listImg[index].base64"
-                      @click="uploadFile('upload' + index)"
-                    />
-                    <img
-                      v-else
-                      width="50"
-                      :src="imageAvatar"
-                      @click="uploadFile('upload' + index)"
-                    />
-                    <input
-                      hidden
-                      type="file"
-                      accept="image/png, image/jpg, image/jpeg"
-                      :ref="'upload' + index"
-                      @change="affterRenderImg($event, index)"
-                    />
+                    <img v-if="listImg[index].base64" width="50" :src="listImg[index].base64"
+                      @click="uploadFile('upload' + index)" />
+                    <img v-else width="50" :src="imageAvatar" @click="uploadFile('upload' + index)" />
+                    <input hidden type="file" accept="image/png, image/jpg, image/jpeg" :ref="'upload' + index"
+                      @change="affterRenderImg($event, index)" />
                   </v-avatar>
                 </v-badge>
               </span>
             </div>
           </v-form>
           <div class="flex justify-center my-6">
-            <v-btn
-              variant="flat"
-              color="blue-darken-4"
-              @click="submitAddProduct"
-            >
+            <v-btn variant="flat" color="blue-darken-4" @click="submitAddProduct">
               Xác nhận
             </v-btn>
           </div>
@@ -201,34 +138,14 @@
           <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
         </div>
       </div>
-      <v-form
-        ref="formEdit"
-        v-model="valid"
-        @submit.prevent="editConfirm"
-        class="grid gap-3"
-      >
-        <v-text-field
-          label="Tên sản phẩm"
-          variant="outlined"
-          v-model="name"
-          :rules="rulesRequired"
-        >
+      <v-form ref="formEdit" v-model="valid" @submit.prevent="editConfirm" class="grid gap-3">
+        <v-text-field label="Tên sản phẩm" variant="outlined" v-model="name" :rules="rulesRequired">
         </v-text-field>
         <v-row>
-          <v-col cols="6"
-            ><v-text-field
-              type="number"
-              inputmode="numeric"
-              label="Thời hạn BH"
-              variant="outlined"
-              v-model="monthGuarantee"
-              :rules="rulesRequired"
-            >
-            </v-text-field
-          ></v-col>
-          <v-col cols="6"
-            ><v-checkbox v-model="status" label="Hoạt động"></v-checkbox
-          ></v-col>
+          <v-col cols="6"><v-text-field type="number" inputmode="numeric" label="Thời hạn BH" variant="outlined"
+              v-model="monthGuarantee" :rules="rulesRequired">
+            </v-text-field></v-col>
+          <v-col cols="6"><v-checkbox v-model="status" label="Hoạt động"></v-checkbox></v-col>
         </v-row>
         <Editor v-model="description" editorStyle="height: 200px"> </Editor>
 
@@ -240,31 +157,13 @@
                 </span>
               </template>
               <v-avatar rounded="lg" size="64">
-                <img
-                  v-if="listImg[index].base64"
-                  width="50"
-                  :src="listImg[index].base64"
-                  @click="uploadFile('upload' + index)"
-                />
-                <img
-                  v-else-if="listImg[index].path"
-                  width="50"
-                  :src="listImg[index].path"
-                  @click="uploadFile('upload' + index)"
-                />
-                <img
-                  v-else
-                  width="50"
-                  :src="imageAvatar"
-                  @click="uploadFile('upload' + index)"
-                />
-                <input
-                  hidden
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg"
-                  :ref="'upload' + index"
-                  @change="affterRenderImg($event, index)"
-                />
+                <img v-if="listImg[index].base64" width="50" :src="listImg[index].base64"
+                  @click="uploadFile('upload' + index)" />
+                <img v-else-if="listImg[index].path" width="50" :src="listImg[index].path"
+                  @click="uploadFile('upload' + index)" />
+                <img v-else width="50" :src="imageAvatar" @click="uploadFile('upload' + index)" />
+                <input hidden type="file" accept="image/png, image/jpg, image/jpeg" :ref="'upload' + index"
+                  @change="affterRenderImg($event, index)" />
               </v-avatar>
             </v-badge>
           </span>
@@ -585,5 +484,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
