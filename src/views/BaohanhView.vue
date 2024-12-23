@@ -19,7 +19,7 @@
 
       <v-divider></v-divider>
       <v-data-table :headers="headers" :items="items" :page="page" :items-per-page="itemsPerPage" item-value="name"
-        hide-default-footer :mobile="windowReSize.x < 768">
+        hide-default-footer :mobile="windowReSize.x < 768" :hide-default-header="windowReSize.x < 768">
         <template v-slot:[`item.id`]="{ item, index }">
           <div class="cursor-pointer">
             <span class="hidden">{{ item.id }}</span>{{ index + 1 }}
