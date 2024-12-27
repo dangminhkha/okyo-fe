@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow-xl rounded-lg">
+  <div class="shadow-xl rounded-lg max-w-screen-lg m-auto">
     <v-card flat>
       <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
         <div class="font-bold text-blue-darken-4 text-xl">
@@ -176,7 +176,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useBaseStore, ["windowReSize"]),
+    ...mapState(useBaseStore, ["windowReSize", "menuItemData"]),
   },
   methods: {
     ...mapActions(useBaseStore, ["getListProduct", "getCusProductDetail"]),
@@ -193,6 +193,11 @@ export default {
             fieldCode: "NAME",
             operator: "LIKE",
             value: this.search,
+          },
+          {
+            fieldCode: "PRODUCT_TYPE",
+            operator: "EQUAL",
+            value: this.menuItemData,
           },
         ],
         sorts: [
@@ -212,16 +217,20 @@ export default {
       );
     },
     getProductDetails(data) {
-      this.getCusProductDetail(`public/product/${data.id}`).then((resp) => {
-        if (resp) {
-          this.dialogDetail = true;
-          this.dataSelected = resp.data;
-        }
-      });
+      this.$router.push({path: `/chitiet/${data.id}`})
+      // this.getCusProductDetail(`public/product/${data.id}`).then((resp) => {
+      //   if (resp) {
+      //     this.dialogDetail = true;
+      //     this.dataSelected = resp.data;
+      //   }
+      // });
     },
   },
   watch: {
     page(val) {
+      this.getProducts();
+    },
+    menuItemData(val) {
       this.getProducts();
     },
   },

@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { baseService } from "../services/base-service";
 const API_URL = import.meta.env.VITE_API_URL + import.meta.env.VITE_API_PREFIX;
+import router from "../router";
 export const useBaseStore = defineStore({
   id: "base",
   state: () => ({
@@ -29,8 +30,14 @@ export const useBaseStore = defineStore({
     cusGuaranteeDetailData: null,
     removeProductData: null,
     changePassData: null,
+    getListTypeData: null,
+    menuItemData: null,
   }),
   actions: {
+    changeMenu(val: any) {
+      this.menuItemData = val;
+      router.push({path: `/danh-muc/${val}`})
+    },
     overlayChange(status: boolean) {
       this.overlay = status;
     },
@@ -162,6 +169,13 @@ export const useBaseStore = defineStore({
         this.removeProductData = resp.data;
       });
       return this.removeProductData;
+    },
+    //Lấy danh sách loại sản phẩm
+    async getListProductType(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.getListTypeData = resp.data;
+      });
+      return this.getListTypeData;
     },
   },
   persist: true,
