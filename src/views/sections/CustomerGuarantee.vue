@@ -1,126 +1,126 @@
 <template>
-  <div class="shadow-xl rounded-lg">
-    <v-card flat>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 items-center">
-        <div class="text-xl text-blue-darken-4 font-bold">
-          Danh sách bảo hành
-        </div>
+  <div class="rounded-lg max-w-screen-lg m-auto">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 items-center gap-4 p-4 bg-white rounded-lg mb-4"
+    >
+      <div class="text-xl text-blue-darken-4 font-bold">Danh sách bảo hành</div>
 
-        <v-text-field
-          v-model="search"
-          density="compact"
-          label="Tìm kiếm"
-          prepend-inner-icon="mdi:mdi-magnify"
-          variant="solo-filled"
-          flat
-          hide-details
-          single-line
-          @click:prepend-inner="searchDara()"
-        ></v-text-field>
-      </div>
+      <v-text-field
+        v-model="search"
+        density="compact"
+        label="Tìm kiếm"
+        prepend-inner-icon="mdi:mdi-magnify"
+        variant="solo-filled"
+        flat
+        hide-details
+        single-line
+        @click:prepend-inner="searchDara()"
+      ></v-text-field>
+    </div>
 
-      <v-divider></v-divider>
-      <v-data-table
-        :headers="headers"
-        :items="items"
-        :page="page"
-        :items-per-page="itemsPerPage"
-        item-value="name"
-        hide-default-footer
-        hide-default-header
-        :mobile="windowReSize.x < 768"
-      >
-        <template v-slot:body="{ items }">
-          <div v-if="items.length > 0">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-10">
-              <div v-for="(item, index) in items" :key="index">
-                <div
-                  class="bg-white border p-3 rounded-lg shadow-xl hover:shadow-lg cursor-pointer"
-                  @click="getGuaranteeDetails(item)"
-                >
-                  <div>
-                    Mã BH:
-                    <span class="text-blue-darken-4 font-bold">{{
-                      item.code
-                    }}</span>
-                  </div>
-                  <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
-                    <v-tooltip activator="parent" location="top">{{
-                      item.product.name
-                    }}</v-tooltip>
-                    Tên SP:
-                    <span class="text-blue-darken-4 font-bold">
-                      {{ item.product.name }}</span
-                    >
-                  </div>
-                  <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
-                    <v-tooltip activator="parent" location="top">{{
-                      item.customerName
-                    }}</v-tooltip>
-                    Tên KH:
-                    <span class="text-blue-darken-4 font-bold">
-                      {{ item.customerName }}</span
-                    >
-                  </div>
-                  <div class="">
-                    SĐT KH:
-                    <span class="text-blue-darken-4 font-bold">{{
-                      item.customerPhone
-                    }}</span>
-                  </div>
-                  <div>
-                    Ngày hết hạn BH:
-                    <span class="text-blue-darken-4 font-bold">{{
-                      item.endDate
-                    }}</span>
-                  </div>
-                  <div class="my-2">
-                    <v-chip
-                      color="red-darken-4"
-                      variant="flat"
-                      v-if="item.status === 'EXPIRED'"
-                      size="small"
-                    >
-                      Hết hạn BH
-                    </v-chip>
-                    <v-chip
-                      color="green-darken-4"
-                      variant="flat"
-                      v-if="item.status === 'NOT_SOLD'"
-                      size="small"
-                    >
-                      Chưa kích hoạt
-                    </v-chip>
-                    <v-chip
-                      color="blue-darken-4"
-                      variant="flat"
-                      v-if="item.status === 'SOLD'"
-                      size="small"
-                    >
-                      Đang BH
-                    </v-chip>
-                  </div>
+    <v-divider></v-divider>
+    <v-data-table
+      :headers="headers"
+      :items="items"
+      :page="page"
+      :items-per-page="itemsPerPage"
+      item-value="name"
+      hide-default-footer
+      hide-default-header
+      :mobile="windowReSize.x < 768"
+    >
+      <template v-slot:body="{ items }">
+        <div v-if="items.length > 0">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-10">
+            <div v-for="(item, index) in items" :key="index">
+              <div
+                class="bg-white border p-3 rounded-lg shadow-xl hover:shadow-lg cursor-pointer"
+                @click="getGuaranteeDetails(item)"
+              >
+                <div>
+                  Mã BH:
+                  <span class="text-blue-darken-4 font-bold">{{
+                    item.code
+                  }}</span>
+                </div>
+                <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
+                  <v-tooltip activator="parent" location="top">{{
+                    item.product.name
+                  }}</v-tooltip>
+                  Tên SP:
+                  <span class="text-blue-darken-4 font-bold">
+                    {{ item.product.name }}</span
+                  >
+                </div>
+                <div class="md:max-w-[300px] md:truncate md:cursor-pointer">
+                  <v-tooltip activator="parent" location="top">{{
+                    item.customerName
+                  }}</v-tooltip>
+                  Tên KH:
+                  <span class="text-blue-darken-4 font-bold">
+                    {{ item.customerName }}</span
+                  >
+                </div>
+                <div class="">
+                  SĐT KH:
+                  <span class="text-blue-darken-4 font-bold">{{
+                    item.customerPhone
+                  }}</span>
+                </div>
+                <div>
+                  Ngày hết hạn BH:
+                  <span class="text-blue-darken-4 font-bold">{{
+                    item.endDate
+                  }}</span>
+                </div>
+                <div class="my-2">
+                  <v-chip
+                    color="red-darken-4"
+                    variant="flat"
+                    v-if="item.status === 'EXPIRED'"
+                    size="small"
+                  >
+                    Hết hạn BH
+                  </v-chip>
+                  <v-chip
+                    color="green-darken-4"
+                    variant="flat"
+                    v-if="item.status === 'NOT_SOLD'"
+                    size="small"
+                  >
+                    Chưa kích hoạt
+                  </v-chip>
+                  <v-chip
+                    color="blue-darken-4"
+                    variant="flat"
+                    v-if="item.status === 'SOLD'"
+                    size="small"
+                  >
+                    Đang BH
+                  </v-chip>
                 </div>
               </div>
             </div>
           </div>
-        </template>
-      </v-data-table>
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-        :total-visible="5"
-        next-icon="mdi:mdi-menu-right"
-        prev-icon="mdi:mdi-menu-left"
-      >
-      </v-pagination>
-    </v-card>
+        </div>
+      </template>
+    </v-data-table>
+    <v-pagination
+      v-model="page"
+      :length="pageCount"
+      :total-visible="5"
+      next-icon="mdi:mdi-menu-right"
+      prev-icon="mdi:mdi-menu-left"
+    >
+    </v-pagination>
     <v-dialog v-model="dialogDetail" max-width="800" scrollable>
       <v-card>
         <v-card-text>
           <div class="bg-white rounded-lg">
             <div class="flex justify-between mb-4">
-              <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
+              <div
+                class="text-center text-xl font-bold text-blue-darken-4 uppercase"
+              >
                 Chi tiết bảo hành
               </div>
               <div class="text-right" @click="dialogDetail = false">

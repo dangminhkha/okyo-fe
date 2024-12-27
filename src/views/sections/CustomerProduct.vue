@@ -1,61 +1,60 @@
 <template>
-  <div class="shadow-xl rounded-lg max-w-screen-lg m-auto">
-    <v-card flat>
-      <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4">
-        <div class="font-bold text-blue-darken-4 text-xl">
-          Danh sách sản phẩm
-        </div>
+  <div class="rounded-lg max-w-screen-lg m-auto">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4 bg-white rounded-lg mb-4"
+    >
+      <div class="font-bold text-blue-darken-4 text-xl">Danh sách sản phẩm</div>
 
-        <v-text-field
-          v-model="search"
-          density="compact"
-          label="Tìm kiếm"
-          prepend-inner-icon="mdi:mdi-magnify"
-          variant="solo-filled"
-          flat
-          hide-details
-          single-line
-          @click:prepend-inner="searchDara()"
-        ></v-text-field>
-      </div>
+      <v-text-field
+        v-model="search"
+        density="compact"
+        label="Tìm kiếm"
+        prepend-inner-icon="mdi:mdi-magnify"
+        variant="solo-filled"
+        flat
+        hide-details
+        single-line
+        @click:prepend-inner="searchDara()"
+      ></v-text-field>
+    </div>
 
-      <v-divider></v-divider>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-        <div v-for="(item, index) in items" :key="index">
-          <div
-            class="bg-white shadow-2xl rounded-lg p-3 hover:shadow-xl cursor-pointer"
-          >
-            <div class="grid" @click="getProductDetails(item)">
-              <div v-if="item.files.length > 0">
-                <img
-                  :src="API_URL + item.files[0].path"
-                  class="m-auto max-h-[150px] rounded-lg"
-                  v-if="item.files[0].path"
-                />
-              </div>
+    <v-divider></v-divider>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mx-5">
+      <div v-for="(item, index) in items" :key="index">
+        <div
+          class="bg-white shadow-2xl rounded-lg p-3 hover:shadow-xl cursor-pointer"
+        >
+          <div class="grid" @click="getProductDetails(item)">
+            <div v-if="item.files.length > 0">
               <img
-                :src="imageAvatar"
+                :src="API_URL + item.files[0].path"
                 class="m-auto max-h-[150px] rounded-lg"
-                v-else
+                v-if="item.files[0].path"
               />
-              <div
-                class="text-center text-sm my-4 m-auto h-[48px] leading-5 text-blue-darken-4 font-bold"
-              >
-                {{ item.name }}
-              </div>
+            </div>
+            <img
+              :src="imageAvatar"
+              class="m-auto max-h-[150px] rounded-lg"
+              v-else
+            />
+            <div
+              class="text-center text-sm my-4 m-auto h-[48px] leading-5 text-blue-darken-4 font-bold"
+            >
+              {{ item.name }}
             </div>
           </div>
         </div>
       </div>
-      <v-pagination
-        class="mt-4"
-        v-model="page"
-        :length="pageCount"
-        :total-visible="5"
-        next-icon="mdi:mdi-menu-right"
-        prev-icon="mdi:mdi-menu-left"
-      ></v-pagination>
-    </v-card>
+    </div>
+    <v-pagination
+      class="mt-4"
+      v-model="page"
+      :length="pageCount"
+      :total-visible="5"
+      next-icon="mdi:mdi-menu-right"
+      prev-icon="mdi:mdi-menu-left"
+    ></v-pagination>
+
     <v-dialog max-width="800" v-model="dialogDetail">
       <v-card>
         <v-card-text>
@@ -217,7 +216,7 @@ export default {
       );
     },
     getProductDetails(data) {
-      this.$router.push({path: `/chitiet/${data.id}`})
+      this.$router.push({ path: `/chitiet/${data.id}` });
       // this.getCusProductDetail(`public/product/${data.id}`).then((resp) => {
       //   if (resp) {
       //     this.dialogDetail = true;
