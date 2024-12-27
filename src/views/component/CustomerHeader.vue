@@ -24,7 +24,7 @@
           <template v-slot:activator="{ props }">
             <span
               v-bind="props"
-              class="text-lg text-blue-darken-4 font-bold cursor-pointer"
+              class="text-lg text-blue-darken-2 font-bold cursor-pointer border p-3 rounded-xl hover:-translate-y-1 hover:scale-105 duration-300"
             >
               Danh mục sản phẩm
             </span>
@@ -40,7 +40,7 @@
           </v-list>
         </v-menu>
 
-        <div class="text-lg text-blue-darken-4 font-bold cursor-pointer">
+        <div class="text-lg text-blue-darken-2 font-bold cursor-pointer border p-3 rounded-xl hover:-translate-y-1 hover:scale-105 duration-300">
           <router-link :to="'/thongtinbaohanh'">Thông tin bảo hành</router-link>
         </div>
       </div>
