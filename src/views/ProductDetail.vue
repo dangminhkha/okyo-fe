@@ -33,7 +33,7 @@
           >
             <img
               :src="API_URL + item.path"
-              class="m-auto max-h-[400px] h-[100%]"
+              class="m-auto max-h-[400px] h-[100%] hover:-translate-y-1 hover:scale-105 duration-300"
           /></v-carousel-item>
         </v-carousel>
         <div class="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 my-4">
@@ -57,7 +57,7 @@
           </li>
         </ul>
       </div>
-      <div class="p-3 border rounded-lg">
+      <div class="p-3 border rounded-lg" v-if="dataDetail.description">
         <div class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
           Mô tả chi tiết
         </div>

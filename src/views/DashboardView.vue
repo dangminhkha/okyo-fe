@@ -176,7 +176,7 @@
               @click="detailCount++"
               ><span class="font-bold">Đặc điểm nổi bật</span></span
             >
-            <v-row>
+            <v-row no-gutters>
               <v-col
                 cols="12"
                 v-for="(item, index) in detailCount"
@@ -186,9 +186,8 @@
                   variant="outlined"
                   :ref="'details' + index"
                   v-model="noibat.details_id[index]"
-                  append-inner-icon="mdi:mdi-check "
                   prepend-inner-icon="mdi:mdi-close "
-                  @click:append-inner="
+                  @change="
                     acceptAddDetail(noibat.details_id[index], index)
                   "
                   @click:prepend-inner="
@@ -198,14 +197,13 @@
                 </v-text-field>
               </v-col>
             </v-row>
-            <div class="grid">
+            <!-- <div class="grid">
               <ul class="list-disc list-inside">
                 <li v-for="(item, index) in details" :key="index">
                   {{ item }}
                 </li>
-                <!-- ... -->
               </ul>
-            </div>
+            </div> -->
 
             <div class="my-2 font-bold text-blue-darken-2">Mô tả chi tiết</div>
             <Editor v-model="description" editorStyle="height: 200px"> </Editor>
@@ -334,7 +332,7 @@
                   v-model="noibat.details_id[index]"
                   append-inner-icon="mdi:mdi-check "
                   prepend-inner-icon="mdi:mdi-close "
-                  @click:append-inner="
+                  @change="
                     acceptAddDetail(noibat.details_id[index], index)
                   "
                   @click:prepend-inner="
@@ -344,14 +342,13 @@
                 </v-text-field>
               </v-col>
             </v-row>
-            <div class="grid">
+            <!-- <div class="grid">
               <ul class="list-disc list-inside">
                 <li v-for="(item, index) in details" :key="index">
                   {{ item }}
                 </li>
-                <!-- ... -->
               </ul>
-            </div>
+            </div> -->
 
             <div class="my-2 font-bold text-blue-darken-2">Mô tả chi tiết</div>
             <Editor v-model="description" editorStyle="height: 200px"> </Editor>
@@ -725,6 +722,7 @@ export default {
     acceptRemoveDetail(data, index) {
       this.detailCount--;
       this.details.splice(index, 1);
+      this.noibat.details_id.splice(index, 1);
     },
   },
   computed: {

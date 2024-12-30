@@ -49,14 +49,20 @@
         Thời gian bảo hành: {{ dataSelected.monthGuarantee }} tháng
       </div>
       <div class="border-y my-3 text-sm py-2 text-gray-500">
-        {{dataSelected.productTypeName}}
+        {{ dataSelected.productTypeName }}
       </div>
-      <div class="font-bold text-xl my-3">Đặc điểm nổi bật</div>
-      <ul class="list-disc list-inside" v-if="dataSelected.details">
-        <li v-for="(item, index) in dataSelected.details" :key="index" class="text-gray-500">
-          {{ item }}
-        </li>
-      </ul>
+      <div v-if="dataSelected.details">
+        <div class="font-bold text-xl my-3">Đặc điểm nổi bật</div>
+        <ul class="list-disc list-inside">
+          <li
+            v-for="(item, index) in dataSelected.details"
+            :key="index"
+            class="text-gray-500"
+          >
+            {{ item }}
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div>
@@ -103,7 +109,7 @@
       </div>
     </div>
   </div>
-  <div class="max-w-screen-lg m-auto my-4 p-3">
+  <div class="max-w-screen-lg m-auto my-4 p-3" v-if="dataSelected?.description">
     <div class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
       Mô tả chi tiết
     </div>
@@ -119,11 +125,13 @@ import icon1 from "@/assets/images/icon-1-1.png";
 import icon2 from "@/assets/images/icon-1-2.png";
 import icon3 from "@/assets/images/icon-1-3.png";
 import icon4 from "@/assets/images/icon-1-4.png";
+const API_URL = import.meta.env.VITE_API_URL;
 export default {
   name: "ProductDetailPage",
   props: {},
   data() {
     return {
+        API_URL,
       imageAvatar,
       icon1,
       icon2,

@@ -6,12 +6,7 @@
     <!-- Grid -->
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-10">
       <div class="col-span-full hidden lg:col-span-1 lg:block">
-        <a
-          class="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80"
-          href="#"
-          aria-label="Brand"
-          ><img :src="imageAvatar" class="m-auto bg-white"
-        /></a>
+        
         <p
           class="mt-3 text-xs sm:text-sm text-gray-600 text-center text-blue-grey-lighten-5"
         >

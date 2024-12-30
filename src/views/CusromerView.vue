@@ -14,13 +14,13 @@
         <div v-if="item.files.length > 0">
           <img
             :src="API_URL + item.files[0].path"
-            class="m-auto max-h-[150px] rounded-lg"
+            class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300"
             v-if="item.files[0].path"
           />
         </div>
         <img
           :src="imageAvatar"
-          class="m-auto max-h-[150px] rounded-lg"
+          class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300"
           v-else
         />
         <div
@@ -45,13 +45,13 @@
         <div v-if="item.files.length > 0">
           <img
             :src="API_URL + item.files[0].path"
-            class="m-auto max-h-[150px] rounded-lg"
+            class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300"
             v-if="item.files[0].path"
           />
         </div>
         <img
           :src="imageAvatar"
-          class="m-auto max-h-[150px] rounded-lg"
+          class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300"
           v-else
         />
         <div
@@ -94,6 +94,7 @@ import CustomerProductVue from "./sections/CustomerProduct.vue";
 import CustomerSliderVue from "./sections/CustomerSlider.vue";
 import { useBaseStore } from "../stores/baseStore";
 import imageAvatar from "@/assets/images/productDF.jpg";
+const API_URL = import.meta.env.VITE_API_URL;
 export default {
   name: "CustomerPage",
   components: {
@@ -104,6 +105,7 @@ export default {
   },
   data() {
     return {
+      API_URL,
       imageAvatar,
       tab: 1,
       page: 1,
