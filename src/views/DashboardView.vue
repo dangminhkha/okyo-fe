@@ -199,7 +199,7 @@
               </v-col>
             </v-row>
             <div class="grid">
-              <ul class="list-disc">
+              <ul class="list-disc list-inside">
                 <li v-for="(item, index) in details" :key="index">
                   {{ item }}
                 </li>
@@ -345,7 +345,7 @@
               </v-col>
             </v-row>
             <div class="grid">
-              <ul class="list-disc">
+              <ul class="list-disc list-inside">
                 <li v-for="(item, index) in details" :key="index">
                   {{ item }}
                 </li>
