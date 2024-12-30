@@ -171,21 +171,43 @@
                 ><v-checkbox v-model="outstanding" label="Nổi bật"></v-checkbox
               ></v-col>
             </v-row>
-            <span class="mdi mdi-plus cursor-pointer my-1" @click="addDetail()"
-              ><span class="text-sm">Đặc điểm nổi bật</span></span
+            <span
+              class="mdi mdi-plus cursor-pointer my-1 text-blue-darken-2"
+              @click="detailCount++"
+              ><span class="font-bold">Đặc điểm nổi bật</span></span
             >
             <v-row>
-              <v-col cols="12" v-for="(item, index) in listDetail" :key="index">
+              <v-col
+                cols="12"
+                v-for="(item, index) in detailCount"
+                :key="index"
+              >
                 <v-text-field
                   variant="outlined"
-                  v-model="detailsModel"
-                  append-inner-icon="mdi:mdi-check-circle"
-                  @click:append-inner="acceptAddDetail(detailsModel)"
+                  :ref="'details' + index"
+                  v-model="noibat.details_id[index]"
+                  append-inner-icon="mdi:mdi-check "
+                  prepend-inner-icon="mdi:mdi-close "
+                  @click:append-inner="
+                    acceptAddDetail(noibat.details_id[index], index)
+                  "
+                  @click:prepend-inner="
+                    acceptRemoveDetail(noibat.details_id[index], index)
+                  "
                 >
                 </v-text-field>
               </v-col>
             </v-row>
-            {{ details }}
+            <div class="grid">
+              <ul class="list-disc">
+                <li v-for="(item, index) in details" :key="index">
+                  {{ item }}
+                </li>
+                <!-- ... -->
+              </ul>
+            </div>
+
+            <div class="my-2 font-bold text-blue-darken-2">Mô tả chi tiết</div>
             <Editor v-model="description" editorStyle="height: 200px"> </Editor>
 
             <div class="flex justify-between border p-3 rounded-lg">
@@ -234,107 +256,152 @@
     </v-card>
   </v-dialog>
   <v-dialog max-width="800" v-model="dialogUpdate">
-    <div class="bg-white p-4 rounded-lg">
-      <div class="flex justify-between items-center mb-4">
-        <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
-          Cập nhật sản phẩm
-        </div>
-        <div class="text-right" @click="dialogUpdate = false">
-          <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
-        </div>
-      </div>
-      <v-form
-        ref="formEdit"
-        v-model="valid"
-        @submit.prevent="editConfirm"
-        class="grid gap-3"
-      >
-        <v-row>
-          <v-col cols="6">
-            <v-text-field
-              label="Tên sản phẩm"
-              variant="outlined"
-              v-model="name"
-              :rules="rulesRequired"
+    <v-card>
+      <v-card-text>
+        <div class="bg-white p-4 rounded-lg">
+          <div class="flex justify-between items-center mb-4">
+            <div
+              class="text-center text-xl font-bold text-blue-darken-4 uppercase"
             >
-            </v-text-field>
-          </v-col>
-          <v-col cols="6">
-            <v-select
-              label="Loại sản phẩm"
-              :items="typeList"
-              v-model="typeSelected"
-              variant="outlined"
-              item-title="name"
-              item-value="id"
-            ></v-select>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="6" md="4"
-            ><v-text-field
-              type="number"
-              inputmode="numeric"
-              label="Thời hạn BH"
-              variant="outlined"
-              v-model="monthGuarantee"
-              :rules="rulesRequired"
+              Cập nhật sản phẩm
+            </div>
+            <div class="text-right" @click="dialogUpdate = false">
+              <span
+                class="mdi mdi-close cursor-pointer font-bold text-2xl"
+              ></span>
+            </div>
+          </div>
+          <v-form
+            ref="formEdit"
+            v-model="valid"
+            @submit.prevent="editConfirm"
+            class="grid gap-3"
+          >
+            <v-row>
+              <v-col cols="6">
+                <v-text-field
+                  label="Tên sản phẩm"
+                  variant="outlined"
+                  v-model="name"
+                  :rules="rulesRequired"
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <v-select
+                  label="Loại sản phẩm"
+                  :items="typeList"
+                  v-model="typeSelected"
+                  variant="outlined"
+                  item-title="name"
+                  item-value="id"
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="6" md="4"
+                ><v-text-field
+                  type="number"
+                  inputmode="numeric"
+                  label="Thời hạn BH"
+                  variant="outlined"
+                  v-model="monthGuarantee"
+                  :rules="rulesRequired"
+                >
+                </v-text-field
+              ></v-col>
+              <v-col cols="6" md="4"
+                ><v-checkbox v-model="status" label="Hoạt động"></v-checkbox
+              ></v-col>
+              <v-col cols="6" md="4"
+                ><v-checkbox v-model="outstanding" label="Nổi bật"></v-checkbox
+              ></v-col>
+            </v-row>
+            <span
+              class="mdi mdi-plus cursor-pointer my-1 text-blue-darken-2"
+              @click="detailCount++"
+              ><span class="font-bold">Đặc điểm nổi bật</span></span
             >
-            </v-text-field
-          ></v-col>
-          <v-col cols="6" md="4"
-            ><v-checkbox v-model="status" label="Hoạt động"></v-checkbox
-          ></v-col>
-          <v-col cols="6" md="4"
-            ><v-checkbox v-model="outstanding" label="Nổi bật"></v-checkbox
-          ></v-col>
-        </v-row>
-        <Editor v-model="description" editorStyle="height: 200px"> </Editor>
+            <v-row>
+              <v-col
+                cols="12"
+                v-for="(item, index) in detailCount"
+                :key="index"
+              >
+                <v-text-field
+                  variant="outlined"
+                  :ref="'details' + index"
+                  v-model="noibat.details_id[index]"
+                  append-inner-icon="mdi:mdi-check "
+                  prepend-inner-icon="mdi:mdi-close "
+                  @click:append-inner="
+                    acceptAddDetail(noibat.details_id[index], index)
+                  "
+                  @click:prepend-inner="
+                    acceptRemoveDetail(noibat.details_id[index], index)
+                  "
+                >
+                </v-text-field>
+              </v-col>
+            </v-row>
+            <div class="grid">
+              <ul class="list-disc">
+                <li v-for="(item, index) in details" :key="index">
+                  {{ item }}
+                </li>
+                <!-- ... -->
+              </ul>
+            </div>
 
-        <div class="flex justify-between border p-3 rounded-lg">
-          <span v-for="(item, index) in listImg" :key="index">
-            <v-badge color="gray-500">
-              <template v-slot:badge>
-                <span class="mdi mdi-close" @click="removeImgList(index)">
-                </span>
-              </template>
-              <v-avatar rounded="lg" size="64">
-                <img
-                  v-if="listImg[index].base64"
-                  width="50"
-                  :src="listImg[index].base64"
-                  @click="uploadFile('upload' + index)"
-                />
-                <img
-                  v-else-if="listImg[index].path"
-                  width="50"
-                  :src="listImg[index].path"
-                  @click="uploadFile('upload' + index)"
-                />
-                <img
-                  v-else
-                  width="50"
-                  :src="imageAvatar"
-                  @click="uploadFile('upload' + index)"
-                />
-                <input
-                  hidden
-                  type="file"
-                  accept="image/png, image/jpg, image/jpeg"
-                  :ref="'upload' + index"
-                  @change="affterRenderImg($event, index)"
-                />
-              </v-avatar>
-            </v-badge>
-          </span>
+            <div class="my-2 font-bold text-blue-darken-2">Mô tả chi tiết</div>
+            <Editor v-model="description" editorStyle="height: 200px"> </Editor>
+
+            <div class="flex justify-between border p-3 rounded-lg">
+              <span v-for="(item, index) in listImg" :key="index">
+                <v-badge color="gray-500">
+                  <template v-slot:badge>
+                    <span class="mdi mdi-close" @click="removeImgList(index)">
+                    </span>
+                  </template>
+                  <v-avatar rounded="lg" size="64">
+                    <img
+                      v-if="listImg[index].base64"
+                      width="50"
+                      :src="listImg[index].base64"
+                      @click="uploadFile('upload' + index)"
+                    />
+                    <img
+                      v-else-if="listImg[index].path"
+                      width="50"
+                      :src="listImg[index].path"
+                      @click="uploadFile('upload' + index)"
+                    />
+                    <img
+                      v-else
+                      width="50"
+                      :src="imageAvatar"
+                      @click="uploadFile('upload' + index)"
+                    />
+                    <input
+                      hidden
+                      type="file"
+                      accept="image/png, image/jpg, image/jpeg"
+                      :ref="'upload' + index"
+                      @change="affterRenderImg($event, index)"
+                    />
+                  </v-avatar>
+                </v-badge>
+              </span>
+            </div>
+          </v-form>
+          <div class="flex justify-center my-4">
+            <v-btn variant="flat" color="blue-darken-4" @click="editConfirm">
+              Xác nhận
+            </v-btn>
+          </div>
         </div>
-      </v-form>
-      <div class="flex justify-center my-4">
-        <v-btn variant="flat" color="blue-darken-4" @click="editConfirm">
-          Xác nhận
-        </v-btn>
-      </div>
-    </div>
+      </v-card-text>
+    </v-card>
   </v-dialog>
 </template>
 
@@ -411,9 +478,11 @@ export default {
       typeList: [],
       typeSelected: null,
       outstanding: false,
-      listDetail: [""],
-      detailsModel: null,
+      detailCount: 0,
       details: [],
+      noibat: {
+        details_id: [],
+      },
     };
   },
   methods: {
@@ -500,6 +569,7 @@ export default {
           files: fileList,
           productTypeId: this.typeSelected,
           outstanding: this.outstanding ? 1 : 0,
+          details: this.details,
         };
         this.addProductAction("admin/product", params).then((resp) => {
           if (resp) {
@@ -586,6 +656,9 @@ export default {
         this.listImg[index].id = item.id;
       });
       this.outstanding = this.productEdit.outstanding === 1 ? true : false;
+      this.details = this.productEdit.details;
+      this.noibat.details_id = this.productEdit.details;
+      this.detailCount = this.productEdit.details.length;
     },
 
     async editConfirm() {
@@ -607,6 +680,7 @@ export default {
           files: fileList,
           productTypeId: this.typeSelected,
           outstanding: this.outstanding ? 1 : 0,
+          details: this.details,
         };
         this.updateProductAction("admin/product", params).then((resp) => {
           if (resp) {
@@ -645,11 +719,12 @@ export default {
         }
       );
     },
-    addDetail() {
-      this.listDetail.push("");
+    acceptAddDetail(data, index) {
+      this.details[index] = data;
     },
-    acceptAddDetail(data) {
-      this.details.push(data);
+    acceptRemoveDetail(data, index) {
+      this.detailCount--;
+      this.details.splice(index, 1);
     },
   },
   computed: {

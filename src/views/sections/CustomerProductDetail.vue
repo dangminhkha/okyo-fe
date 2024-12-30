@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-screen-lg m-auto my-4"
+    class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-screen-lg m-auto my-4 p-3"
     v-if="dataSelected"
   >
     <div>
@@ -48,7 +48,17 @@
       <div class="font-bold">
         Thời gian bảo hành: {{ dataSelected.monthGuarantee }} tháng
       </div>
+      <div class="border-y my-3 text-sm py-2 text-gray-500">
+        {{dataSelected.productTypeName}}
+      </div>
+      <div class="font-bold text-xl my-3">Đặc điểm nổi bật</div>
+      <ul class="list-disc list-inside" v-if="dataSelected.details">
+        <li v-for="(item, index) in dataSelected.details" :key="index" class="text-gray-500">
+          {{ item }}
+        </li>
+      </ul>
     </div>
+
     <div>
       <v-list lines="two" class="bg-transparent">
         <v-list-item
@@ -93,7 +103,7 @@
       </div>
     </div>
   </div>
-  <div class="max-w-screen-lg m-auto my-4">
+  <div class="max-w-screen-lg m-auto my-4 p-3">
     <div class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
       Mô tả chi tiết
     </div>

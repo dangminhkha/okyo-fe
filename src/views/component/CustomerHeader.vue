@@ -27,6 +27,7 @@
               class="text-lg text-blue-darken-2 font-bold cursor-pointer border p-3 rounded-xl hover:-translate-y-1 hover:scale-105 duration-300"
             >
               Danh mục sản phẩm
+              <span class="mdi mdi-arrow-down text-2xl"></span>
             </span>
           </template>
           <v-list>
@@ -40,7 +41,9 @@
           </v-list>
         </v-menu>
 
-        <div class="text-lg text-blue-darken-2 font-bold cursor-pointer border p-3 rounded-xl hover:-translate-y-1 hover:scale-105 duration-300">
+        <div
+          class="text-lg text-blue-darken-2 font-bold cursor-pointer border p-3 rounded-xl hover:-translate-y-1 hover:scale-105 duration-300"
+        >
           <router-link :to="'/thongtinbaohanh'">Thông tin bảo hành</router-link>
         </div>
       </div>
@@ -62,6 +65,7 @@ export default {
   methods: {
     ...mapActions(useBaseStore, ["changeMenu"]),
     menuSelect(val) {
+      
       this.changeMenu(val);
     },
   },

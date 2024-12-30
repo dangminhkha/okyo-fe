@@ -8,7 +8,7 @@
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="bg-white p-3 grid rounded-lg shadow-lg hover:shadow-xl cursor-pointer"
+        class="bg-white p-3 grid rounded-lg shadow-sm hover:shadow-xl cursor-pointer"
         @click="gotoDetail(item)"
       >
         <div v-if="item.files.length > 0">
@@ -39,7 +39,7 @@
       <div
         v-for="(item, index) in listItems1"
         :key="index"
-        class="bg-white p-3 grid rounded-lg shadow-lg hover:shadow-xl cursor-pointer"
+        class="bg-white p-3 grid rounded-lg shadow-sm hover:shadow-xl cursor-pointer"
         @click="gotoDetail(item)"
       >
         <div v-if="item.files.length > 0">

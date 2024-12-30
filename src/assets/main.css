@@ -50,3 +50,12 @@ input[type=number] {
 .v-btn {
   text-transform: unset !important;
 }
+
+.customer-divide{
+  background-color: rgba(0, 0, 0, .1);
+  display: block;
+  height: 3px;
+  margin: 1em 0;
+  max-width: 30px;
+  width: 100%;
+}

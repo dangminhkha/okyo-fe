@@ -15,6 +15,7 @@
           aria-controls="hs-application-sidebar"
           aria-label="Toggle navigation"
           data-hs-overlay="#hs-application-sidebar"
+          ref="triggerMenuCustomer"
         >
           <span class="sr-only">Toggle Navigation</span>
           <span class="mdi mdi-menu"></span>
@@ -43,12 +44,12 @@
     <div class="relative flex flex-col h-full max-h-full">
       <div class="px-6 pt-4 m-auto">
         <!-- Logo -->
-        <router-link
+        <a
           class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
-          :to="'/'"
+          @click="bhClick('/')"
         >
           <img src="@/assets/images/logo.png" class="w-[150px] m-auto" />
-        </router-link>
+        </a>
         <!-- End Logo -->
       </div>
 
@@ -125,13 +126,13 @@
             </li>
 
             <li>
-              <router-link
+              <a
                 class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-neutral-900 dark:text-neutral-200 dark:hover:text-neutral-300"
-                :to="'/thongtinbaohanh'"
+                @click="bhClick('/thongtinbaohanh')"
               >
                 <span class="mdi mdi-information-box-outline text-lg"></span>
                 Thông tin bảo hành
-              </router-link>
+              </a>
             </li>
           </ul>
         </nav>
@@ -155,9 +156,18 @@ export default {
     ...mapState(useBaseStore, ["getListTypeData"]),
   },
   methods: {
-    ...mapActions(useBaseStore,["changeMenu"]),
+    ...mapActions(useBaseStore, ["changeMenu"]),
     menuSelect(val) {
+      if (window.innerWidth < 1024) {
+        this.$refs.triggerMenuCustomer.click();
+      }
       this.changeMenu(val);
+    },
+    bhClick(val) {
+      if (window.innerWidth < 1024) {
+        this.$refs.triggerMenuCustomer.click();
+      }
+      this.$router.push({ path: val });
     },
   },
 };
