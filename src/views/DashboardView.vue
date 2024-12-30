@@ -187,9 +187,7 @@
                   :ref="'details' + index"
                   v-model="noibat.details_id[index]"
                   prepend-inner-icon="mdi:mdi-close "
-                  @change="
-                    acceptAddDetail(noibat.details_id[index], index)
-                  "
+                  @change="acceptAddDetail(noibat.details_id[index], index)"
                   @click:prepend-inner="
                     acceptRemoveDetail(noibat.details_id[index], index)
                   "
@@ -330,11 +328,8 @@
                   variant="outlined"
                   :ref="'details' + index"
                   v-model="noibat.details_id[index]"
-                  append-inner-icon="mdi:mdi-check "
                   prepend-inner-icon="mdi:mdi-close "
-                  @change="
-                    acceptAddDetail(noibat.details_id[index], index)
-                  "
+                  @change="acceptAddDetail(noibat.details_id[index], index)"
                   @click:prepend-inner="
                     acceptRemoveDetail(noibat.details_id[index], index)
                   "
@@ -547,6 +542,8 @@ export default {
         { id: null, base64: null, path: null },
         { id: null, base64: null, path: null },
       ];
+      this.noibat.details_id = [];
+      this.detailCount = 0;
     },
     async submitAddProduct() {
       const { valid } = await this.$refs.form.validate();

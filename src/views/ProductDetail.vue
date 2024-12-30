@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white p-3 rounded-lg" v-if="dataDetail">
-    <div class="grid gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="p-3 border rounded-lg">
         <v-carousel
           v-if="imageList.length > 0"
@@ -36,6 +36,9 @@
               class="m-auto max-h-[400px] h-[100%] hover:-translate-y-1 hover:scale-105 duration-300"
           /></v-carousel-item>
         </v-carousel>
+        <div v-else>
+          <img :src="imageAvatar" class="m-auto max-h-[360px] rounded-lg" />
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 my-4">
           <div class="font-bold text-xl">
             {{ dataDetail.name }}
@@ -57,6 +60,8 @@
           </li>
         </ul>
       </div>
+    </div>
+    <div class="grid gap-4">
       <div class="p-3 border rounded-lg" v-if="dataDetail.description">
         <div class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
           Mô tả chi tiết
@@ -225,13 +230,14 @@
 import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../stores/baseStore";
 import GuaranteeDetailVue from "./sections/GuaranteeDetail.vue";
-
+import imageAvatar from "@/assets/images/productDF.jpg";
 const API_URL = import.meta.env.VITE_API_URL;
 export default {
   name: "ProductDetailPage",
   components: { GuaranteeDetailVue },
   data() {
     return {
+      imageAvatar,
       API_URL,
       valid: false,
       addGuaranteeDialog: false,
