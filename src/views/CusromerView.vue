@@ -1,62 +1,36 @@
 <template>
   <div class="bg-gray-100 rounded-lg">
     <CustomerSliderVue />
-    <div class="text-center font-bold text-2xl my-4">Sản phẩm nổi bật</div>
-    <div
-      class="max-w-screen-lg m-auto my-4 grid grid-cols-2 md:grid-cols-3 gap-3 justify-center"
-    >
-      <div
-        v-for="(item, index) in items"
-        :key="index"
-        class="bg-white p-3 grid rounded-lg shadow-sm hover:shadow-xl cursor-pointer"
-        @click="gotoDetail(item)"
-      >
+    <div class="text-center font-bold text-2xl my-4 text-blue-darken-3">Sản phẩm nổi bật</div>
+    <div class="max-w-screen-lg m-auto my-4 grid grid-cols-2 md:grid-cols-3 gap-3 justify-center p-3">
+      <div v-for="(item, index) in items" :key="index"
+        class="bg-white p-3 grid rounded-lg shadow-sm hover:shadow-xl cursor-pointer" @click="gotoDetail(item)">
         <div v-if="item.files.length > 0">
-          <img
-            :src="API_URL + item.files[0].path"
+          <img :src="API_URL + item.files[0].path"
             class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300"
-            v-if="item.files[0].path"
-          />
+            v-if="item.files[0].path" />
         </div>
-        <img
-          :src="imageAvatar"
-          class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300"
-          v-else
-        />
-        <div
-          class="text-center text-sm my-4 m-auto h-[48px] leading-5 text-blue-darken-4 font-bold"
-        >
+        <img :src="imageAvatar"
+          class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300" v-else />
+        <div class="text-center text-sm my-4 m-auto h-[48px] leading-5 text-blue-darken-4 font-bold">
           {{ item.name }}
         </div>
       </div>
     </div>
-    <div class="text-center font-bold text-2xl my-4">
+    <div class="text-center font-bold text-2xl my-4 text-blue-darken-3">
       Sản phẩm lọc nước tinh khiết của OKYO
     </div>
-    <div
-      class="max-w-screen-lg m-auto my-4 grid grid-cols-2 grid-cols-4 gap-3 justify-center"
-    >
-      <div
-        v-for="(item, index) in listItems1"
-        :key="index"
-        class="bg-white p-3 grid rounded-lg shadow-sm hover:shadow-xl cursor-pointer"
-        @click="gotoDetail(item)"
-      >
+    <div class="max-w-screen-lg m-auto my-4 grid grid-cols-2 md:grid-cols-4 gap-3 justify-center p-3">
+      <div v-for="(item, index) in listItems1" :key="index"
+        class="bg-white p-3 grid rounded-lg shadow-sm hover:shadow-xl cursor-pointer" @click="gotoDetail(item)">
         <div v-if="item.files.length > 0">
-          <img
-            :src="API_URL + item.files[0].path"
+          <img :src="API_URL + item.files[0].path"
             class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300"
-            v-if="item.files[0].path"
-          />
+            v-if="item.files[0].path" />
         </div>
-        <img
-          :src="imageAvatar"
-          class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300"
-          v-else
-        />
-        <div
-          class="text-center text-sm my-4 m-auto h-[48px] leading-5 text-blue-darken-4 font-bold"
-        >
+        <img :src="imageAvatar"
+          class="m-auto max-h-[150px] rounded-lg hover:-translate-y-1 hover:scale-105 duration-300" v-else />
+        <div class="text-center text-sm my-4 m-auto h-[48px] leading-5 text-blue-darken-4 font-bold">
           {{ item.name }}
         </div>
       </div>
@@ -186,5 +160,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
