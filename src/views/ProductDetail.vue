@@ -46,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="grid gap-4">
+    <div class="grid gap-4 mt-4">
       <div class="p-3 border rounded-lg" v-if="dataDetail.description">
         <div class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
           Mô tả chi tiết
