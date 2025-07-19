@@ -1,11 +1,12 @@
 import axios from 'axios'
 import router from '../router'
 import { useBaseStore } from '../stores/baseStore'
+const API_KEY = import.meta.env.VITE_API_KEY
 const addTokenHeader = () => {
   return {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS',
-    'Secret-Key': 'T0tZMCRFY1JFdGtleTIwMjU=',
+    'Secret-Key': API_KEY,
   }
 }
 const getHeader = () => {
@@ -13,7 +14,7 @@ const getHeader = () => {
   return {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS',
-    'Secret-Key': 'T0tZMCRFY1JFdGtleTIwMjU=',
+    'Secret-Key': API_KEY,
     Authorization: baseStore.$state.loginData
       ? 'Bearer ' + baseStore.$state.loginData.data.accessToken
       : '',
@@ -23,7 +24,7 @@ const getHeaderFile = () => {
   return {
     'Content-Type': 'multipart/form-data',
     'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS',
-    'Secret-Key': 'T0tZMCRFY1JFdGtleTIwMjU=',
+    'Secret-Key': API_KEY,
   }
 }
 async function fetch(url: string) {
