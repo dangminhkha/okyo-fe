@@ -1,6 +1,6 @@
 <template>
   <CustomerHeaderVue />
-  <!-- <CustomerMenuVue /> -->
+  <CustomerMenuVue />
   <!-- Content -->
   <div class="w-full">
     <div class="space-y-4 sm:space-y-6">
