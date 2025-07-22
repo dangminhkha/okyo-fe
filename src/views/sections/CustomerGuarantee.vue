@@ -149,21 +149,21 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../../stores/baseStore";
-import img1 from "@/assets/images/Slider1.jpg"
-import img2 from "@/assets/images/Slider2.jpg"
-import img3 from "@/assets/images/Slider3.jpg"
-import img4 from "@/assets/images/Slider4.png"
-import img5 from "@/assets/images/Slider5.jpg"
+import img1 from "@/assets/images/Slider.jpg"
+// import img2 from "@/assets/images/Slider2.jpg"
+// import img3 from "@/assets/images/Slider3.jpg"
+// import img4 from "@/assets/images/Slider4.png"
+// import img5 from "@/assets/images/Slider5.jpg"
 export default {
   name: "CustomerGuaramteePage",
   data() {
     return {
       sliders: [
         img1,
-        img2,
-        img3,
-        img4,
-        img5
+        // img2,
+        // img3,
+        // img4,
+        // img5
       ],
       page: 1,
       pageCount: 0,

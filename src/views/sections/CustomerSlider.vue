@@ -16,11 +16,11 @@ export default {
   data() {
     return {
       sliders: [
-        "images/Slider1.jpg",
-        "images/Slider2.jpg",
-        "images/Slider3.jpg",
-        "images/Slider4.png",
-        "images/Slider5.jpg",
+        "images/Slider.jpg",
+        // "images/Slider2.jpg",
+        // "images/Slider3.jpg",
+        // "images/Slider4.png",
+        // "images/Slider5.jpg",
       ],
     };
   },
