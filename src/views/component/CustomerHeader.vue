@@ -7,7 +7,7 @@
         <!-- Logo -->
         <router-link class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
           :to="'/'">
-          <img src="@/assets/images/logo.png" class="w-[150px]" />
+          <img src="@/assets/images/logo.jpg" class="w-[150px]" />
         </router-link>
         <!-- End Logo -->
       </div>

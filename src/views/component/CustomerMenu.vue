@@ -14,7 +14,7 @@
         </button>
         <a class="flex-none rounded-md text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
           @click="bhClickLogo('/')">
-          <img src="@/assets/images/logo.png" class="w-[100px] m-auto" />
+          <img src="@/assets/images/logo.jpg" class="w-[100px] m-auto" />
         </a>
         <!-- End Navigation Toggle -->
       </div>
@@ -31,7 +31,7 @@
         <!-- Logo -->
         <a class="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
           @click="bhClick('/')">
-          <img src="@/assets/images/logo.png" class="w-[150px] m-auto" />
+          <img src="@/assets/images/logo.jpg" class="w-[150px] m-auto" />
         </a>
         <!-- End Logo -->
       </div>

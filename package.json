@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "env-cmd -f .env.dev vite",
+    "prod": "env-cmd -f .env.prod vite",
     "build": "env-cmd -f .env.prod vite build",
     "build:prod": "env-cmd -f .env.prod vite build",
     "preview": "vite preview",
