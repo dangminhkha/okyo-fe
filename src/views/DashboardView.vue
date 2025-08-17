@@ -126,7 +126,7 @@
 
             <div class="my-2 font-bold text-blue-darken-2">Mô tả chi tiết</div>
             <Editor v-model="description" editorStyle="height: 200px"> </Editor>
-
+            <br></br>
             <div class="flex justify-between border p-3 rounded-lg">
               <span v-for="(item, index) in listImg" :key="index">
                 <v-badge color="gray-500">
