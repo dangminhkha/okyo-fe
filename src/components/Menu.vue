@@ -106,7 +106,7 @@
 </template>
 
 <script>
-import imageAvatar from "@/assets/images/logo.jpg";
+import imageAvatar from "@/assets/images/logo_no_bg.png";
 export default {
   name: "MenuPage",
   data() {

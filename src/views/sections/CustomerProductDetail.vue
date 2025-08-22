@@ -57,20 +57,19 @@
       <div class="border-2 border-black p-3 rounded-lg">
         <div class="text-xl font-bold">Thông tin liên hệ</div>
         <div>
-          <span class="font-bold">Địa chỉ:</span> 7A Tân Thới Nhất 8, P. Tân
-          Thới Nhất, Q.12, TP HCM
+          <span class="font-bold">Địa chỉ:</span> 40 Đường D16, Phường Tây Thạnh, Quận Tân Phú , TP HCM
         </div>
         <div>
           <span class="font-bold">Hotline:</span>
-          <a href="tel:0917.911.159">0917.911.159</a>
+          <a href="tel:028 22436633">028 22436633</a>
         </div>
         <div>
           <span class="font-bold">Email:</span>
-          <a href="mailto:contact@okyo.vn">contact@okyo.vn</a>
+          <a href="info@osgvietnam.com">info@osgvietnam.com </a>
         </div>
         <div>
           <span class="font-bold">Website:</span>
-          <a href="https://okyo.vn/" target="_blank">https://okyo.vn</a>
+          <a href="https://osg-humanwater.com" target="_blank">https://osg-humanwater.com</a>
         </div>
       </div>
     </div>

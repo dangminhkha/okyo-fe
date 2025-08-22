@@ -69,7 +69,7 @@
       </div>
     </div>
   </v-dialog>
-  <v-dialog v-model="addProductDialog" max-width="800" persistent>
+  <v-dialog v-model="addProductDialog" max-width="1024" persistent>
     <v-card>
       <v-card-text>
         <div class="bg-white p-4 rounded-lg">
@@ -126,7 +126,7 @@
 
             <div class="my-2 font-bold text-blue-darken-2">Mô tả chi tiết</div>
             <Editor v-model="description" editorStyle="height: 200px"> </Editor>
-            <br></br>
+            <br />
             <div class="flex justify-between border p-3 rounded-lg">
               <span v-for="(item, index) in listImg" :key="index">
                 <v-badge color="gray-500">
@@ -154,7 +154,7 @@
       </v-card-text>
     </v-card>
   </v-dialog>
-  <v-dialog max-width="800" v-model="dialogUpdate">
+  <v-dialog max-width="1024" v-model="dialogUpdate">
     <v-card>
       <v-card-text>
         <div class="bg-white p-4 rounded-lg">
