@@ -6,7 +6,7 @@
       <div class="col-span-full hidden lg:col-span-1 lg:block">
 
         <p class="mt-3 text-xs sm:text-sm text-gray-600 text-center text-blue-grey-lighten-5">
-          © {{ new Date().getFullYear() }} OKYO.
+          © {{ new Date().getFullYear() }} OSG VIETNAM.
         </p>
       </div>
       <!-- End Col -->

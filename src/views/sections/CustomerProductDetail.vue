@@ -75,7 +75,7 @@
       </div>
     </div>
   </div>
-  <div class="max-w-screen-lg m-auto my-4 p-3" v-if="dataSelected?.description">
+  <div class="max-w-screen-xl m-auto my-4 p-3" v-if="dataSelected?.description">
     <div class="text-start mt-4 mb-2 text-blue-darken-4 text-2xl font-bold">
       Mô tả chi tiết
     </div>
