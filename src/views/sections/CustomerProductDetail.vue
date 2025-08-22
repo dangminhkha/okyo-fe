@@ -61,15 +61,15 @@
         </div>
         <div>
           <span class="font-bold">Hotline:</span>
-          <a href="tel:028 22436633">028 22436633</a>
+          <a href="tel:028 22436633"> 028 22436633</a>
         </div>
         <div>
           <span class="font-bold">Email:</span>
-          <a href="info@osgvietnam.com">info@osgvietnam.com </a>
+          <a href="info@osgvietnam.com"> info@osgvietnam.com </a>
         </div>
         <div>
           <span class="font-bold">Website:</span>
-          <a href="https://osg-humanwater.com" target="_blank">https://osg-humanwater.com</a>
+          <a href="https://osg-humanwater.com" target="_blank"> https://osg-humanwater.com</a>
         </div>
       </div>
     </div>

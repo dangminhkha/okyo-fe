@@ -9,7 +9,7 @@
       </v-carousel-item>
     </v-carousel>
   </div>
-  <div class="max-w-screen-lg m-auto p-3">
+  <div class="max-w-screen-xl m-auto p-3">
     <div class="grid grid-cols-1 md:grid-cols-2 items-center gap-4 rounded-lg my-4">
       <div class="text-xl text-blue-darken-3 font-bold">Danh sách bảo hành</div>
 
