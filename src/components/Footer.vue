@@ -1,12 +1,8 @@
 <template>
   <!-- ========== FOOTER ========== -->
-  <footer
-    class="mt-auto w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto !bg-[#ecf3fa] !text-[#333333]"
-  >
+  <footer class="mt-auto w-full py-10 px-4 sm:px-6 lg:px-8 mx-auto !bg-[#ecf3fa] !text-[#333333]">
     <!-- Grid -->
-    <div
-      class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 mb-10 max-w-screen-lg m-auto"
-    >
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 mb-10 max-w-screen-xl m-auto">
       <div class="col-span-full hidden lg:col-span-2 lg:block">
         <div>
           <img src="/src/assets/images/logo_no_bg.png" class="w-[200px]" />
@@ -17,7 +13,8 @@
             tinh phát triển thịnh vượng.
           </p>
           <div class="grid grid-cols-4 gap-3 mt-3 text-3xl text-[#333333]">
-            <a href="https://www.facebook.com/maylocnuocionosg?locale=vi_VN" target="_blank"><span class="mdi mdi-facebook"></span></a>
+            <a href="https://www.facebook.com/maylocnuocionosg?locale=vi_VN" target="_blank"><span
+                class="mdi mdi-facebook"></span></a>
             <span class="mdi mdi-instagram"></span>
             <span class="fa-brands fa-x-twitter"></span>
             <span class="mdi mdi-linkedin"></span>
@@ -70,26 +67,17 @@
     <!-- End Grid -->
   </footer>
   <div class="bg-[#061b3b] px-5 py-8">
-    <div class="max-w-screen-lg m-auto flex justify-between">
+    <div class="max-w-screen-xl m-auto flex justify-between">
       <div class="text-[#ffffff80] text-base md:text-xl">
         © {{ new Date().getFullYear() }} Bản quyền thuộc về OSG
       </div>
       <div class="flex gap-3">
+        <span class="fa-brands fa-cc-visa text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"></span>
+        <span class="fa-brands fa-cc-paypal text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"></span>
+        <span class="fa-brands fa-cc-stripe text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"></span>
         <span
-          class="fa-brands fa-cc-visa text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"
-        ></span>
-        <span
-          class="fa-brands fa-cc-paypal text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"
-        ></span>
-        <span
-          class="fa-brands fa-cc-stripe text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"
-        ></span>
-        <span
-          class="fa-brands fa-cc-mastercard text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"
-        ></span>
-        <span
-          class="fas fa-shipping-fast text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"
-        ></span>
+          class="fa-brands fa-cc-mastercard text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"></span>
+        <span class="fas fa-shipping-fast text-3xl text-[#ffffff80] hover:text-[#ffffff] hover:cursor-pointer"></span>
       </div>
     </div>
   </div>

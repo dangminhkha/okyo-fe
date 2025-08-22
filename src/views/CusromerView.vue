@@ -2,7 +2,7 @@
   <div class="bg-gray-100 rounded-lg">
     <CustomerSliderVue />
     <div class="text-center font-bold text-2xl my-4 text-blue-darken-3">Sản phẩm nổi bật</div>
-    <div class="max-w-screen-lg m-auto my-4 grid grid-cols-2 md:grid-cols-3 gap-3 justify-center p-3">
+    <div class="max-w-screen-xl m-auto my-4 grid grid-cols-2 md:grid-cols-3 gap-3 justify-center p-3">
       <div v-for="(item, index) in items" :key="index"
         class="bg-white p-3 grid rounded-lg shadow-sm hover:shadow-xl cursor-pointer" @click="gotoDetail(item)">
         <div v-if="item.files.length > 0">
@@ -20,7 +20,7 @@
     <div class="text-center font-bold text-2xl my-4 text-blue-darken-3">
       Sản phẩm lọc nước tinh khiết của OKYO
     </div>
-    <div class="max-w-screen-lg m-auto my-4 grid grid-cols-2 md:grid-cols-4 gap-3 justify-center p-3">
+    <div class="max-w-screen-xl m-auto my-4 grid grid-cols-2 md:grid-cols-4 gap-3 justify-center p-3">
       <div v-for="(item, index) in listItems1" :key="index"
         class="bg-white p-3 grid rounded-lg shadow-sm hover:shadow-xl cursor-pointer" @click="gotoDetail(item)">
         <div v-if="item.files.length > 0">
