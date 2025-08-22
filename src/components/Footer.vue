@@ -17,7 +17,7 @@
             tinh phát triển thịnh vượng.
           </p>
           <div class="grid grid-cols-4 gap-3 mt-3 text-3xl text-[#333333]">
-            <span class="mdi mdi-facebook"></span>
+            <a href="https://www.facebook.com/maylocnuocionosg?locale=vi_VN" target="_blank"><span class="mdi mdi-facebook"></span></a>
             <span class="mdi mdi-instagram"></span>
             <span class="fa-brands fa-x-twitter"></span>
             <span class="mdi mdi-linkedin"></span>
@@ -28,42 +28,42 @@
       <div>
         <div class="grid gap-3">
           <div class="customer-divide !bg-[#d0df00]"></div>
-          <div>Tuyển dụng</div>
-          <div>Thương hiệu</div>
-          <div>Nhà đầu tư</div>
-          <div>Media</div>
-          <div>Nhà cung cấp</div>
+          <a href="https://osg-humanwater.com/" target="_blank">Tuyển dụng</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Thương hiệu</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Nhà đầu tư</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Media</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Nhà cung cấp</a>
         </div>
       </div>
       <div>
         <div class="grid gap-3">
           <div class="customer-divide !bg-[#d0df00]"></div>
-          <div>Dân dụng</div>
-          <div>Doanh nghiệp và công nghiệp</div>
-          <div>Sản phẩm</div>
-          <div>Tra cứu đại lý</div>
-          <div>Trang đối tác</div>
+          <a href="https://osg-humanwater.com/" target="_blank">Dân dụng</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Doanh nghiệp và công nghiệp</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Sản phẩm</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Tra cứu đại lý</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Trang đối tác</a>
         </div>
       </div>
       <div>
         <div class="grid gap-3">
           <div class="customer-divide !bg-[#d0df00]"></div>
-          <div>Liên hệ</div>
-          <div>Hỗ trợ sản phẩm dân dụng</div>
-          <div>Hỗ trợ sản phẩm cho doanh nghiệp và công nghiệp</div>
-          <div>Trung tâm Tải xuống</div>
+          <a href="https://osg-humanwater.com/" target="_blank">Liên hệ</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Hỗ trợ sản phẩm dân dụng</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Hỗ trợ sản phẩm cho doanh nghiệp và công nghiệp</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Trung tâm Tải xuống</a>
         </div>
       </div>
       <div class="lg:col-span-2">
         <div class="grid gap-3 ">
           <div class="customer-divide !bg-[#d0df00]"></div>
-          <div>Thông báo về quyền riêng tư</div>
-          <div>Điều khoản sử dụng</div>
-          <div>Tuyên bố về khả năng truy cập website</div>
-          <div>Báo cáo minh bạch nhà vận chuyển y tế</div>
-          <div>Nhãn hiệu thương hiệu</div>
-          <div>Công bố có trách nhiệm</div>
-          <div>Không bán hoặc chia sẻ thông tin cá nhân của tôi</div>
+          <a href="https://osg-humanwater.com/" target="_blank">Thông báo về quyền riêng tư</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Điều khoản sử dụng</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Tuyên bố về khả năng truy cập website</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Báo cáo minh bạch nhà vận chuyển y tế</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Nhãn hiệu thương hiệu</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Công bố có trách nhiệm</a>
+          <a href="https://osg-humanwater.com/" target="_blank">Không bán hoặc chia sẻ thông tin cá nhân của tôi</a>
         </div>
       </div>
     </div>
