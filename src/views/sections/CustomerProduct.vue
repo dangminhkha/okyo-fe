@@ -9,7 +9,7 @@
       </v-carousel-item>
     </v-carousel>
   </div>
-  <div class="rounded-lg max-w-screen-lg m-auto p-3">
+  <div class="rounded-lg max-w-screen-xl m-auto p-3">
     <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 rounded-lg mb-4">
       <div class="font-bold text-blue-darken-3 text-xl">Danh sách sản phẩm</div>
 
