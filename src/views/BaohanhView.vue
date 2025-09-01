@@ -262,7 +262,7 @@ export default {
     },
     removeConfirm() {
       this.removeGuaranteeAction(
-        `admin/guarantee/${this.dataSelected.id}`
+        `admin/guarantee/delete?id=${this.dataSelected.id}`
       ).then((resp) => {
         if (resp) {
           this.snackChange({

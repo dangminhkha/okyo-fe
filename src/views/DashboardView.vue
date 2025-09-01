@@ -359,7 +359,7 @@ export default {
       });
     },
     getProductDetails(item) {
-      this.$router.push({ path: `/sanpham/${item.id}` });
+      this.$router.push({ path: `/sanpham/detail/${item.id}` });
     },
     addProduct() {
       this.addProductDialog = true;
@@ -533,7 +533,7 @@ export default {
       this.removeData = data;
     },
     removeConfirm() {
-      this.removeProductAction(`admin/product/${this.removeData.id}`).then(
+      this.removeProductAction(`admin/product/delete?id=${this.removeData.id}`).then(
         (resp) => {
           if (resp) {
             this.snackChange({

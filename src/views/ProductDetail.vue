@@ -236,7 +236,7 @@ export default {
     ]),
 
     getDetails(id) {
-      this.detailsProduct(`admin/product/${id}`).then((resp) => {
+      this.detailsProduct(`admin/product/detail?id=${id}`).then((resp) => {
         if (resp) {
           this.dataDetail = resp.data;
           this.imageList = resp.data.files;
@@ -244,7 +244,7 @@ export default {
       });
     },
     getGuarantee(id) {
-      this.getListGuarantee(`admin/guarantee/product/${id}`).then((resp) => {
+      this.getListGuarantee(`admin/guarantee/product/list?id=${id}`).then((resp) => {
         if (resp) {
           this.guaranteeData = resp.data;
           this.pageCount = resp.data.totalPage;
@@ -284,7 +284,7 @@ export default {
       this.idRemove = data.id;
     },
     removeConfirm() {
-      this.removeGuaranteeAction(`admin/guarantee/${this.idRemove}`).then(
+      this.removeGuaranteeAction(`admin/guarantee/delete?id=${this.idRemove}`).then(
         (resp) => {
           if (resp) {
             this.snackChange({

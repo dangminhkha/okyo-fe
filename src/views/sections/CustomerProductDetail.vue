@@ -108,7 +108,7 @@ export default {
   methods: {
     ...mapActions(useBaseStore, ["getCusProductDetail"]),
     fetchDataDetail(data) {
-      this.getCusProductDetail(`public/product/${data}`).then((resp) => {
+      this.getCusProductDetail(`public/product/detail?id=${data}`).then((resp) => {
         if (resp) {
           this.dialogDetail = true;
           this.dataSelected = resp.data;

@@ -251,7 +251,7 @@ export default {
       );
     },
     getGuaranteeDetails(data) {
-      this.cusDetail(`public/guarantee/${data.code}`).then((resp) => {
+      this.cusDetail(`public/guarantee/detail?code=${data.code}`).then((resp) => {
         if (resp) {
           this.dialogDetail = true;
           this.dataSelected = resp.data;

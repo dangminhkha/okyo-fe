@@ -123,7 +123,7 @@ export default {
       "snackChange",
     ]),
     getGuaranteeDetails(id) {
-      this.getGuaranteeDetail(`admin/guarantee/${id}`).then((resp) => {
+      this.getGuaranteeDetail(`admin/guarantee/detail?id=${id}`).then((resp) => {
         if (resp) {
           this.dialogDetail = true;
           this.dataSelected = resp.data;
