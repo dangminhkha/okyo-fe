@@ -155,6 +155,7 @@
     v-if="dialogDetail"
     :status="dialogDetail"
     :id="dialogDetailId"
+    :agentData="agentData"
     @close="dialogDetail = $event"
     @updateDone="updateDone"
   />
@@ -374,7 +375,7 @@ export default {
   },
   created() {
     this.getData();
-    this.getListAgent().then((resp) => {
+    this.getListAgent('admin/sales-agent/select').then((resp) => {
       if (resp) {
         this.agentData = resp.data;
       }
