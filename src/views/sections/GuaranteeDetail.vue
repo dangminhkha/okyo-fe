@@ -26,7 +26,7 @@
             <div class="my-1 font-bold">Cập nhật thông tin khách hàng</div>
             <v-form ref="form" v-model="valid" @submit.prevent="submitEdit" class="grid">
               <v-row>
-                <v-col cols="12" md="6">
+                <v-col cols="12" md="12">
                   <v-select label="Đại lý BH" :items="agentData" v-model="agentSelected" variant="outlined"
                     density="comfortable" item-title="name" item-value="id" return-object
                     :rules="[rules.required]"></v-select>
