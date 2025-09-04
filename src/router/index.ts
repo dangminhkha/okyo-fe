@@ -42,6 +42,15 @@ const router = createRouter({
             rule: 'admin',
           },
         },
+        //dại lý
+        {
+          path: '/agent',
+          name: 'AgentPage',
+          component: () => import('../views/agent/AgentList.vue'),
+          meta: {
+            rule: 'admin',
+          },
+        },
         {
           path: '/userinfo',
           name: 'UserInfo',
