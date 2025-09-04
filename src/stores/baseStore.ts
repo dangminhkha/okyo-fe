@@ -32,11 +32,12 @@ export const useBaseStore = defineStore({
     changePassData: null,
     getListTypeData: null,
     menuItemData: null,
+    listAgentData: null,
   }),
   actions: {
     changeMenu(val: any) {
       this.menuItemData = val;
-      router.push({path: `/danh-muc/${val}`})
+      router.push({ path: `/danh-muc/${val}` });
     },
     overlayChange(status: boolean) {
       this.overlay = status;
@@ -176,6 +177,14 @@ export const useBaseStore = defineStore({
         this.getListTypeData = resp.data;
       });
       return this.getListTypeData;
+    },
+    //lấy danh sách đại lý
+
+    async getListAgent(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.listAgentData = resp.data;
+      });
+      return this.listAgentData;
     },
   },
   persist: true,
