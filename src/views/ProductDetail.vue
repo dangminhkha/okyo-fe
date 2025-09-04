@@ -201,6 +201,12 @@ export default {
           sortable: false,
         },
         {
+          title: "Đại lí",
+          align: "center",
+          key: "salesAgent.name",
+          sortable: false,
+        },
+        {
           title: "Trạng thái",
           align: "start",
           key: "status",
@@ -242,6 +248,16 @@ export default {
           this.imageList = resp.data.files;
         }
       });
+    },
+    searchDara() {
+
+      this.getListGuarantee(`admin/guarantee/product/list?id=${this.$route.params.id}&code=${this.search}`).then((resp) => {
+        if (resp) {
+          this.guaranteeData = resp.data;
+          this.pageCount = resp.data.totalPage;
+        }
+      });
+
     },
     getGuarantee(id) {
       this.getListGuarantee(`admin/guarantee/product/list?id=${id}`).then((resp) => {
