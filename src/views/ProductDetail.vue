@@ -139,7 +139,7 @@
             </v-chip>
           </template>
           <template v-slot:[`item.actions`]="{ item }">
-            <div class="min-w-[60px]">
+            <div class="min-w-[60px] flex justify-start">
               <v-icon
                 @click="getGuaranteeDetails(item)"
                 v-if="item.status !== 'NOT_SOLD'"
