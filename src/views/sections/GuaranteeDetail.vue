@@ -29,7 +29,7 @@
                 <v-col cols="12" md="12">
                   <v-select label="Đại lý BH" :items="agentData" v-model="agentSelected" variant="outlined"
                     density="comfortable" item-title="name" item-value="id" return-object
-                    :rules="[rules.required]"></v-select>
+                    :rules="[rules.required]" :disabled="loginData.data.user.role !== 'ADMIN'"></v-select>
                 </v-col>
               </v-row>
               <v-row>
@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { mapActions } from "pinia";
+import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../../stores/baseStore";
 import moment from "moment";
 export default {
@@ -189,6 +189,7 @@ export default {
     },
   },
   computed: {
+    ...mapState(useBaseStore, ['loginData']),
     rulesEmail() {
       const rules = [];
       const rule2 = (value) =>
@@ -200,6 +201,7 @@ export default {
       rules.push(rule2);
       return rules;
     },
+    
   },
   watch: {
     fromDate(val) {

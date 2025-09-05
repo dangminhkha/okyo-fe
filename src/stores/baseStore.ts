@@ -208,7 +208,7 @@ export const useBaseStore = defineStore({
     //cập nhật đại lý
     
     async editAgentInfo(url: string, params: any) {
-      await baseService.update(API_URL + url, params).then((resp) => {
+      await baseService.add(API_URL + url, params).then((resp) => {
         this.editAgentData = resp.data;
       });
       return this.editAgentData;
