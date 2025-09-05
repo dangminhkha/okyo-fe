@@ -468,7 +468,7 @@ export default {
           username: this.username,
           role: this.roleSelected,
           salesAgentId:
-            this.roleSelected === "ADMIN" ? 0 : this.agentSelected.id,
+            this.roleSelected === "ADMIN" ? '' : this.agentSelected.id,
           status: this.status ? 1 : 0,
         };
         this.addNewUser("admin/user", params).then((resp) => {
