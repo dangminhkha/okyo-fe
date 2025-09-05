@@ -42,11 +42,20 @@ const router = createRouter({
             rule: 'admin',
           },
         },
-        //dại lý
+        //đại lý
         {
           path: '/agent',
           name: 'AgentPage',
           component: () => import('../views/agent/AgentList.vue'),
+          meta: {
+            rule: 'admin',
+          },
+        },
+        //user
+        {
+          path: '/user',
+          name: 'UserPage',
+          component: () => import('../views/user/UserList.vue'),
           meta: {
             rule: 'admin',
           },

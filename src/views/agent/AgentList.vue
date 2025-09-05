@@ -216,12 +216,6 @@
             <div>{{ dialogDetailData.email }}</div>
           </div>
           <div class="flex justify-between gap-2">
-            <div>Địa chỉ</div>
-            <div>{{ dialogDetailData.address }}</div>
-          </div>
-        </div>
-        <div class="grid grid-cols-2">
-          <div class="flex justify-between gap-2">
             <div>Trạng thái</div>
             <div
               :class="
@@ -232,6 +226,13 @@
                 dialogDetailData.status ? "Đang hoạt động" : "Không hoạt động"
               }}
             </div>
+          </div>
+          
+        </div>
+        <div class="grid grid-cols-2">
+          <div class="flex justify-between gap-2">
+            <div>Địa chỉ</div>
+            <div>{{ dialogDetailData.address }}</div>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="pt-10">
     <div
-      class=" bg-white border border-gray-200 rounded-xl shadow-sm max-w-md m-auto"
+      class="bg-white border border-gray-200 rounded-xl shadow-sm max-w-md m-auto"
     >
       <div class="p-4 sm:p-7">
         <div class="">
@@ -37,13 +37,13 @@
                   ><template v-slot:append-inner>
                     <button type="button" @click="visible = !visible">
                       <i
-                      v-if="visible"
-                      class="far fa-eye eyes-button-custom"
-                    ></i>
-                    <i
-                      v-if="!visible"
-                      class="far fa-eye-slash eyes-button-custom"
-                    ></i>
+                        v-if="visible"
+                        class="far fa-eye eyes-button-custom"
+                      ></i>
+                      <i
+                        v-if="!visible"
+                        class="far fa-eye-slash eyes-button-custom"
+                      ></i>
                     </button> </template></v-text-field
               ></v-col>
             </v-row>
@@ -104,7 +104,11 @@ export default {
         this.login("public/login", params).then((resp) => {
           if (resp) {
             localStorage.setItem("isLogined", "true");
-            this.$router.push({ path: "/product" });
+            if (resp.data.user.role === "ADMIN") {
+              this.$router.push({ path: "/product" });
+            } else {
+              this.$router.push({ path: "/baohanh" });
+            }
           }
         });
       }
