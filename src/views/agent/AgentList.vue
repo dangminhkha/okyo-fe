@@ -160,7 +160,12 @@
 
             <v-row>
               <v-col cols="6" md="6">
-                <v-text-field label="Email" variant="outlined" v-model="email" :rules="email ? rulesEmail : []">
+                <v-text-field
+                  label="Email"
+                  variant="outlined"
+                  v-model="email"
+                  :rules="email ? rulesEmail : []"
+                >
                 </v-text-field>
               </v-col>
               <v-col cols="6" md="6">
@@ -193,47 +198,35 @@
     <div class="bg-white py-3 px-5 rounded-lg">
       <div class="flex justify-between items-center mb-4">
         <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
-          Chi tiết user
+          Chi tiết đại lý
         </div>
         <div class="text-right" @click="dialogDetail = false">
           <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
         </div>
       </div>
       <div class="grid gap-3">
-        <div class="grid grid-cols-2 gap-3">
-          <div class="flex justify-between gap-2">
-            <div>Tên đại lý</div>
-            <div>{{ dialogDetailData.name }}</div>
-          </div>
-          <div class="flex justify-between gap-2">
-            <div>Số điện thoại</div>
-            <div>{{ dialogDetailData.phone }}</div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="text-right">Tên đại lý</div>
+          <div class="font-bold">{{ dialogDetailData.name }}</div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="text-right">Email</div>
+          <div class="font-bold">{{ dialogDetailData.email }}</div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="text-right">Trạng thái</div>
+          <div
+            class="font-bold"
+            :class="
+              dialogDetailData.status ? 'text-green-500' : 'text-gray-500'
+            "
+          >
+            {{ dialogDetailData.status ? "Đang hoạt động" : "Không hoạt động" }}
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="flex justify-between gap-2">
-            <div>Email</div>
-            <div>{{ dialogDetailData.email }}</div>
-          </div>
-          <div class="flex justify-between gap-2">
-            <div>Trạng thái</div>
-            <div
-              :class="
-                dialogDetailData.status ? 'text-green-500' : 'text-gray-500'
-              "
-            >
-              {{
-                dialogDetailData.status ? "Đang hoạt động" : "Không hoạt động"
-              }}
-            </div>
-          </div>
-          
-        </div>
-        <div class="grid grid-cols-2">
-          <div class="flex justify-between gap-2">
-            <div>Địa chỉ</div>
-            <div>{{ dialogDetailData.address }}</div>
-          </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="text-right">Địa chỉ</div>
+          <div class="font-bold">{{ dialogDetailData.address }}</div>
         </div>
       </div>
     </div>
@@ -295,10 +288,7 @@
                 </v-text-field>
               </v-col>
               <v-col cols="6" md="6">
-                <v-checkbox
-                  v-model="status"
-                  label="Hoạt động"
-                ></v-checkbox>
+                <v-checkbox v-model="status" label="Hoạt động"></v-checkbox>
               </v-col>
               <v-col cols="12" md="12">
                 <v-text-field
@@ -325,10 +315,8 @@
   >
   <v-dialog v-model="dialogRemove" max-width="500">
     <div class="bg-white py-3 px-5 rounded-lg">
-      
-        <div class="text-right" @click="dialogRemove = false">
-          <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
-        
+      <div class="text-right" @click="dialogRemove = false">
+        <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
       </div>
       <div class="grid gap-3">
         <div class="text-center text-xl font-bold">Xác nhận xóa đại lý?</div>
@@ -440,7 +428,7 @@ export default {
       "addAgent",
       "getAgentDetail",
       "editAgentInfo",
-      "removeAgentAction"
+      "removeAgentAction",
     ]),
     getDataAgentDetail(id) {
       this.getAgentDetail(`admin/sales-agent/detail?id=${id}`).then((resp) => {
@@ -449,8 +437,8 @@ export default {
           this.name = this.detailData.name;
           this.phone = this.detailData.phone;
           this.email = this.detailData.email;
-          this.address= this.detailData.address;
-          this.status = this.detailData.status === 1 ? true : false
+          this.address = this.detailData.address;
+          this.status = this.detailData.status === 1 ? true : false;
         }
       });
     },
