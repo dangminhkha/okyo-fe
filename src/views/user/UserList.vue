@@ -183,8 +183,8 @@
   </v-dialog>
   <v-dialog max-width="800" v-model="dialogDetail" persistent>
     <div class="bg-white py-3 px-5 rounded-lg">
-      <div class="flex justify-between items-center mb-4">
-        <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
+      <div class="grid grid-cols-2 items-center mb-4">
+        <div class="text-left text-xl font-bold text-blue-darken-4 uppercase">
           Chi tiết user
         </div>
         <div class="text-right" @click="dialogDetail = false">
@@ -192,34 +192,34 @@
         </div>
       </div>
       <div class="grid gap-3" v-if="detailData">
-        <div class="grid grid-cols-2 gap-3">
-          <div class="flex justify-between gap-2">
-            <div>Tên user</div>
-            <div>{{ detailData.name }}</div>
+        <div class="grid gap-3">
+          <div class="grid grid-cols-2 gap-2">
+            <div class="text-right">Tên user</div>
+            <div class="font-bold">{{ detailData.name }}</div>
           </div>
-          <div class="flex justify-between gap-2">
-            <div>Tên đăng nhập</div>
-            <div>{{ detailData.username }}</div>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="text-right">Tên đăng nhập</div>
+            <div class="font-bold">{{ detailData.username }}</div>
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-3">
-          <div class="flex justify-between gap-2">
-            <div>Quyền</div>
-            <div>{{ detailData.role }}</div>
+        <div class="grid gap-3">
+          <div class="grid grid-cols-2 gap-2">
+            <div class="text-right">Quyền</div>
+            <div class="font-bold">{{ detailData.role }}</div>
           </div>
-          <div class="flex justify-between gap-2">
-            <div>Trạng thái</div>
-            <div
+          <div class="grid grid-cols-2 gap-2">
+            <div class="text-right">Trạng thái</div>
+            <div class="font-bold"
               :class="detailData.status ? 'text-green-500' : 'text-gray-500'"
             >
               {{ detailData.status ? "Đang hoạt động" : "Không hoạt động" }}
             </div>
           </div>
         </div>
-        <div class="grid grid-cols-2" v-if="detailData.role === 'USER_AGENT'">
-          <div class="flex justify-between gap-2">
-            <div>Đại lý</div>
-            <div>{{ detailData?.salesAgent?.name }}</div>
+        <div class="grid" v-if="detailData.role === 'USER_AGENT'">
+          <div class="grid grid-cols-2 gap-2">
+            <div class="text-right">Đại lý</div>
+            <div class="font-bold">{{ detailData?.salesAgent?.name }}</div>
           </div>
         </div>
       </div>
@@ -263,6 +263,7 @@
                   variant="outlined"
                   v-model="username"
                   :rules="[rules.required, rules.varChar]"
+                  disabled
                 >
                 </v-text-field>
               </v-col>
