@@ -130,7 +130,7 @@
               </v-col>
               <v-col cols="12" md="6">
                 <v-text-field
-                  label="Tên đăng nhập"
+                  label="Tên tài khoản"
                   variant="outlined"
                   v-model="username"
                   :rules="[rules.required, rules.varChar]"
@@ -198,7 +198,7 @@
             <div class="font-bold">{{ detailData.name }}</div>
           </div>
           <div class="grid grid-cols-2 gap-2">
-            <div class="text-right">Tên đăng nhập</div>
+            <div class="text-right">Tên tài khoản</div>
             <div class="font-bold">{{ detailData.username }}</div>
           </div>
         </div>
@@ -259,7 +259,7 @@
               </v-col>
               <v-col cols="12" md="6">
                 <v-text-field
-                  label="Tên đăng nhập"
+                  label="Tên tài khoản"
                   variant="outlined"
                   v-model="username"
                   :rules="[rules.required, rules.varChar]"
@@ -364,7 +364,7 @@ export default {
           sortable: false,
         },
         {
-          title: "Username",
+          title: "Tên tài khoản",
           align: "start",
           key: "username",
           sortable: false,

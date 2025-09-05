@@ -156,7 +156,7 @@
               </v-icon>
               <v-icon
                 @click="addAgentToProduct(item)"
-                class="text-blue-darken-4"
+                class="text-blue-darken-4 ml-3"
               >
                 mdi:mdi-plus
               </v-icon>
