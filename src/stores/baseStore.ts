@@ -36,7 +36,13 @@ export const useBaseStore = defineStore({
     detailAgentData: null,
     addAgentData: null,
     editAgentData: null,
-    removeAgentData: null
+    removeAgentData: null,
+    userListData: null,
+    userDetailData: null,
+    userAddData: null,
+    userEditData: null,
+    userRemoveData: null,
+    roleListData: null
   }),
   actions: {
     changeMenu(val: any) {
@@ -190,7 +196,7 @@ export const useBaseStore = defineStore({
       });
       return this.listAgentData;
     },
-    //lấy danh sách đại lý
+    //lấy chi tiết đại lý
 
     async getAgentDetail(url: string) {
       await baseService.fetch(API_URL + url).then((resp) => {
@@ -206,7 +212,7 @@ export const useBaseStore = defineStore({
       return this.addAgentData;
     },
     //cập nhật đại lý
-    
+
     async editAgentInfo(url: string, params: any) {
       await baseService.add(API_URL + url, params).then((resp) => {
         this.editAgentData = resp.data;
@@ -220,6 +226,48 @@ export const useBaseStore = defineStore({
       });
       return this.removeAgentData;
     },
+    //Danh sách user
+    async getUserList(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.userListData = resp?.data;
+      });
+      return this.userListData;
+    },
+    //tạo mới user
+    async addNewUser(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.userAddData = resp?.data;
+      });
+      return this.userAddData;
+    },
+    //Cập nhật user
+    async editInfoUser(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.userEditData = resp.data;
+      });
+      return this.userEditData;
+    },
+    //xóa user
+    async removeUser(url: string) {
+      await baseService.remove(API_URL + url).then((resp) => {
+        this.userRemoveData = resp?.data;
+      });
+      return this.userRemoveData;
+    },
+    //chi tiết user
+    async getUserDetailInfo(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.userDetailData = resp?.data;
+      });
+      return this.userDetailData;
+    },
+    //danh sách quyền
+    async getListRole(url: string){
+      await baseService.fetch(API_URL + url).then(resp => {
+        this.roleListData = resp?.data
+      })
+      return this.roleListData
+    }
   },
   persist: true,
 });

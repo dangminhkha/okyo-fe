@@ -193,7 +193,7 @@
     <div class="bg-white py-3 px-5 rounded-lg">
       <div class="flex justify-between items-center mb-4">
         <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
-          Chi tiết đại lý
+          Chi tiết user
         </div>
         <div class="text-right" @click="dialogDetail = false">
           <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
@@ -349,7 +349,7 @@ import { mapActions, mapState } from "pinia";
 import { useBaseStore } from "../../stores/baseStore";
 import GuaranteeDetailVue from "../sections/GuaranteeDetail.vue";
 export default {
-  name: "BaoHanhPage",
+  name: "AgentListPage",
   components: { GuaranteeDetailVue },
   data() {
     return {
@@ -486,7 +486,7 @@ export default {
               color: "blue",
             });
             this.getData();
-            this.addProductDialog = false;
+            this.dialogAdd = false;
           }
         });
       }
