@@ -29,7 +29,7 @@
           data-hs-accordion-always-open
         >
           <ul class="flex flex-col space-y-1">
-            <li>
+            <li v-if="loginData.data.user.role === 'ADMIN'">
               <router-link
                 :to="'/product'"
                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
@@ -86,7 +86,7 @@
                 Thông tin bảo hành
               </router-link>
             </li>
-            <li>
+            <li v-if="loginData.data.user.role === 'ADMIN'">
               <router-link
                 :to="'/agent'"
                 class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
@@ -118,7 +118,7 @@
                 Quản lý đại lý
               </router-link>
             </li>
-            <li>
+            <li v-if="loginData.data.user.role === 'ADMIN'">
               <router-link
                 :to="'/user'"
                 class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
@@ -171,6 +171,8 @@
 
 <script>
 import imageAvatar from "@/assets/images/logo_no_bg.png";
+import { mapState } from 'pinia';
+import { useBaseStore } from '../stores/baseStore';
 export default {
   name: "MenuPage",
   data() {
@@ -178,6 +180,9 @@ export default {
       imageAvatar,
     };
   },
+  computed:{
+    ...mapState(useBaseStore, ['loginData'])
+  }
 };
 </script>
 

@@ -33,6 +33,10 @@ export const useBaseStore = defineStore({
     getListTypeData: null,
     menuItemData: null,
     listAgentData: null,
+    detailAgentData: null,
+    addAgentData: null,
+    editAgentData: null,
+    removeAgentData: null
   }),
   actions: {
     changeMenu(val: any) {
@@ -185,6 +189,36 @@ export const useBaseStore = defineStore({
         this.listAgentData = resp.data;
       });
       return this.listAgentData;
+    },
+    //lấy danh sách đại lý
+
+    async getAgentDetail(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.detailAgentData = resp?.data;
+      });
+      return this.detailAgentData;
+    },
+    //Tạo mới đại lý
+    async addAgent(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.addAgentData = resp?.data;
+      });
+      return this.addAgentData;
+    },
+    //cập nhật đại lý
+    
+    async editAgentInfo(url: string, params: any) {
+      await baseService.update(API_URL + url, params).then((resp) => {
+        this.editAgentData = resp.data;
+      });
+      return this.editAgentData;
+    },
+    //xóa đại lý
+    async removeAgentAction(url: string) {
+      await baseService.remove(API_URL + url).then((resp) => {
+        this.removeAgentData = resp?.data;
+      });
+      return this.removeAgentData;
     },
   },
   persist: true,

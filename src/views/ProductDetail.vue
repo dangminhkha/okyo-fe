@@ -105,7 +105,7 @@
       </v-card>
     </div>
   </div>
-  <GuaranteeDetailVue v-if="dialogDetail" :status="dialogDetail" :id="dialogDetailId" @close="dialogDetail = $event"
+  <GuaranteeDetailVue v-if="dialogDetail" :status="dialogDetail" :id="dialogDetailId" :agentData="agentData" @close="dialogDetail = $event"
     @updateDone="updateDone" />
   <v-dialog v-model="dialogRemove" max-width="500">
     <div class="bg-white py-3 px-5 rounded-lg">
@@ -135,7 +135,7 @@
           </v-col>
           <v-col cols="12" md="6">
             <v-text-field label="Mã bảo hành" variant="outlined" v-model="code" :rules="[rules.required, rules.varChar]"
-              counter="50">
+            density="comfortable" counter="50">
             </v-text-field>
           </v-col>
         </v-row>

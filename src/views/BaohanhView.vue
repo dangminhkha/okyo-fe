@@ -68,7 +68,7 @@
             <v-icon @click="getGuaranteeDetails(item)" v-else class="text-blue-darken-4">
               mdi:mdi-pencil
             </v-icon>
-            <v-icon v-if="item.status === 'NOT_SOLD'" @click="removeGuaranteeDetails(item)"
+            <v-icon v-if="item.status === 'NOT_SOLD' && loginData.data.user.role === 'ADMIN'" @click="removeGuaranteeDetails(item)"
               class="text-red-darken-4 ml-3">
               mdi:mdi-close-circle-outline
             </v-icon>
@@ -190,7 +190,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useBaseStore, ["windowReSize"]),
+    ...mapState(useBaseStore, ["windowReSize", 'loginData']),
     rulesEmail() {
       const rules = [];
       const rule2 = (value) =>

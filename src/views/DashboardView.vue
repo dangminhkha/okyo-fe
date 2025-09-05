@@ -9,7 +9,7 @@
               @click:prepend-inner="searchDara()"></v-text-field></v-col>
         </v-row>
       </v-card-title>
-      <div class="grid grid-cols-1 md:grid-cols-2 align-center gap-4 p-4"></div>
+      
       <div class="p-4">
         <div
           class="flex justify-center items-center p-3 rounded-lg text-sm bg-blue-darken-4 h-[40px] w-[165px] cursor-pointer"
