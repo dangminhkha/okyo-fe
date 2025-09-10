@@ -207,10 +207,10 @@
             <div class="text-right">Quyền</div>
             <div class="font-bold">{{ detailData.role }}</div>
           </div>
-          <div class="grid grid-cols-2 gap-2">
+          <div class="grid grid-cols-2 gap-2 items-center">
             <div class="text-right">Trạng thái</div>
-            <div class="font-bold"
-              :class="detailData.status ? 'text-green-500' : 'text-gray-500'"
+            <div class="text-white rounded-lg pa-2 text-center w-50"
+              :class="detailData.status ? 'bg-green-500' : 'bg-gray-500'"
             >
               {{ detailData.status ? "Đang hoạt động" : "Không hoạt động" }}
             </div>

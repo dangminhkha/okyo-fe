@@ -213,12 +213,12 @@
           <div class="text-right">Email</div>
           <div class="font-bold">{{ dialogDetailData.email }}</div>
         </div>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="grid grid-cols-2 gap-2 items-center">
           <div class="text-right">Trạng thái</div>
           <div
-            class="font-bold"
+            class="text-white rounded-lg pa-2 text-center w-50 "
             :class="
-              dialogDetailData.status ? 'text-green-500' : 'text-gray-500'
+              dialogDetailData.status ? 'bg-green-500' : 'bg-gray-500'
             "
           >
             {{ dialogDetailData.status ? "Đang hoạt động" : "Không hoạt động" }}
