@@ -68,6 +68,14 @@ const router = createRouter({
             rule: 'admin',
           },
         },
+        {
+          path: '/pushNoti',
+          name: 'PushNotiRouter',
+          component: () => import('../views/noti/PushNotiPage.vue'),
+          meta: {
+            rule: 'admin',
+          },
+        },
       ],
     },
     {

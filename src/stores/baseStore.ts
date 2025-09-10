@@ -42,7 +42,8 @@ export const useBaseStore = defineStore({
     userAddData: null,
     userEditData: null,
     userRemoveData: null,
-    roleListData: null
+    roleListData: null,
+    pushNotiData: null,
   }),
   actions: {
     changeMenu(val: any) {
@@ -262,12 +263,19 @@ export const useBaseStore = defineStore({
       return this.userDetailData;
     },
     //danh sách quyền
-    async getListRole(url: string){
-      await baseService.fetch(API_URL + url).then(resp => {
-        this.roleListData = resp?.data
-      })
-      return this.roleListData
-    }
+    async getListRole(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.roleListData = resp?.data;
+      });
+      return this.roleListData;
+    },
+    //gửi thông báo
+    async pushNotification(url: string, params: any) {
+      await baseService.add(API_URL + url, params).then((resp) => {
+        this.pushNotiData = resp?.data;
+      });
+      return this.pushNotiData;
+    },
   },
   persist: true,
 });
