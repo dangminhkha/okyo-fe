@@ -71,21 +71,50 @@
         </template>
         <template v-slot:[`item.actions`]="{ item }">
           <div class="min-w-[60px]">
-            <v-icon @click="detailAgent(item)" class="text-blue-darken-4">
-              mdi:mdi-eye
-            </v-icon>
-            <v-icon @click="editAgent(item)" class="text-blue-darken-4 ml-3">
-              mdi:mdi-pencil
-            </v-icon>
-            <v-icon @click="resetAction(item)" class="text-blue-darken-4 ml-3">
-              mdi:mdi-lock-reset
-            </v-icon>
-            <v-icon
-              @click="removeUserAction(item)"
-              class="text-red-darken-4 ml-3"
-            >
-              mdi:mdi-close-circle-outline
-            </v-icon>
+            <v-tooltip text="Xem chi tiết" location="top">
+              <template v-slot:activator="{ props }">
+                <v-icon
+                  v-bind="props"
+                  @click="detailAgent(item)"
+                  class="text-blue-darken-4"
+                >
+                  mdi:mdi-eye
+                </v-icon>
+              </template>
+            </v-tooltip>
+            <v-tooltip text="Cập nhật" location="top">
+              <template v-slot:activator="{ props }">
+                <v-icon
+                  v-bind="props"
+                  @click="editAgent(item)"
+                  class="text-blue-darken-4 ml-3"
+                >
+                  mdi:mdi-pencil
+                </v-icon>
+              </template>
+            </v-tooltip>
+            <v-tooltip text="Đặt lại mật khẩu" location="top">
+              <template v-slot:activator="{ props }">
+                <v-icon
+                  v-bind="props"
+                  @click="resetAction(item)"
+                  class="text-blue-darken-4 ml-3"
+                >
+                  mdi:mdi-lock-reset
+                </v-icon>
+              </template>
+            </v-tooltip>
+            <v-tooltip text="Xóa" location="top">
+              <template v-slot:activator="{ props }">
+                <v-icon
+                  v-bind="props"
+                  @click="removeUserAction(item)"
+                  class="text-red-darken-4 ml-3"
+                >
+                  mdi:mdi-close-circle-outline
+                </v-icon>
+              </template>
+            </v-tooltip>
           </div>
         </template>
       </v-data-table>
@@ -361,7 +390,9 @@
         <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
       </div>
       <div class="grid gap-3">
-        <div class="text-center text-xl font-bold">Xác nhận Đặt lại mật khẩu?</div>
+        <div class="text-center text-xl font-bold">
+          Xác nhận Đặt lại mật khẩu?
+        </div>
         <v-btn
           variant="flat"
           color="blue-darken-4"
@@ -622,22 +653,22 @@ export default {
       this.dataSelected = data;
       this.resetPassDialog = true;
     },
-    resetPassConfirm(){
-      this.resetPassword(`admin/user/reset-pass?id=${this.dataSelected.id}`).then(
-        (resp) => {
-          if (resp) {
-            this.snackChange({
-              status: true,
-              message: "Đặt lại mật khẩu user thành công",
-              color: "blue",
-            });
-            this.resetPassDialog = false;
-            this.dialogDetail = false;
-            this.getData();
-          }
+    resetPassConfirm() {
+      this.resetPassword(
+        `admin/user/reset-pass?id=${this.dataSelected.id}`
+      ).then((resp) => {
+        if (resp) {
+          this.snackChange({
+            status: true,
+            message: "Đặt lại mật khẩu user thành công",
+            color: "blue",
+          });
+          this.resetPassDialog = false;
+          this.dialogDetail = false;
+          this.getData();
         }
-      );
-    }
+      });
+    },
   },
   watch: {
     page(val) {
