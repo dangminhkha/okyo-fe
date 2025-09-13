@@ -189,10 +189,12 @@
         </div>
       </div>
 
-      <div class="grid justify-center gap-3" v-if="detailData">
+      <div class="grid gap-3" v-if="detailData">
         <div class="flex justify-center">
           <v-avatar class="!bg-gray-200" size="100">
-            <span class="font-bold">{{ detailData.name.substring(detailData.name.length - 1) }}</span>
+            <span class="font-bold">{{
+              detailData.name.substring(detailData.name.length - 1)
+            }}</span>
           </v-avatar>
         </div>
         <div class="flex justify-start font-bold text-base">
@@ -227,15 +229,15 @@
             color="blue-darken-4"
             class="flex gap-2 !rounded-lg"
             @click="editAgent(detailData)"
-            >Chỉnh sửa <span class="mdi mdi-pencil"></span></v-btn
-          >
+            >Chỉnh sửa <span class="mdi mdi-pencil"></span
+          ></v-btn>
 
           <v-btn
             variant="flat"
             class="!bg-gray-200 flex gap-2 !rounded-lg"
             @click="removeUserAction(detailData)"
-            >Xóa <span class="mdi mdi-delete-outline"></span></v-btn
-          >
+            >Xóa <span class="mdi mdi-delete-outline"></span
+          ></v-btn>
         </div>
       </div>
     </div>
@@ -577,6 +579,7 @@ export default {
               color: "blue",
             });
             this.dialogRemove = false;
+            this.dialogDetail = false;
             this.getData();
           }
         }

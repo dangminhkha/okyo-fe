@@ -194,39 +194,58 @@
       </v-card-text>
     </v-card>
   </v-dialog>
-  <v-dialog max-width="800" v-model="dialogDetail" persistent>
+  <v-dialog max-width="500" v-model="dialogDetail" persistent>
     <div class="bg-white py-3 px-5 rounded-lg">
-      <div class="flex justify-between items-center mb-4">
-        <div class="text-center text-xl font-bold text-blue-darken-4 uppercase">
-          Chi tiết đại lý
-        </div>
+      <div class="grid justify-end items-center mb-4">
         <div class="text-right" @click="dialogDetail = false">
           <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
         </div>
       </div>
       <div class="grid gap-3">
+        <div class="flex justify-center">
+          <v-avatar class="!bg-gray-200" size="100">
+            <span class="font-bold">{{
+              dialogDetailData.name.substring(dialogDetailData.name.length - 1)
+            }}</span>
+          </v-avatar>
+        </div>
         <div class="grid grid-cols-2 gap-2">
-          <div class="text-right">Tên đại lý</div>
+          <div class="text-left text-gray-400">Tên đại lý</div>
           <div class="font-bold">{{ dialogDetailData.name }}</div>
         </div>
         <div class="grid grid-cols-2 gap-2">
-          <div class="text-right">Email</div>
+          <div class="text-left text-gray-400">Email</div>
           <div class="font-bold">{{ dialogDetailData.email }}</div>
         </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="text-left text-gray-400">Địa chỉ</div>
+          <div class="font-bold">{{ dialogDetailData.address }}</div>
+        </div>
         <div class="grid grid-cols-2 gap-2 items-center">
-          <div class="text-right">Trạng thái</div>
+          <div class="text-left text-gray-400">Trạng thái</div>
           <div
-            class="text-white rounded-lg pa-2 text-center w-50 "
-            :class="
-              dialogDetailData.status ? 'bg-green-500' : 'bg-gray-500'
-            "
+            class="text-white rounded-lg pa-2 text-center"
+            :class="dialogDetailData.status ? 'bg-green-500' : 'bg-gray-500'"
           >
             {{ dialogDetailData.status ? "Đang hoạt động" : "Không hoạt động" }}
           </div>
         </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div class="text-right">Địa chỉ</div>
-          <div class="font-bold">{{ dialogDetailData.address }}</div>
+        <div class="font-bold">Hành động</div>
+        <div class="flex justify-start gap-3">
+          <v-btn
+            variant="flat"
+            color="blue-darken-4"
+            class="flex gap-2 !rounded-lg"
+            @click="editAgent(dialogDetailData)"
+            >Chỉnh sửa <span class="mdi mdi-pencil"></span></v-btn
+          >
+
+          <v-btn
+            variant="flat"
+            class="!bg-gray-200 flex gap-2 !rounded-lg"
+            @click="removeGuaranteeDetails(dialogDetailData)"
+            >Xóa <span class="mdi mdi-delete-outline"></span></v-btn
+          >
         </div>
       </div>
     </div>
@@ -558,6 +577,7 @@ export default {
             color: "blue",
           });
           this.dialogRemove = false;
+          this.dialogDetail = false;
           this.getData();
         }
       });
