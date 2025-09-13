@@ -77,6 +77,9 @@
             <v-icon @click="editAgent(item)" class="text-blue-darken-4 ml-3">
               mdi:mdi-pencil
             </v-icon>
+            <v-icon @click="resetAction(item)" class="text-blue-darken-4 ml-3">
+              mdi:mdi-lock-reset
+            </v-icon>
             <v-icon
               @click="removeUserAction(item)"
               class="text-red-darken-4 ml-3"
@@ -233,7 +236,12 @@
             @click="editAgent(detailData)"
             >Chỉnh sửa <span class="mdi mdi-pencil"></span
           ></v-btn>
-
+          <v-btn
+            variant="flat"
+            class="!bg-gray-200 flex gap-2 !rounded-lg"
+            @click="resetAction(detailData)"
+            >Reset <span class="mdi mdi-lock-reset"></span
+          ></v-btn>
           <v-btn
             variant="flat"
             class="!bg-gray-200 flex gap-2 !rounded-lg"
@@ -347,6 +355,23 @@
       </div>
     </div>
   </v-dialog>
+  <v-dialog v-model="resetPassDialog" max-width="500">
+    <div class="bg-white py-3 px-5 rounded-lg">
+      <div class="text-right" @click="resetPassDialog = false">
+        <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
+      </div>
+      <div class="grid gap-3">
+        <div class="text-center text-xl font-bold">Xác nhận Đặt lại mật khẩu?</div>
+        <v-btn
+          variant="flat"
+          color="blue-darken-4"
+          class="w-3/5 m-auto mt-5"
+          @click="resetPassConfirm()"
+          >Xác nhận</v-btn
+        >
+      </div>
+    </div>
+  </v-dialog>
 </template>
   
   <script>
@@ -427,6 +452,7 @@ export default {
       roleSelected: null,
       agentData: null,
       agentSelected: null,
+      resetPassDialog: false,
     };
   },
   computed: {
@@ -454,6 +480,7 @@ export default {
       "getListRole",
       "getListAgent",
       "getUserDetailInfo",
+      "resetPassword",
     ]),
     getDataAgentDetail(id) {
       this.getUserDetailInfo(`admin/user/detail?id=${id}`).then((resp) => {
@@ -591,6 +618,26 @@ export default {
       this.dialogDetail = false;
       this.getData();
     },
+    resetAction(data) {
+      this.dataSelected = data;
+      this.resetPassDialog = true;
+    },
+    resetPassConfirm(){
+      this.resetPassword(`admin/user/reset-pass?id=${this.dataSelected.id}`).then(
+        (resp) => {
+          if (resp) {
+            this.snackChange({
+              status: true,
+              message: "Đặt lại mật khẩu user thành công",
+              color: "blue",
+            });
+            this.resetPassDialog = false;
+            this.dialogDetail = false;
+            this.getData();
+          }
+        }
+      );
+    }
   },
   watch: {
     page(val) {

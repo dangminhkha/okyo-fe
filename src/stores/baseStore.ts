@@ -44,6 +44,7 @@ export const useBaseStore = defineStore({
     userRemoveData: null,
     roleListData: null,
     pushNotiData: null,
+    resetPassData: null
   }),
   actions: {
     changeMenu(val: any) {
@@ -276,6 +277,13 @@ export const useBaseStore = defineStore({
       });
       return this.pushNotiData;
     },
+    //reset mật khẩu
+    async resetPassword(url: string, params: any){
+      await baseService.update(API_URL + url, params).then(resp => {
+        this.resetPassData = resp?.data
+      })
+      return this.resetPassData
+    }
   },
   persist: true,
 });

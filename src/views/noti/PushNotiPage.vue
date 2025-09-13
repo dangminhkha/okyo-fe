@@ -17,27 +17,19 @@
             class="grid"
           >
             <v-row>
-              <v-col cols="12" md="6">
+              <v-col cols="12" md="12">
                 <v-text-field
                   label="Tiêu đề"
                   variant="outlined"
                   v-model="title"
                   :rules="rulesRequired"
                   density="comfortable"
-                  counter="50"
+                  maxlength="200"
+                  counter="200"
                 >
                 </v-text-field>
               </v-col>
-              <v-col cols="12" md="6">
-                <v-text-field
-                  label="Khuyến mãi"
-                  variant="outlined"
-                  v-model="promotion"
-                  density="comfortable"
-                  counter="50"
-                >
-                </v-text-field>
-              </v-col>
+              
               <v-col cols="12" md="12">
                 <v-textarea
                   label="Nội dung tin"
@@ -46,10 +38,21 @@
                   :rules="rulesRequired"
                   auto-grow
                   rows="5"
-                  maxlength="250"
-                  counter="250"
+                  maxlength="200"
+                  counter="200"
                 >
                 </v-textarea>
+              </v-col>
+              <v-col cols="12" md="12">
+                <v-text-field
+                  label="Khuyến mãi"
+                  variant="outlined"
+                  v-model="promotion"
+                  density="comfortable"
+                  maxlength="200"
+                  counter="200"
+                >
+                </v-text-field>
               </v-col>
             </v-row>
             <div class="flex justify-center my-6">
