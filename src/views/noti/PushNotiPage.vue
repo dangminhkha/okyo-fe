@@ -17,6 +17,27 @@
             class="grid"
           >
             <v-row>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  label="Tiêu đề"
+                  variant="outlined"
+                  v-model="title"
+                  :rules="rulesRequired"
+                  density="comfortable"
+                  counter="50"
+                >
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" md="6">
+                <v-text-field
+                  label="Khuyến mãi"
+                  variant="outlined"
+                  v-model="promotion"
+                  density="comfortable"
+                  counter="50"
+                >
+                </v-text-field>
+              </v-col>
               <v-col cols="12" md="12">
                 <v-textarea
                   label="Nội dung tin"
@@ -51,7 +72,9 @@ export default {
   data() {
     return {
       valid: false,
+      title: null,
       content: null,
+      promotion: null,
       rulesRequired: [
         (value) => {
           if (value) return true;
@@ -61,13 +84,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useBaseStore, ["pushNotification","snackChange"]),
+    ...mapActions(useBaseStore, ["pushNotification", "snackChange"]),
 
     async submitPush() {
       const { valid } = await this.$refs.form.validate();
       if (valid) {
         let params = {
+          title: this.title,
           content: this.content,
+          promotion: this.promotion
         };
         this.pushNotification("admin/send-ads", params).then((resp) => {
           if (resp) {

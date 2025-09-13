@@ -264,7 +264,9 @@ export default {
       this.getData();
     },
   },
-  created() { },
+  created() {
+    this.getData();
+   },
 };
 </script>
 
