@@ -181,46 +181,60 @@
       </v-card-text>
     </v-card>
   </v-dialog>
-  <v-dialog max-width="800" v-model="dialogDetail" persistent>
+  <v-dialog max-width="500" v-model="dialogDetail" persistent>
     <div class="bg-white py-3 px-5 rounded-lg">
-      <div class="grid grid-cols-2 items-center mb-4">
-        <div class="text-left text-xl font-bold text-blue-darken-4 uppercase">
-          Chi tiết user
-        </div>
+      <div class="grid items-center mb-4">
         <div class="text-right" @click="dialogDetail = false">
           <span class="mdi mdi-close cursor-pointer font-bold text-2xl"></span>
         </div>
       </div>
-      <div class="grid gap-3" v-if="detailData">
-        <div class="grid gap-3">
-          <div class="grid grid-cols-2 gap-2">
-            <div class="text-right">Tên user</div>
-            <div class="font-bold">{{ detailData.name }}</div>
-          </div>
-          <div class="grid grid-cols-2 gap-2">
-            <div class="text-right">Tên tài khoản</div>
-            <div class="font-bold">{{ detailData.username }}</div>
-          </div>
+
+      <div class="grid justify-center gap-3" v-if="detailData">
+        <div class="flex justify-center">
+          <v-avatar class="!bg-gray-200" size="100">
+            <span class="font-bold">{{ detailData.name.substring(detailData.name.length - 1) }}</span>
+          </v-avatar>
         </div>
-        <div class="grid gap-3">
-          <div class="grid grid-cols-2 gap-2">
-            <div class="text-right">Quyền</div>
-            <div class="font-bold">{{ detailData.role }}</div>
-          </div>
-          <div class="grid grid-cols-2 gap-2 items-center">
-            <div class="text-right">Trạng thái</div>
-            <div class="text-white rounded-lg pa-2 text-center w-50"
-              :class="detailData.status ? 'bg-green-500' : 'bg-gray-500'"
-            >
-              {{ detailData.status ? "Đang hoạt động" : "Không hoạt động" }}
-            </div>
+        <div class="flex justify-start font-bold text-base">
+          {{ detailData.name }}
+        </div>
+        <div class="flex justify-start font-bold text-xs text-gray-400">
+          {{ detailData.role }}
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="text-left text-gray-400">Tên tài khoản</div>
+          <div class="font-bold">{{ detailData.username }}</div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 items-center">
+          <div class="text-left text-gray-400">Trạng thái</div>
+          <div
+            class="text-white rounded-lg pa-2 text-center"
+            :class="detailData.status ? 'bg-green-500' : 'bg-gray-500'"
+          >
+            {{ detailData.status ? "Đang hoạt động" : "Không hoạt động" }}
           </div>
         </div>
         <div class="grid" v-if="detailData.role === 'USER_AGENT'">
           <div class="grid grid-cols-2 gap-2">
-            <div class="text-right">Đại lý</div>
+            <div class="text-left text-gray-400">Đại lý</div>
             <div class="font-bold">{{ detailData?.salesAgent?.name }}</div>
           </div>
+        </div>
+        <div class="font-bold">Hành động</div>
+        <div class="flex justify-start gap-3">
+          <v-btn
+            variant="flat"
+            color="blue-darken-4"
+            class="flex gap-2 !rounded-lg"
+            @click="editAgent(detailData)"
+            >Chỉnh sửa <span class="mdi mdi-pencil"></span></v-btn
+          >
+          <v-btn
+            variant="flat"
+            class="!bg-gray-200 flex gap-2 !rounded-lg"
+            @click="removeGuaranteeDetails(detailData)"
+            >Xóa <span class="mdi mdi-delete-outline"></span></v-btn
+          >
         </div>
       </div>
     </div>
@@ -469,7 +483,7 @@ export default {
           username: this.username,
           role: this.roleSelected,
           salesAgentId:
-            this.roleSelected === "ADMIN" ? '' : this.agentSelected.id,
+            this.roleSelected === "ADMIN" ? "" : this.agentSelected.id,
           status: this.status ? 1 : 0,
         };
         this.addNewUser("admin/user", params).then((resp) => {
