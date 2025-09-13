@@ -209,6 +209,7 @@
             }}</span>
           </v-avatar>
         </div>
+       <div class="h-[2px] !border border-t-[#000000]"></div>
         <div class="grid grid-cols-2 gap-2">
           <div class="text-left text-gray-400">Tên đại lý</div>
           <div class="font-bold">{{ dialogDetailData.name }}</div>
@@ -231,6 +232,7 @@
           </div>
         </div>
         <div class="font-bold">Hành động</div>
+        <div class="h-[2px] !border border-t-[#000000]"></div>
         <div class="flex justify-start gap-3">
           <v-btn
             variant="flat"
