@@ -131,7 +131,7 @@
   <v-dialog max-width="1024" v-model="dialogAdd" persistent>
     <v-card>
       <v-card-text>
-        <div class="bg-white p-4 rounded-lg">
+        <div class="bg-white p-3 rounded-lg">
           <div class="flex justify-between items-center mb-4">
             <div
               class="text-center text-xl font-bold text-blue-darken-4 uppercase"
