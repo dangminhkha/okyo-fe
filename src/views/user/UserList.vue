@@ -78,7 +78,7 @@
               mdi:mdi-pencil
             </v-icon>
             <v-icon
-              @click="removeGuaranteeDetails(item)"
+              @click="removeUserAction(item)"
               class="text-red-darken-4 ml-3"
             >
               mdi:mdi-close-circle-outline
@@ -229,10 +229,11 @@
             @click="editAgent(detailData)"
             >Chỉnh sửa <span class="mdi mdi-pencil"></span></v-btn
           >
+
           <v-btn
             variant="flat"
             class="!bg-gray-200 flex gap-2 !rounded-lg"
-            @click="removeGuaranteeDetails(detailData)"
+            @click="removeUserAction(detailData)"
             >Xóa <span class="mdi mdi-delete-outline"></span></v-btn
           >
         </div>
@@ -562,7 +563,7 @@ export default {
       this.dialogEdit = true;
     },
 
-    removeGuaranteeDetails(data) {
+    removeUserAction(data) {
       this.dialogRemove = true;
       this.dataSelected = data;
     },
