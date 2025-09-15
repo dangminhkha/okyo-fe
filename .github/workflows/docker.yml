@@ -3,7 +3,7 @@ name: Build & Push Frontend
 on:
   push:
     branches:
-      - develop # hoặc main, tùy bạn muốn CI/CD trigger khi nào
+      - main # hoặc develop, tùy bạn muốn CI/CD trigger khi nào
 
 jobs:
   docker:
