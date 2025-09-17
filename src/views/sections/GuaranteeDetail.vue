@@ -28,8 +28,8 @@
               <v-row>
                 <v-col cols="12" md="12">
                   <v-select label="Đại lý BH" :items="agentData" v-model="agentSelected" variant="outlined"
-                    density="comfortable" item-title="name" item-value="id" return-object
-                    :rules="[rules.required]" :disabled="loginData.data.user.role !== 'ADMIN'"></v-select>
+                    density="comfortable" item-title="name" item-value="id" return-object :rules="[rules.required]"
+                    :disabled="loginData.data.user.role !== 'ADMIN'"></v-select>
                 </v-col>
               </v-row>
               <v-row>
@@ -53,7 +53,8 @@
                 <v-col cols="12" md="6">
                   <v-date-input prepend-icon="" label="Ngày bắt đầu" variant="outlined" v-model="fromDate"
                     class="p-date hideDate" :cancel-text="'Đóng'" :hide-actions="true" placeholder="dd/mm/yyyy"
-                    :format="'dd/mm/yyyy'" :rules="[rules.required]">
+                    :format="'dd/mm/yyyy'" :rules="[rules.required]"
+                    :disabled="dataSelected.startDate && loginData.data.user.role !== 'ADMIN'">
                     <template v-slot:default>
                       {{ dateFormated }}
                     </template>
@@ -201,7 +202,7 @@ export default {
       rules.push(rule2);
       return rules;
     },
-    
+
   },
   watch: {
     fromDate(val) {
