@@ -105,9 +105,9 @@ export default {
           if (resp) {
             localStorage.setItem("isLogined", "true");
             if (resp.data.user.role === "ADMIN") {
-              this.$router.push({ path: "/product" });
+              this.$router.push({ path: "/thongke" });
             } else {
-              this.$router.push({ path: "/baohanh" });
+              this.$router.push({ path: "/thongke" });
             }
           }
         });
