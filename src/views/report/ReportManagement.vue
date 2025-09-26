@@ -1,6 +1,6 @@
 <template>
     <div class="shadow-xl rounded-lg bg-white p-4">
-      <div class="text-blue-darken-4 font-bold uppercase text-xl my-4">
+      <div class="text-blue-darken-4 font-bold uppercase text-xl mb-4">
         Thống kê
       </div>
       <div v-if="loginData?.data.user.role === 'ADMIN'">
@@ -21,7 +21,7 @@
           ></v-select>
         </div>
       </div>
-      <div class="grid md:grid-cols-2 gap-3 mt-4">
+      <div class="grid md:grid-cols-2 gap-3 mt-4 border rounded-lg p-3">
         <div>
           <v-pie
             v-if="series"
@@ -79,7 +79,7 @@
           </div>
         </div>
       </v-form>
-      <div v-if="chartOptions.xaxis.categories.length">
+      <div v-if="chartOptions.xaxis.categories.length" class="border p-3 mt-4 rounded-lg">
         <apexchart
           type="bar"
           height="350"
