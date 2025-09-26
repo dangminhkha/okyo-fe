@@ -18,6 +18,15 @@
         class="h-full overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
         <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap" data-hs-accordion-always-open>
           <ul class="flex flex-col space-y-1">
+            <li>
+              <router-link :to="'/thongke'"
+                class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
+                :class="$route.fullPath === '/thongke' ? 'bg-gray-100' : ''">
+                
+                <i class="fa-solid fa-chart-simple"></i>
+                Thống kê
+              </router-link>
+            </li>
             <li v-if="loginData?.data.user.role === 'ADMIN'">
               <router-link :to="'/product'"
                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100"
@@ -51,14 +60,15 @@
                 Quản lý User
               </router-link>
             </li>
-            <li v-if="loginData?.data.user.role === 'ADMIN'">
+            <!-- <li v-if="loginData?.data.user.role === 'ADMIN'">
               <router-link :to="'/pushNoti'"
                 class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-100"
                 :class="$route.fullPath === '/pushNoti' ? 'bg-gray-100' : ''">
                 <span class="fa-solid fa-comment-sms"></span>
                 Gửi thông báo
               </router-link>
-            </li>
+            </li> -->
+            
             <!-- <li>
               <router-link
                 :to="'/login'"

@@ -76,6 +76,15 @@ const router = createRouter({
             rule: 'admin',
           },
         },
+        //report
+        {
+          path: '/thongke',
+          name: 'ReportRouter',
+          component: () => import('../views/report/ReportManagement.vue'),
+          meta: {
+            rule: 'admin',
+          },
+        },
       ],
     },
     {
@@ -119,6 +128,7 @@ const router = createRouter({
             rule: 'customer',
           },
         },
+        
       ],
     },
     {

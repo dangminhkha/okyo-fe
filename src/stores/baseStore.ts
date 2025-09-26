@@ -44,7 +44,9 @@ export const useBaseStore = defineStore({
     userRemoveData: null,
     roleListData: null,
     pushNotiData: null,
-    resetPassData: null
+    resetPassData: null,
+    reportAgentData: null,
+    reportMonthlyData: null
   }),
   actions: {
     changeMenu(val: any) {
@@ -283,7 +285,21 @@ export const useBaseStore = defineStore({
         this.resetPassData = resp?.data
       })
       return this.resetPassData
-    }
+    },
+    //thống kê theo đại lý
+    async getAgentReport(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.reportAgentData = resp?.data;
+      });
+      return this.reportAgentData;
+    },
+    //thống kê theo tháng
+    async getMonthlyReport(url: string) {
+      await baseService.fetch(API_URL + url).then((resp) => {
+        this.reportMonthlyData = resp?.data;
+      });
+      return this.reportMonthlyData;
+    },
   },
   persist: true,
 });
