@@ -8,7 +8,7 @@ import App from "./App.vue";
 import router from "./router";
 //prime
 import PrimeVue from 'primevue/config';
-import Aura from '@primevue/themes/aura';
+import Aura from '@primeuix/themes/aura';
 import "quill/dist/quill.snow.css";
 // Vuetify
 import "vuetify/styles";
@@ -16,10 +16,13 @@ import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as labsComponent from "vuetify/labs/components";
 import * as directives from "vuetify/directives";
+import { VPie } from 'vuetify/labs/VPie'
 import "@mdi/font/css/materialdesignicons.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { aliases, fa } from "vuetify/iconsets/fa";
 import { mdi } from "vuetify/iconsets/mdi";
+//apex chart
+import VueApexCharts from "vue3-apexcharts";
 //in it vuetify
 const vuetify = createVuetify({
   icons: {
@@ -33,6 +36,7 @@ const vuetify = createVuetify({
   components: {
     ...components,
     ...labsComponent,
+    VPie
   },
   directives,
 });
@@ -42,6 +46,7 @@ const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 app.use(pinia);
 app.use(router);
+app.use(VueApexCharts);
 app.use(PrimeVue, {
   theme: {
       preset: Aura,
