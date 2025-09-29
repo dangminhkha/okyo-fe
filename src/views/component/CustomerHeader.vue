@@ -18,7 +18,7 @@
       </div>
 
       <div
-        class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3 items-center"
+        class="w-full flex items-center justify-end ms-auto md:justify-between gap-x-1 md:gap-x-3"
       >
         <div
           class="text-lg text-blue-darken-3 font-bold cursor-pointer p-3 rounded-xl hover:-translate-y-1 hover:scale-105 duration-300"

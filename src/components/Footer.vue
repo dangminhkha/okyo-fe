@@ -67,7 +67,7 @@
     <!-- End Grid -->
   </footer>
   <div class="bg-[#061b3b] px-5 py-8">
-    <div class="max-w-screen-xl m-auto flex justify-between">
+    <div class="max-w-screen-xl m-auto flex justify-between gap-3">
       <div class="text-[#ffffff80] text-base md:text-xl">
         © {{ new Date().getFullYear() }} Bản quyền thuộc về OSG
       </div>
