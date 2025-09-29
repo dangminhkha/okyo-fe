@@ -26,7 +26,7 @@
         <v-pie
           v-if="series"
           title="Kích hoạt"
-          :palette="['#43A047', '#E53935']"
+          :palette="['#43A047', '#546E7A']"
           :items="series"
           :legend="{ position: 'right' }"
           animation
@@ -38,7 +38,7 @@
         <v-pie
           v-if="series2"
           title="Hạn sử dụng"
-          :palette="['#43A047', '#546E7A']"
+          :palette="['#43A047', '#E53935']"
           :items="series2"
           :legend="{ position: 'right' }"
           animation
@@ -128,7 +128,7 @@ export default {
             borderRadiusApplication: "end",
           },
         },
-        colors: ["#43A047", "#546E7A"],
+        colors: ["#43A047", "#E53935"],
         stroke: {
           show: true,
           width: 2,
@@ -215,7 +215,7 @@ export default {
                 borderRadiusApplication: "end",
               },
             },
-            colors: ["#43A047", "#546E7A"],
+            colors: ["#43A047", "#E53935"],
             stroke: {
               show: true,
               width: 2,
